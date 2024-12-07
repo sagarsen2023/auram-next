@@ -12,12 +12,18 @@ export default function WelcomeLoader() {
 
   useEffect(() => {
     if (isFirstVisit) {
-      const timeout = setTimeout(() => {
-        setIsAnimating(true); // Start slide-up animation
-        setTimeout(() => setIsFirstVisit(false), 1000); // Remove after animation ends
+      const animationTimeout = setTimeout(() => {
+        setIsAnimating(true);
       }, 2200);
 
-      return () => clearTimeout(timeout);
+      const removalTimeout = setTimeout(() => {
+        setIsFirstVisit(false);
+      }, 3200);
+
+      return () => {
+        clearTimeout(animationTimeout);
+        clearTimeout(removalTimeout);
+      };
     }
   }, [isFirstVisit, setIsFirstVisit]);
 
@@ -25,13 +31,13 @@ export default function WelcomeLoader() {
 
   return (
     <section
-      className={`h-screen w-screen flex items-center justify-center bg-white bg-cover bg-center absolute z-[99999] no-doc-scroll ${
-        isAnimating ? "animate-slide-up" : ""
+      className={`-mt-16 lg:-mt-20 h-screen w-screen flex items-center justify-center bg-white bg-cover bg-center relative z-[999999] no-doc-scroll ${
+        isAnimating ? "-translate-y-full transition-all duration-500" : ""
       }`}
       style={{ backgroundImage: `url(${welcome.src})` }}
     >
-      <div className="absolute w-full h-full bg-pink-100 opacity-0 animate-increase-width z-3"></div>
-      <div className="relative p-6 text-center z-5">
+      <div className="absolute w-full h-full bg-pink-100 opacity-0 animate-increase-width z-[9999]"></div>
+      <div className="relative p-6 text-center z-[99999]">
         <div className="mb-10">
           <Image src={auramLogoWithText} alt="aurum" width={500} height={500} />
         </div>
