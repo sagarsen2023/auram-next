@@ -1,51 +1,123 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Scrollbar, A11y, Autoplay, EffectCoverflow } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/scrollbar";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
-import "swiper/css/autoplay";
+import {
+  EffectCoverflow,
+  Pagination,
+  A11y,
+  Autoplay,
+  Navigation,
+  Scrollbar,
+} from "swiper/modules";
+import "swiper/css";
+import { BannerModel } from "@/models/banner/banner-response.model";
+import homeAPI from "@/services/home.service";
+import Image from "next/image";
+import { IMAGE_URL } from "@/services/queryUrls";
+import { useRouter } from "next/navigation";
 
-export default function BannerHomePage({ bannerData }: any) {
-  const [delayanimation, setDelayAnimation] = useState(10000);
+function BannerComponent() {
+  const router = useRouter();
+  const [bannerData, setBannerData] = useState<BannerModel[]>([]);
+  const [delayAnimation, setDelayAnimation] = useState(10000);
+
   useEffect(() => {
     setTimeout(() => {
       setDelayAnimation(3000);
     }, 5000);
   });
 
+  useEffect(() => {
+    homeAPI
+      .fetchBanner()
+      .then((response) => {
+        setBannerData(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+      .finally(() => {});
+  }, []);
+
   return (
-    <div className="flex flex-wrap items-center relative min-h-[calc(100vh-100px)]">
-      <div className="flex-1 p-4">
-        <Swiper
-          modules={[Scrollbar, A11y, Autoplay, EffectCoverflow]}
-          spaceBetween={50}
-          slidesPerView={1}
-          autoplay={{ delay: delayanimation }}
-          effect="coverflow"
-        >
-          {bannerData.map((banner: any, index: number) => (
-            <SwiperSlide key={index}>
-              <div className="bg-gradient-to-b from-gray-700 to-gray-300 p-5 min-h-screen bg-cover">
-                <h2 className="text-black text-6xl capitalize font-light">
-                  {banner.title}
-                </h2>
-                <h5 className="text-black uppercase font-light tracking-wide">
-                  {banner.subtitle}
-                </h5>
-                <p className="text-black text-lg font-light tracking-wide mt-6 leading-relaxed">
-                  {banner.description}
-                </p>
+    <Swiper
+      effect={"coverflow"}
+      centeredSlides={true}
+      spaceBetween={0}
+      slidesPerView={1}
+      coverflowEffect={{
+        rotate: 50,
+        stretch: 0,
+        depth: 100,
+        modifier: 1,
+        slideShadows: true,
+      }}
+      navigation
+      pagination={false}
+      modules={[
+        Navigation,
+        Pagination,
+        Scrollbar,
+        A11y,
+        EffectCoverflow,
+        Autoplay,
+      ]}
+      autoplay={{ delay: delayAnimation }}
+      grabCursor={false}
+      loop={true}
+      scrollbar={{ draggable: true }}
+    >
+      {bannerData.map((banner, index) => (
+        <SwiperSlide key={banner._id}>
+          <div className={`relative w-full h-screen flex items-center`}>
+            <Image
+              src={`${IMAGE_URL}/${banner.image.path}`}
+              alt="Picture of the author"
+              fill
+              className="object-cover z-10"
+            />
+            <div
+              className={`absolute z-20 w-full h-full flex items-center text-black ${
+                index % 2 === 0 ? "justify-end" : "justify-start"
+              }`}
+            >
+              <div className="text-center">
+                <div
+                  className={`w-full h-full mb-20 flex ${
+                    index % 2 === 0
+                      ? "justify-end pr-80"
+                      : "justify-start pl-80"
+                  }`}
+                >
+                  <div className="text-center w-1/3 flex flex-col gap-2 font-[300] items-center">
+                    <h1 className="text-[100px] leading-[100px]">
+                      {banner.title}
+                    </h1>
+                    <p className="text-xl">{banner.subTitle}</p>
+                    <p className="text-[22px] leading-relaxed">
+                      {banner.description}
+                    </p>
+                    <button
+                      className="w-fit px-3 py-2 my-2 hover:border-t hover:border-b hover:border-gray-600 transition-all duration-150"
+                      onClick={() => {
+                        router.push(banner.link);
+                      }}
+                    >
+                      {banner.buttonText}
+                    </button>
+                  </div>
+                </div>
               </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-      </div>
-      <div className="flex-1 p-4">{/* Add any additional content here */}</div>
-    </div>
+            </div>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
   );
 }
+
+export default BannerComponent;
