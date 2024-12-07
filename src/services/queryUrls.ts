@@ -7,3 +7,6 @@ export const IMAGE_URL =
 
 // Banner
 export const BANNER_URL = `/banners/user`;
+
+// Collection
+export const COLLECTION_URL = `/collections/user`;
