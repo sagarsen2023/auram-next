@@ -12,17 +12,22 @@ export default function WelcomeLoader() {
 
   useEffect(() => {
     if (isFirstVisit) {
+      // Add 'no-scroll' class to the body
+      document.body.classList.add("no-scroll");
+
       const animationTimeout = setTimeout(() => {
         setIsAnimating(true);
       }, 2200);
 
       const removalTimeout = setTimeout(() => {
         setIsFirstVisit(false);
+        document.body.classList.remove("no-scroll"); // Remove 'no-scroll'
       }, 3200);
 
       return () => {
         clearTimeout(animationTimeout);
         clearTimeout(removalTimeout);
+        document.body.classList.remove("no-scroll");
       };
     }
   }, [isFirstVisit, setIsFirstVisit]);
@@ -31,13 +36,15 @@ export default function WelcomeLoader() {
 
   return (
     <section
-      className={`-mt-16 lg:-mt-20 h-screen w-screen flex items-center justify-center bg-white bg-cover bg-center relative z-[999999] no-doc-scroll ${
-        isAnimating ? "-translate-y-full transition-all duration-500" : ""
+      className={`fixed inset-0 h-screen w-screen flex items-center justify-center bg-white bg-cover bg-center z-[999999] ${
+        isAnimating
+          ? "-translate-y-full transition-transform duration-500 ease-in-out"
+          : ""
       }`}
       style={{ backgroundImage: `url(${welcome.src})` }}
     >
-      <div className="absolute w-full h-full bg-pink-100 opacity-0 animate-increase-width z-[9999] no-doc-scroll"></div>
-      <div className="relative p-6 text-center z-[99999]">
+      <div className="absolute inset-0 bg-pink-100 opacity-0 animate-increase-width z-[99999]"></div>
+      <div className="relative p-6 text-center z-[1000000]">
         <div className="mb-10">
           <Image src={auramLogoWithText} alt="aurum" width={500} height={500} />
         </div>

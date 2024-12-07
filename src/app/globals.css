@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.no-scroll {
+  overflow: hidden;
+}
+
 :root:has(.no-doc-scroll) {
   overflow: hidden;
 }
