@@ -1,4 +1,3 @@
-
 import BaseApiResponse from "../common/base-api-response.model";
 import MediaResponse from "../common/media-response.model";
 import { CategoryItem } from "./category.model";
@@ -18,7 +17,7 @@ export interface MetalRateDetails {
   rate: number;
 }
 
-export interface Product {
+export interface ItemModel {
   _id: string;
   itemName: string;
   itemDescription?: string;
@@ -48,5 +47,5 @@ export interface Product {
 
 export default interface ItemApiResponse extends BaseApiResponse {
   status: boolean;
-  data: Product[];
+  data: ItemModel[];
 }

@@ -11,8 +11,8 @@ export const BANNER_URL = `/banners/user`;
 // Collection
 export const COLLECTION_URL = `/collections/user`;
 
-// FEATURED PRODUCTS URL
-export const FEATURED_PRODUCTS_URL = "/items/user/feature";
+// Featured Items Url
+export const FEATURED_ITEMS_URL = "/items/user/feature";
 
-// LATEST PRODUCTS URL
-export const LATEST_PRODUCTS_URL = "/items/user/latest-items";
+// latest Items Url
+export const LATEST_ITEMS_URL = "/items/user/latest-items";
