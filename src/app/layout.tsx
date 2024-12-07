@@ -1,7 +1,7 @@
 import NavBarComponent from "@/components/navbar";
 import "./globals.css";
 import type { Metadata } from "next";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@/components/next-theme-provider.component";
 
 export const metadata: Metadata = {
   title: "Auram",
@@ -14,16 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    // suppressHydrationWarning is used to suppress the warning that appears when the theme is changed
+    <html lang="en" suppressHydrationWarning>
       <body>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem={true}
-        >
-          <div >
-            <NavBarComponent />
-          </div>
+        <ThemeProvider>
+          <NavBarComponent />
           {children}
         </ThemeProvider>
       </body>
