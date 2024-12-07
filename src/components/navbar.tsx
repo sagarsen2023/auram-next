@@ -3,8 +3,8 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
-import auramLogoWithText from "../../../public/images/auram-logo-with-text.webp";
-import CartButtonComponent from "../buttons/cart-button.component";
+import auramLogoWithText from "../../public/images/auram-logo-with-text.webp";
+import CartButtonComponent from "./buttons/cart-button.component";
 import Link from "next/link";
 import { FaXmark } from "react-icons/fa6";
 // import dynamic from "next/dynamic";
