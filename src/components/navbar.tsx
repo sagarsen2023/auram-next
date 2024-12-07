@@ -18,7 +18,7 @@ function NavBarComponent() {
 
   return (
     <>
-      <div className="flex justify-center shadow-md fixed w-full bg-white dark:bg-black z-40">
+      <div className="flex justify-center shadow-md fixed w-full bg-white dark:bg-black z-[9999]">
         <div className="w-full px-4 lg:px-0 lg:max-w-8xl flex justify-between items-center p-2  bg-white dark:bg-black dark:text-black">
           <Link href="/">
             <Image
@@ -62,7 +62,7 @@ function NavBarComponent() {
 
       {/* Mobile Menu */}
       <div
-        className={`fixed border-4 z-30 w-full max-w-full backdrop-blur-xl bg-white/60 dark:bg-black/50 h-screen px-4 py-10 shadow-lg transform transition-transform duration-300 ease-in-out ${
+        className={`fixed border-4 z-[999] w-full max-w-full backdrop-blur-xl bg-white/60 dark:bg-black/50 h-screen px-4 py-10 shadow-lg transform transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0 no-doc-scroll" : "translate-x-full"
         }`}
       >
