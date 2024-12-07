@@ -1,0 +1,6 @@
+// Base Urls
+export const BASE_URL =
+  process.env.NEXT_PUBLIC_BASE_URL ?? "https://auram-api.onrender.com/api";
+export const IMAGE_URL =
+  process.env.NEXT_PUBLIC_IMAGE_BASE_URL ??
+  "https://pub-d7fc7e0204644a99b00264cba5e82690.r2.dev";
