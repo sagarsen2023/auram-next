@@ -13,8 +13,8 @@ function Page() {
       <BannerComponent />
 
       {/* Collection and Items */}
-      <div className="flex flex-col justify-center items-center w-full bg-gray-50">
-        <div className="p-2 w-full lg:max-w-7xl flex flex-col">
+      <div className="flex flex-col justify-center items-center w-full bg-gray-50 pb-5 lg:pb-14">
+        <div className="p-2 w-full lg:max-w-8xl flex flex-col">
           <CollectionComponent />
         </div>
       </div>

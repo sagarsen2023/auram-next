@@ -36,7 +36,7 @@ export default function WelcomeLoader() {
       }`}
       style={{ backgroundImage: `url(${welcome.src})` }}
     >
-      <div className="absolute w-full h-full bg-pink-100 opacity-0 animate-increase-width z-[9999]"></div>
+      <div className="absolute w-full h-full bg-pink-100 opacity-0 animate-increase-width z-[9999] no-doc-scroll"></div>
       <div className="relative p-6 text-center z-[99999]">
         <div className="mb-10">
           <Image src={auramLogoWithText} alt="aurum" width={500} height={500} />

@@ -7,7 +7,14 @@ import CollectionCardComponent from "../cards/collection-card.component";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
-import { Navigation } from "swiper/modules";
+import {
+  Navigation,
+  Pagination,
+  Scrollbar,
+  A11y,
+  EffectCreative,
+  Autoplay,
+} from "swiper/modules";
 
 function CollectionComponent() {
   const [loading, setLoading] = useState(true);
@@ -29,9 +36,9 @@ function CollectionComponent() {
   if (loading) return <DefaultLoaderComponent />;
   return (
     <div className="flex flex-col items-center justify-center w-full">
-      <div className="p-10 text-center">
+      <div className="pt-10 text-center">
         <p className="text-sm">WE&apos;VE GOT EVERYTHING YOU NEED</p>
-        <p className="text-lg font-[700] mt-2">DISCOVER OUR COLLECTION</p>
+        <p className="text-xl font-[700] mt-2">DISCOVER OUR COLLECTION</p>
       </div>
       <Swiper
         spaceBetween={30}
@@ -52,14 +59,6 @@ function CollectionComponent() {
             width: 1366,
             slidesPerView: 4,
           },
-          1440: {
-            width: 1440,
-            slidesPerView: 4,
-          },
-          1600: {
-            width: 1600,
-            slidesPerView: 5,
-          },
           1680: {
             width: 1680,
             slidesPerView: 5,
@@ -69,7 +68,15 @@ function CollectionComponent() {
             slidesPerView: 6,
           },
         }}
-        modules={[Navigation]}
+        modules={[
+          Navigation,
+          Pagination,
+          Scrollbar,
+          A11y,
+          EffectCreative,
+          Autoplay,
+        ]}
+        autoplay={{ delay: 4000 }}
         className="w-full"
         loop
       >
