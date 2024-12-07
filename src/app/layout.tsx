@@ -6,6 +6,7 @@ import { Nunito_Sans } from "next/font/google";
 
 const nunitoSans = Nunito_Sans({
   weight: ["1000", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
