@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-html.light {
-  color-scheme: light;
-}
-
-html.dark {
-  color-scheme: dark;
+:root:has(.no-doc-scroll) {
+  overflow: hidden;
 }
