@@ -5,3 +5,17 @@
 :root:has(.no-doc-scroll) {
   overflow: hidden;
 }
+
+.swiper-button-prev:after,
+.swiper-button-next:after {
+  font-size: 20px !important;
+}
+.swiper-button-prev,
+.swiper-button-next {
+  background-color: #ffffff;
+  padding: 5px 20px;
+  color: #000000 !important;
+  border-radius: 50%;
+  width: 45px !important;
+  height: 45px !important;
+}

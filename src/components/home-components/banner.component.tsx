@@ -19,10 +19,6 @@ import homeAPI from "@/services/home.service";
 import Image from "next/image";
 import { IMAGE_URL } from "@/services/queryUrls";
 import { useRouter } from "next/navigation";
-import {
-  LeftButtonComponent,
-  RightButtonComponent,
-} from "../buttons/left-right-buttons.component";
 
 function BannerComponent() {
   const router = useRouter();
@@ -48,7 +44,7 @@ function BannerComponent() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative bg-white">
       <Swiper
         effect={"coverflow"}
         centeredSlides={true}
@@ -61,10 +57,7 @@ function BannerComponent() {
           modifier: 1,
           slideShadows: true,
         }}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }}
+        navigation
         pagination={false}
         modules={[
           Navigation,
@@ -125,12 +118,6 @@ function BannerComponent() {
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="swiper-button-prev absolute left-4 top-1/2 transform -translate-y-1/2 z-50">
-        <LeftButtonComponent  />
-      </div>
-      <div className="swiper-button-next absolute right-4 top-1/2 transform -translate-y-1/2 z-50">
-        <RightButtonComponent />
-      </div>
     </div>
   );
 }
