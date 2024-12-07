@@ -1,6 +1,5 @@
 // import { getToken } from "../hooks/token";
-
-import { BASE_URL } from "./queryURLs";
+import { BASE_URL } from "./queryUrls";
 
 interface APIOptions extends RequestInit {
   headers?: Record<string, string>;
