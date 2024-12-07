@@ -12,6 +12,8 @@ export default {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        primary: "#000000",
+        secondary: "#d2a83e",
       },
       maxWidth: {
         "8xl": "90rem",
