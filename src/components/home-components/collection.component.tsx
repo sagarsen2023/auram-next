@@ -43,29 +43,17 @@ function CollectionComponent() {
       <Swiper
         spaceBetween={30}
         breakpoints={{
-          768: {
-            width: 768,
+          320: {
             slidesPerView: 1,
           },
           1024: {
-            width: 1024,
             slidesPerView: 2,
           },
           1280: {
-            width: 1280,
             slidesPerView: 3,
           },
           1366: {
-            width: 1366,
             slidesPerView: 4,
-          },
-          1680: {
-            width: 1680,
-            slidesPerView: 5,
-          },
-          1920: {
-            width: 1920,
-            slidesPerView: 6,
           },
         }}
         modules={[
