@@ -10,7 +10,7 @@ function CollectionCardComponent({
 }) {
   return (
     <div className="py-6">
-      <div className="relative w-full h-[450px] lg:h-[350px] aspect-square rounded-lg hover:shadow-lg hover:bg-white transition-all duration-300">
+      <div className="relative w-full h-[28rem] lg:h-[23rem] aspect-square rounded-lg hover:shadow-lg hover:bg-white transition-all duration-300">
         <Image
           src={imageValidator(collection.verticalImage?.path)}
           alt="collection image"

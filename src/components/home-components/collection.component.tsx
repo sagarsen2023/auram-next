@@ -36,9 +36,9 @@ function CollectionComponent() {
   if (loading) return <DefaultLoaderComponent />;
   return (
     <div className="flex flex-col items-center justify-center w-full">
-      <div className="pt-10 text-center">
-        <p className="text-sm">WE&apos;VE GOT EVERYTHING YOU NEED</p>
-        <p className="text-xl font-[700] mt-2">DISCOVER OUR COLLECTION</p>
+      <div className="pt-10 lg:pt-16 lg:pb-5 text-center">
+        <p className="text-sm lg:text-xl">WE&apos;VE GOT EVERYTHING YOU NEED</p>
+        <p className="text-xl lg:text-3xl font-[600] mt-2">DISCOVER OUR COLLECTION</p>
       </div>
       <Swiper
         spaceBetween={30}
