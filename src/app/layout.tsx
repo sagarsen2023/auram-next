@@ -26,7 +26,7 @@ export default function RootLayout({
       >
         <Providers>
           <NavBarComponent />
-          {children}
+          <div className="mt-16 lg:mt-20">{children}</div>
         </Providers>
       </body>
     </html>

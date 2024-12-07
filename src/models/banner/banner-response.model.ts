@@ -2,7 +2,7 @@ import BaseApiResponse from "../common/base-api-response.model";
 import MediaResponse from "../common/media-response.model";
 import UserResponse from "../common/user-response.model";
 
-export interface BannerData {
+export interface BannerModel {
   _id: string;
   title: string;
   subTitle: string;
@@ -19,5 +19,5 @@ export interface BannerData {
 export default interface BannerApiResponse extends BaseApiResponse {
   status: boolean;
   totalCount: number;
-  data: BannerData[];
+  data: BannerModel[];
 }
