@@ -4,7 +4,7 @@ import WelcomeLoader from "@/components/welcome-loader.component";
 import CollectionComponent from "@/components/home-components/collection.component";
 import NewArrivalComponent from "@/components/home-components/new-arrival.component";
 import FeaturedItemComponent from "@/components/home-components/featured-items.component";
-import ShippingInfoComponent from "@/components/shipping-info.component";
+import ShippingInfoComponent from "@/components/home-components/shipping-info.component";
 import ConnectWithUsComponent from "@/components/home-components/connect-with-us.component";
 
 function Page() {
