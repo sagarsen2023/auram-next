@@ -1,5 +1,6 @@
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { ItemModel } from "@/models/product-category-collections/item.model";
+import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
 import { itemAPI } from "@/services/product.service";
 
 function extractKeyValuePairs(arr: string[]): {
@@ -67,5 +68,29 @@ export async function getItems(): Promise<ItemModel[] | null> {
   } catch (error) {
     console.error(error);
     return null;
+  }
+}
+
+export async function getSortFilterOptions(): Promise<{
+  sortOptions: SortFilterModel[] | null;
+  filterOptions: SortFilterModel[] | null;
+}> {
+  try {
+    const response = await itemAPI.getSortFilers();
+    const data: SortFilterModel[] = response.data;
+
+    const sortOptions:SortFilterModel[] = data.filter((option) => option.type === "sort");
+    const filterOptions = data.filter((option) => option.type === "filter");
+    console.log(sortOptions);
+    return {
+      sortOptions,
+      filterOptions,
+    };
+  } catch (error) {
+    console.error(error);
+    return {
+      sortOptions: null,
+      filterOptions: null,
+    };
   }
 }
