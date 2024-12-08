@@ -1,7 +1,8 @@
 import NavBarComponent from "@/components/navbar";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Providers } from "@/components/next-theme-provider.component";
+// If we later want dark mode then we can use the Providers component
+// import { Providers } from "@/components/next-theme-provider.component";
 import { Nunito_Sans } from "next/font/google";
 import FooterComponent from "@/components/footer.component";
 import { Toaster } from "sonner";
@@ -28,11 +29,11 @@ export default function RootLayout({
         className={`${nunitoSans.className} bg-white text-black dark:bg-black dark:text-white transition-colors duration-300 ease-in-out min-h-screen flex flex-col tracking-widest`}
       >
         <Toaster richColors theme="light" position="top-center" />
-        <Providers>
-          <NavBarComponent />
-          <div className="mt-16 lg:mt-20">{children}</div>
-          <FooterComponent />
-        </Providers>
+        {/* <Providers> */}
+        <NavBarComponent />
+        <div className="mt-16 lg:mt-20">{children}</div>
+        <FooterComponent />
+        {/* </Providers> */}
       </body>
     </html>
   );
