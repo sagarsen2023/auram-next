@@ -4,7 +4,7 @@ export interface ItemParams {
   collections?: string | string[];
   itemCategory?: string | string[];
   goldPurity?: number | number[];
-  sortBy?: "priceAsc" | "priceDesc";
+  sortBy?: string;
   minPrice?: number;
   maxPrice?: number;
 }

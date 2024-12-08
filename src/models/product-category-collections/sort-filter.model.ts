@@ -15,4 +15,5 @@ export interface SortFilterModel {
 export interface SortFilterOptions {
   label: string;
   value: string;
+  link?: string;
 }

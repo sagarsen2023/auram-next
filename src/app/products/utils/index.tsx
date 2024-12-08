@@ -22,6 +22,38 @@ function extractKeyValuePairs(arr: string[]): {
   return result;
 }
 
+export function generateSlugFromParams(params: ItemParams): string {
+  const slug: string[] = [];
+  if (params.sortBy) {
+    slug.push(`sortBy=${params.sortBy}`);
+  }
+  if (params.collections) {
+    if (Array.isArray(params.collections)) {
+      slug.push(`collections=${params.collections.join("=")}`);
+    }
+  }
+  if (params.goldPurity) {
+    if (Array.isArray(params.goldPurity)) {
+      slug.push(`goldPurity=${params.goldPurity.join("=")}`);
+    }
+  }
+  if (params.minPrice) {
+    slug.push(`minPrice=${params.minPrice}`);
+  }
+  if (params.maxPrice) {
+    slug.push(`maxPrice=${params.maxPrice}`);
+  }
+  if (params.itemCategory) {
+    if (Array.isArray(params.itemCategory)) {
+      slug.push(`itemCategory=${params.itemCategory.join("=")}`);
+    }
+  }
+  if (params.skip) {
+    slug.push(`skip=${params.skip}`);
+  }
+  return slug.join("/");
+}
+
 export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
   if (!slug) return {};
 
@@ -79,9 +111,10 @@ export async function getSortFilterOptions(): Promise<{
     const response = await itemAPI.getSortFilers();
     const data: SortFilterModel[] = response.data;
 
-    const sortOptions:SortFilterModel[] = data.filter((option) => option.type === "sort");
+    const sortOptions: SortFilterModel[] = data.filter(
+      (option) => option.type === "sort"
+    );
     const filterOptions = data.filter((option) => option.type === "filter");
-    console.log(sortOptions);
     return {
       sortOptions,
       filterOptions,

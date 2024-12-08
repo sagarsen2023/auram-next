@@ -1,14 +1,43 @@
 "use client";
+import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { SortFilterOptions } from "@/models/product-category-collections/sort-filter.model";
+import React, { useEffect, useState } from "react";
+import { generateSlugFromParams } from "@/app/products/utils";
 import Link from "next/link";
-import React, { useState } from "react";
 
 const SortByMenuComponent = ({
+  currentParams,
   sortOptions,
 }: {
+  currentParams: ItemParams;
   sortOptions?: SortFilterOptions[];
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedOption, setSelectedOption] = useState<string>("Sort By");
+  const [updatedSortOptions, setUpdatedSortOptions] = useState<
+    SortFilterOptions[]
+  >([]);
+
+  useEffect(() => {
+    if (sortOptions && currentParams.sortBy) {
+      const selected = sortOptions.find(
+        (option) => option.value === currentParams.sortBy
+      );
+      if (selected) {
+        setSelectedOption(selected.label);
+      }
+    }
+
+    if (sortOptions) {
+      const newSortOptions = sortOptions.map((option) => {
+        const updatedParams = { ...currentParams, sortBy: option.value };
+        const link = `/products/${generateSlugFromParams(updatedParams)}`;
+        return { ...option, link };
+      });
+      console.log(newSortOptions)
+      setUpdatedSortOptions(newSortOptions);
+    }
+  }, [sortOptions, currentParams]);
 
   const toggleDropdown = () => {
     setIsOpen(!isOpen);
@@ -21,11 +50,11 @@ const SortByMenuComponent = ({
       <button
         id="dropdownDividerButton"
         data-dropdown-toggle="dropdownDivider"
-        className="bg-white border w-36 px-4 py-2 border-primary hover:bg-primary hover:text-white hover:shadow-lg transition-colors duration-250"
+        className="bg-white border w-fit px-4 py-2 border-primary hover:bg-primary hover:text-white hover:shadow-lg transition-colors duration-250"
         type="button"
         onClick={toggleDropdown}
       >
-        Sort By
+        {selectedOption}
       </button>
 
       {/* Dropdown menu */}
@@ -41,11 +70,14 @@ const SortByMenuComponent = ({
           className="py-2 text-sm text-gray-700 dark:text-gray-200"
           aria-labelledby="dropdownDividerButton"
         >
-          {sortOptions.map((item, index) => (
-            <li key={index} onClick={() => setIsOpen(false)}>
-              <Link
-                href="#"
-                className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white"
+          {updatedSortOptions.map((item, index) => (
+            <li key={index}>
+              <Link href={item.link?? ''}
+                className={`block px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
+                  currentParams.sortBy === item.value
+                    ? "bg-gray-200 dark:bg-gray-600"
+                    : ""
+                }`}
               >
                 {item.label}
               </Link>

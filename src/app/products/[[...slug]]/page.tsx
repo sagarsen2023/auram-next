@@ -5,14 +5,12 @@ import ProductCardComponent from "@/components/cards/product-card.component";
 import DualLineComponent from "@/components/ui/dual-line.component";
 import SortByMenuComponent from "@/components/product-listing-components/sort-by-menu.component";
 
-async function Page({ params }: { params: { slug?: string[] } }) {
-  const { slug } = await params;
+async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
+  const slug = (await params).slug
   const itemParams = getItemParams({ slug });
-  console.log(itemParams);
   const itemData = await getItems();
   const { sortOptions } = await getSortFilterOptions();
 
-  // console.log(sortOptions.values)
   return (
     <Suspense
       fallback={
@@ -31,9 +29,12 @@ async function Page({ params }: { params: { slug?: string[] } }) {
         </div>
 
         {/* Sort and filter Menu */}
-        <div className="flex justify-end items-center w-full">
+        <div className="flex justify-end items-center w-full my-3">
           {sortOptions && sortOptions.length > 0 && (
-            <SortByMenuComponent sortOptions={sortOptions[0].values} />
+            <SortByMenuComponent
+              currentParams={itemParams}
+              sortOptions={sortOptions[0].values}
+            />
           )}
         </div>
 
