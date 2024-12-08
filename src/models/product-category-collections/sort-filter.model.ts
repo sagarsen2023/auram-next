@@ -9,12 +9,10 @@ export interface SortFilterModel {
   lebel?: string;
   field: string;
   type: "sort" | "filter";
-  values?: Value[];
-  label?: string;
-  data?: Value[];
+  values?: SortFilterOptions[];
 }
 
-export interface Value {
+export interface SortFilterOptions {
   label: string;
   value: string;
 }

@@ -1,13 +1,18 @@
 import React, { Suspense } from "react";
-import { getItemParams, getItems } from "../utils";
+import { getItemParams, getItems, getSortFilterOptions } from "../utils";
 import DefaultLoaderComponent from "@/components/default-loader.component";
 import ProductCardComponent from "@/components/cards/product-card.component";
+import DualLineComponent from "@/components/ui/dual-line.component";
+import SortByMenuComponent from "@/components/product-listing-components/sort-by-menu.component";
 
 async function Page({ params }: { params: { slug?: string[] } }) {
   const { slug } = await params;
   const itemParams = getItemParams({ slug });
   console.log(itemParams);
   const itemData = await getItems();
+  const { sortOptions } = await getSortFilterOptions();
+
+  // console.log(sortOptions.values)
   return (
     <Suspense
       fallback={
@@ -17,6 +22,22 @@ async function Page({ params }: { params: { slug?: string[] } }) {
       }
     >
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Top Heading Part */}
+        <div className="flex justify-center flex-col gap-3 w-full pb-6">
+          <h1 className="font-[500] text-center text-2xl">
+            Our Elegant Products
+          </h1>
+          <DualLineComponent />
+        </div>
+
+        {/* Sort and filter Menu */}
+        <div className="flex justify-end items-center w-full">
+          {sortOptions && sortOptions.length > 0 && (
+            <SortByMenuComponent sortOptions={sortOptions[0].values} />
+          )}
+        </div>
+
+        {/* All Products Part */}
         {itemData && itemData.length ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
             {itemData.map((item) => (
