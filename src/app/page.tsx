@@ -8,8 +8,7 @@ import ShippingInfoComponent from "@/components/shipping-info.component";
 import ConnectWithUsComponent from "@/components/home-components/connect-with-us.component";
 
 function Page() {
-  const sectionClassNames = "flex flex-col items-center w-full pb-5 lg:pb-14";
-  const containerClassNames = "p-2 w-full lg:max-w-8xl";
+  const sectionClassNames = "max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8";
 
   return (
     <div>
@@ -21,17 +20,13 @@ function Page() {
 
       {/* Collection */}
       <div className={`${sectionClassNames} bg-gray-50`}>
-        <div className={containerClassNames}>
-          <CollectionComponent />
-        </div>
+        <CollectionComponent />
       </div>
 
       {/* New Arrival and Featured Items */}
-      <div className={sectionClassNames}>
-        <div className={`${containerClassNames} flex flex-col gap-5`}>
-          <NewArrivalComponent />
-          <FeaturedItemComponent />
-        </div>
+      <div className={`${sectionClassNames} space-y-5 pb-20`}>
+        <NewArrivalComponent />
+        <FeaturedItemComponent />
       </div>
 
       {/* Shipping Info */}
@@ -39,9 +34,7 @@ function Page() {
 
       {/* Connect with us */}
       <div className={sectionClassNames}>
-        <div className={containerClassNames}>
-          <ConnectWithUsComponent />
-        </div>
+        <ConnectWithUsComponent />
       </div>
     </div>
   );
