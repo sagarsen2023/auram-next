@@ -11,9 +11,9 @@ function extractKeyValuePairs(arr: string[]): {
     const [key, value] = item.split("%3D");
     if (result[key]) {
       if (Array.isArray(result[key])) {
-        (result[key] as string[]).push(value);
+        (result[key]).push(value);
       } else {
-        result[key] = [result[key] as string, value];
+        result[key] = [result[key], value];
       }
     } else {
       result[key] = value;
@@ -29,12 +29,16 @@ export function generateSlugFromParams(params: ItemParams): string {
   }
   if (params.collections) {
     if (Array.isArray(params.collections)) {
-      slug.push(`collections=${params.collections.join("=")}`);
+      params.collections.forEach((collection) => {
+        slug.push(`collections=${collection}`);
+      });
     }
   }
   if (params.goldPurity) {
     if (Array.isArray(params.goldPurity)) {
-      slug.push(`goldPurity=${params.goldPurity.join("=")}`);
+      params.goldPurity.forEach((purity) => {
+        slug.push(`goldPurity=${purity}`);
+      });
     }
   }
   if (params.minPrice) {
@@ -45,7 +49,9 @@ export function generateSlugFromParams(params: ItemParams): string {
   }
   if (params.itemCategory) {
     if (Array.isArray(params.itemCategory)) {
-      slug.push(`itemCategory=${params.itemCategory.join("=")}`);
+      params.itemCategory.forEach((category) => {
+        slug.push(`itemCategory=${category}`);
+      });
     }
   }
   if (params.skip) {
@@ -93,9 +99,11 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
   return itemParams;
 }
 
-export async function getItems(): Promise<ItemModel[] | null> {
+export async function getItems({params}:{
+  params: ItemParams;
+}): Promise<ItemModel[] | null> {
   try {
-    const response = await itemAPI.getAllItems();
+    const response = await itemAPI.getAllItems(params);
     return response.data;
   } catch (error) {
     console.error(error);

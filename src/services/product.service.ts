@@ -9,6 +9,8 @@ import {
 } from "./queryUrls";
 import ItemApiResponse from "@/models/product-category-collections/item.model";
 import { SortFilterApiResponse } from "@/models/product-category-collections/sort-filter.model";
+import { ItemParams } from "@/models/product-category-collections/item-params.model";
+import queryParamsFormatter from "@/utils/queryParamsFormatter";
 
 export const collectionAPI = {
   getAllCollections: async () =>
@@ -21,5 +23,9 @@ export const itemAPI = {
   getLatestItems: async () => fetchAPI.get<ItemApiResponse>(LATEST_ITEMS_URL),
   getSortFilers: async () =>
     fetchAPI.get<SortFilterApiResponse>(SORT_FILTERS_URL),
-  getAllItems: async () => fetchAPI.get<ItemApiResponse>(ITEM_URL),
+  getAllItems: async (params:ItemParams) => {
+    const queryString = queryParamsFormatter(params );
+    console.log("queryString", queryString);
+    return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`);
+  },
 };

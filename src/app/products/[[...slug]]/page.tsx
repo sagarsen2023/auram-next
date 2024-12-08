@@ -8,7 +8,9 @@ import SortByMenuComponent from "@/components/product-listing-components/sort-by
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug
   const itemParams = getItemParams({ slug });
-  const itemData = await getItems();
+  const itemData = await getItems({
+    params: itemParams,
+  });
   const { sortOptions } = await getSortFilterOptions();
 
   return (
