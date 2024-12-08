@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 import welcome from "../../public/images/welcome.png";
-import auramLogoWithText from "../../public/images/auram-logo-with-text.webp";
+import auramLogo from "../../public/images/auram-logo.png"
 
 export default function WelcomeLoader() {
   const [isFirstVisit, setIsFirstVisit] = useAtom(isFirstVisitAtom);
@@ -46,7 +46,7 @@ export default function WelcomeLoader() {
       <div className="absolute inset-0 bg-pink-100 opacity-0 animate-increase-width z-[99999]"></div>
       <div className="relative p-6 text-center z-[1000000]">
         <div className="mb-10">
-          <Image src={auramLogoWithText} alt="aurum" width={500} height={500} />
+          <Image src={auramLogo} alt="aurum" width={350} height={350} />
         </div>
       </div>
     </section>
