@@ -10,3 +10,9 @@ export const BANNER_URL = `/banners/user`;
 
 // Collection
 export const COLLECTION_URL = `/collections/user`;
+
+// Featured Items Url
+export const FEATURED_ITEMS_URL = "/items/user/feature";
+
+// latest Items Url
+export const LATEST_ITEMS_URL = "/items/user/latest-items";

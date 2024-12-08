@@ -19,10 +19,6 @@ import homeAPI from "@/services/home.service";
 import Image from "next/image";
 import { IMAGE_URL } from "@/services/queryUrls";
 import { useRouter } from "next/navigation";
-import {
-  LeftButtonComponent,
-  RightButtonComponent,
-} from "../buttons/left-right-buttons.component";
 
 function BannerComponent() {
   const router = useRouter();
@@ -48,7 +44,7 @@ function BannerComponent() {
   }, []);
 
   return (
-    <div className="relative">
+    <div className="relative bg-white">
       <Swiper
         effect={"coverflow"}
         centeredSlides={true}
@@ -61,10 +57,7 @@ function BannerComponent() {
           modifier: 1,
           slideShadows: true,
         }}
-        navigation={{
-          nextEl: ".swiper-button-next",
-          prevEl: ".swiper-button-prev",
-        }}
+        navigation
         pagination={false}
         modules={[
           Navigation,
@@ -81,7 +74,9 @@ function BannerComponent() {
       >
         {bannerData.map((banner, index) => (
           <SwiperSlide key={banner._id}>
-            <div className={`relative w-full h-screen flex items-center`}>
+            <div
+              className={`relative w-full h-[23rem] md:h-[30rem] lg:h-screen flex items-center`}
+            >
               <Image
                 src={`${IMAGE_URL}/${banner.image.path}`}
                 alt="Picture of the author"
@@ -89,7 +84,7 @@ function BannerComponent() {
                 className="object-cover z-10"
               />
               <div
-                className={`absolute z-20 w-full h-full flex items-center text-black ${
+                className={`hidden lg:absolute z-20 w-full h-full lg:flex items-center text-black ${
                   index % 2 === 0 ? "justify-end" : "justify-start"
                 }`}
               >
@@ -97,16 +92,16 @@ function BannerComponent() {
                   <div
                     className={`w-full h-full mb-20 flex ${
                       index % 2 === 0
-                        ? "justify-end pr-80"
-                        : "justify-start pl-80"
+                        ? "justify-end lg:pr-64 xl:pr-72"
+                        : "justify-start lg:pl-64 xl:pl-72"
                     }`}
                   >
-                    <div className="text-center w-1/3 flex flex-col gap-2 font-[300] items-center">
-                      <h1 className="text-[100px] leading-[100px]">
+                    <div className="text-center lg:w-1/3 flex flex-col gap-2 font-[300] items-center">
+                      <h1 className="lg:text-[2rem] xl:text-[3rem]">
                         {banner.title}
                       </h1>
-                      <p className="text-xl">{banner.subTitle}</p>
-                      <p className="text-[22px] leading-relaxed">
+                      <p className="text-lg xl:text-xl">{banner.subTitle}</p>
+                      <p className="text-lg xl:text-xl leading-relaxed">
                         {banner.description}
                       </p>
                       <button
@@ -122,15 +117,24 @@ function BannerComponent() {
                 </div>
               </div>
             </div>
+            <div className="text-center space-y-2 py-3 lg:hidden">
+              <p className="text-3xl">{banner.title}</p>
+              <p className="text-lg font-[300]">{banner.subTitle}</p>
+              <p className="">
+                {banner.description}
+              </p>
+              <button
+                className="w-fit px-3 py-2 my-2 hover:border-t hover:border-b hover:border-gray-600 transition-all duration-150"
+                onClick={() => {
+                  router.push(banner.link);
+                }}
+              > 
+                {banner.buttonText}
+              </button>
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>
-      <div className="swiper-button-prev absolute left-4 top-1/2 transform -translate-y-1/2 z-50">
-        <LeftButtonComponent  />
-      </div>
-      <div className="swiper-button-next absolute right-4 top-1/2 transform -translate-y-1/2 z-50">
-        <RightButtonComponent />
-      </div>
     </div>
   );
 }

@@ -9,7 +9,7 @@ import Link from "next/link";
 import { FaXmark } from "react-icons/fa6";
 // import dynamic from "next/dynamic";
 // const ThemeSwitchButtonComponent = dynamic(
-//   () => import("../buttons/theme-switch-button.component"),
+//   () => import("../components/buttons/theme-switch-button.component"),
 //   { ssr: false }
 // );
 
