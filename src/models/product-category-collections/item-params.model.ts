@@ -5,6 +5,6 @@ export interface ItemParams {
   itemCategory?: string;
   goldPurity?: number;
   sortBy?: "priceAsc" | "priceDesc";
-  // Following line is added to implement priceRange filter
-  [key: string]: string | number | undefined;
+  minPrice?: number;
+  maxPrice?: number;
 }
