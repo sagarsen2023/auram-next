@@ -4,7 +4,13 @@ import { contactAPI } from "@/services/contact.service";
 import { collectionAPI } from "@/services/product.service";
 import Link from "next/link";
 import React from "react";
-import { FaGlobe, FaMapMarkerAlt, FaPhoneAlt, FaWhatsapp } from "react-icons/fa";
+import {
+  FaGlobe,
+  FaMapMarkerAlt,
+  FaPhoneAlt,
+  FaWhatsapp,
+} from "react-icons/fa";
+import { FaEnvelope, FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa6";
 import { IoMailSharp } from "react-icons/io5";
 
 async function FooterComponent() {
@@ -105,7 +111,7 @@ async function FooterComponent() {
   return (
     <>
       {/* Testimonial Part */}
-      <footer className="w-full bg-gray-100 flex flex-col items-center justify-center gap-5">
+      <footer className="w-full bg-gray-100 flex flex-col items-center justify-center gap-5 lg:h-[30rem] border-b-2 border-gray-300">
         <div className="w-full lg:max-w-8xl">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-0 md:gap-4">
             {testimonials.map((testimonial, index) => (
@@ -126,7 +132,8 @@ async function FooterComponent() {
             ))}
           </div>
         </div>
-        <div className="w-full lg:max-w-8xl grid grid-cols-1 md:grid-cols-4 gap-10 lg:gap-4">
+        {/* More sections */}
+        <div className="w-full lg:max-w-8xl grid grid-cols-1 md:grid-cols-4 gap-10 lg:gap-4 lg:h-full">
           {/* Collection Info */}
           <div className={`${sectionClassName}`}>
             <h1 className="pb-2 mb-2 border-b-2 border-secondary w-fit">
@@ -161,7 +168,9 @@ async function FooterComponent() {
             ))}
           </div>
           {/* Contact Info */}
-          <div className={`${sectionClassName} bg-gray-200 -mt-5`}>
+          <div
+            className={`${sectionClassName} bg-gray-200 -mt-5 lg:h-[24.5rem]`}
+          >
             <h1 className="mt-5 pb-2 mb-2 border-b-2 border-secondary w-fit">
               Contact Us
             </h1>
@@ -203,6 +212,50 @@ async function FooterComponent() {
             )}
           </div>
         </div>
+      </footer>
+
+      {/* Social Icon and copyright */}
+      <footer className="w-full bg-gray-100 flex flex-col items-center justify-center gap-5 py-5">
+        <div className="flex items-center gap-5">
+          {contactInfoData.facebook && (
+            <Link href={contactInfoData.facebook}>
+              <FaFacebook className="text-2xl" />
+            </Link>
+          )}
+          {contactInfoData.instagram && (
+            <Link href={contactInfoData.instagram}>
+              <FaInstagram className="text-2xl" />
+            </Link>
+          )}
+          {contactInfoData.linkedin && (
+            <Link href={contactInfoData.linkedin}>
+              <FaLinkedin className="text-2xl" />
+            </Link>
+          )}
+          {contactInfoData.twitter && (
+            <Link href={contactInfoData.twitter}>
+              <FaTwitter className="text-2xl" />
+            </Link>
+          )}
+          {contactInfoData.youtube && (
+            <Link href={contactInfoData.youtube}>
+              <FaYoutube className="text-2xl" />
+            </Link>
+          )}
+          {contactInfoData.whatsapp && (
+            <Link href={`https://wa.me/${contactInfoData.whatsapp}`}>
+              <FaWhatsapp className="text-2xl" />
+            </Link>
+          )}
+          {contactInfoData.email && (
+            <Link href={`mailto:${contactInfoData.email}`}>
+              <FaEnvelope className="text-2xl" />
+            </Link>
+          )}
+        </div>
+        <p className="text-sm">
+          © {new Date().getFullYear()} Auram. All Rights Reserved.
+        </p>
       </footer>
     </>
   );
