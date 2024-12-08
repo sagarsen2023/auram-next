@@ -17,5 +17,8 @@ export const FEATURED_ITEMS_URL = "/items/user/feature";
 // latest Items Url
 export const LATEST_ITEMS_URL = "/items/user/latest-items";
 
+// Sort Filters Url
+export const SORT_FILTERS_URL = "/items/user/sort-filter";
+
 // Contact Info Url
 export const CONTACT_INFO = `/general-infos`;
