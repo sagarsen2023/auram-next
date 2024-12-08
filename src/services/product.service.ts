@@ -3,6 +3,7 @@ import { fetchAPI } from "./config";
 import {
   COLLECTION_URL,
   FEATURED_ITEMS_URL,
+  ITEM_URL,
   LATEST_ITEMS_URL,
   SORT_FILTERS_URL,
 } from "./queryUrls";
@@ -20,4 +21,5 @@ export const itemAPI = {
   getLatestItems: async () => fetchAPI.get<ItemApiResponse>(LATEST_ITEMS_URL),
   getSortFilers: async () =>
     fetchAPI.get<SortFilterApiResponse>(SORT_FILTERS_URL),
+  getAllItems: async () => fetchAPI.get<ItemApiResponse>(ITEM_URL),
 };
