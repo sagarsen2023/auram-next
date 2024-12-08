@@ -26,7 +26,7 @@ export default function RootLayout({
     // suppressHydrationWarning is used to suppress the warning that appears when the theme is changed
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${nunitoSans.className} bg-white text-black dark:bg-black dark:text-white transition-colors duration-300 ease-in-out min-h-screen flex flex-col tracking-widest`}
+        className={`${nunitoSans.className} bg-white text-black dark:bg-black dark:text-white transition-colors duration-300 ease-in-out min-h-screen flex flex-col`}
       >
         <Toaster richColors theme="light" position="top-center" />
         {/* <Providers> */}
