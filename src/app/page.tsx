@@ -26,6 +26,7 @@ function Page() {
         </div>
       </div>
 
+      {/* New Arrival and Featured Items */}
       <div className={sectionClassNames}>
         <div className={`${containerClassNames} flex flex-col gap-5`}>
           <NewArrivalComponent />
@@ -33,8 +34,10 @@ function Page() {
         </div>
       </div>
 
+      {/* Shipping Info */}
       <ShippingInfoComponent />
 
+      {/* Connect with us */}
       <div className={sectionClassNames}>
         <div className={containerClassNames}>
           <ConnectWithUsComponent />
