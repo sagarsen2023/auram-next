@@ -26,7 +26,6 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
 
   const {
     skip,
-    limit,
     sortBy,
     collections,
     goldPurity,
@@ -53,7 +52,7 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
       ? [parseInt(goldPurity)]
       : undefined,
     skip: skip ? parseInt(skip as string) : undefined,
-    limit: limit ? parseInt(limit as string) : undefined,
+    limit: 50,
     minPrice: minPrice ? parseInt(minPrice as string) : undefined,
     maxPrice: maxPrice ? parseInt(maxPrice as string) : undefined,
   };
