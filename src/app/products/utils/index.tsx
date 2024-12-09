@@ -11,7 +11,7 @@ function extractKeyValuePairs(arr: string[]): {
     const [key, value] = item.split("%3D");
     if (result[key]) {
       if (Array.isArray(result[key])) {
-        (result[key]).push(value);
+        result[key].push(value);
       } else {
         result[key] = [result[key], value];
       }
@@ -99,7 +99,9 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
   return itemParams;
 }
 
-export async function getItems({params}:{
+export async function getItems({
+  params,
+}: {
   params: ItemParams;
 }): Promise<ItemModel[] | null> {
   try {
@@ -117,12 +119,14 @@ export async function getSortFilterOptions(): Promise<{
 }> {
   try {
     const response = await itemAPI.getSortFilers();
+    console.log(response)
     const data: SortFilterModel[] = response.data;
 
-    const sortOptions: SortFilterModel[] = data.filter(
+    const sortOptions: SortFilterModel[] = data?.filter(
       (option) => option.type === "sort"
     );
-    const filterOptions = data.filter((option) => option.type === "filter");
+    const filterOptions = data?.filter((option) => option.type === "filter");
+    console.log("filterOptions", filterOptions);
     return {
       sortOptions,
       filterOptions,

@@ -6,9 +6,12 @@ export interface SortFilterApiResponse extends BaseApiResponse {
 }
 
 export interface SortFilterModel {
-  lebel?: string;
+  label?: string;
   field: string;
   type: "sort" | "filter";
+  // Following part for sorting
+  data?: SortFilterOptions[];
+  // Following part for filtering
   values?: SortFilterOptions[];
 }
 

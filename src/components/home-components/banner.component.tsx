@@ -71,7 +71,7 @@ function BannerComponent() {
         loop={true}
         scrollbar={{ draggable: true }}
       >
-        {bannerData.map((banner, index) => (
+        {bannerData?.map((banner, index) => (
           <SwiperSlide key={banner._id}>
             <div
               className={`relative w-full h-[23rem] md:h-[30rem] lg:h-screen flex items-center`}

@@ -4,14 +4,15 @@ import DefaultLoaderComponent from "@/components/default-loader.component";
 import ProductCardComponent from "@/components/cards/product-card.component";
 import DualLineComponent from "@/components/ui/dual-line.component";
 import SortByMenuComponent from "@/components/product-listing-components/sort-by-menu.component";
+import FilterMenuComponent from "@/components/product-listing-components/filter-menu.component";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
-  const slug = (await params).slug
+  const slug = (await params).slug;
   const itemParams = getItemParams({ slug });
   const itemData = await getItems({
     params: itemParams,
   });
-  const { sortOptions } = await getSortFilterOptions();
+  const { sortOptions, filterOptions } = await getSortFilterOptions();
 
   return (
     <Suspense
@@ -31,7 +32,8 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
 
         {/* Sort and filter Menu */}
-        <div className="flex justify-end items-center w-full my-3">
+        <div className="flex justify-between items-center w-full my-3">
+          <FilterMenuComponent filterOptions={filterOptions} />
           {sortOptions && sortOptions.length > 0 && (
             <SortByMenuComponent
               currentParams={itemParams}
@@ -42,7 +44,7 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
 
         {/* All Products Part */}
         {itemData && itemData.length ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {itemData.map((item) => (
               <ProductCardComponent key={item._id} item={item} />
             ))}
