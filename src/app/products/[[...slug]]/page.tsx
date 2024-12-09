@@ -5,6 +5,7 @@ import ProductCardComponent from "@/components/cards/product-card.component";
 import DualLineComponent from "@/components/ui/dual-line.component";
 import SortByMenuComponent from "@/components/product-listing-components/sort-by-menu.component";
 import FilterMenuComponent from "@/components/product-listing-components/filter-menu.component";
+import FilterSideBarComponent from "@/components/product-listing-components/filter-sidebar.component";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
@@ -46,15 +47,23 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
 
         {/* All Products Part */}
-        {itemData && itemData.length ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            {itemData.map((item) => (
-              <ProductCardComponent key={item._id} item={item} />
-            ))}
+        <div className="lg:flex gap-2 items-start">
+          <FilterSideBarComponent
+            currentParams={itemParams}
+            filterOptions={filterOptions}
+          />
+          <div className="w-full">
+            {itemData && itemData.length ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {itemData.map((item) => (
+                  <ProductCardComponent key={item._id} item={item} />
+                ))}
+              </div>
+            ) : (
+              <div>No Products to display</div>
+            )}
           </div>
-        ) : (
-          <div>No Products to display</div>
-        )}
+        </div>
       </div>
     </Suspense>
   );
