@@ -1,6 +1,5 @@
 import React from "react";
-import { TbTruckDelivery } from "react-icons/tb";
-import { TbTruckReturn } from "react-icons/tb";
+import { TbTruckDelivery, TbTruckReturn } from "react-icons/tb";
 import { RiSecurePaymentLine } from "react-icons/ri";
 
 function ShippingInfoComponent() {
@@ -40,19 +39,15 @@ function ShippingInfoComponent() {
     },
   ];
   return (
-    <div className="bg-primary px-6 py-12 flex flex-col lg:flex-row md:px-36 md:py-24 justify-center items-center select-none gap-10">
+    <div className="bg-[url('/images/parallx.jpg')] bg-fixed px-6 py-12 flex flex-col lg:flex-row md:px-36 md:py-24 justify-center items-center select-none gap-10">
       {shipptingInfo.map((info, index) => (
         <div
           key={index}
           className="text-white group w-full flex flex-col justify-center items-center text-center gap-2"
         >
-          <div className="border-b w-fit">
-            {info.icon}
-          </div>
+          <div className="border-b w-fit">{info.icon}</div>
           <p className="mt-2 md:text-xl">{info.title}</p>
-          <p className="text-sm md:w-96 md:text-lg">
-           {info.description}
-          </p>
+          <p className="text-sm md:w-96 md:text-lg">{info.description}</p>
         </div>
       ))}
     </div>

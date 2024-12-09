@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
 import {
@@ -41,7 +40,7 @@ function BannerComponent() {
         console.log(error);
       })
       .finally(() => {});
-  }, []);
+  }, []); 
 
   return (
     <div className="relative bg-white">
@@ -120,15 +119,13 @@ function BannerComponent() {
             <div className="text-center space-y-2 py-3 lg:hidden">
               <p className="text-3xl">{banner.title}</p>
               <p className="text-lg font-[300]">{banner.subTitle}</p>
-              <p className="">
-                {banner.description}
-              </p>
+              <p className="">{banner.description}</p>
               <button
                 className="w-fit px-3 py-2 my-2 hover:border-t hover:border-b hover:border-gray-600 transition-all duration-150"
                 onClick={() => {
                   router.push(banner.link);
                 }}
-              > 
+              >
                 {banner.buttonText}
               </button>
             </div>
