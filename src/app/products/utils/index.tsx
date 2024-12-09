@@ -41,6 +41,13 @@ export function generateSlugFromParams(params: ItemParams): string {
       });
     }
   }
+  if (params.metalType) {
+    if (Array.isArray(params.metalType)) {
+      params.metalType.forEach((purity) => {
+        slug.push(`metalType=${purity}`);
+      });
+    }
+  }
   if (params.minPrice) {
     slug.push(`minPrice=${params.minPrice}`);
   }
@@ -51,6 +58,13 @@ export function generateSlugFromParams(params: ItemParams): string {
     if (Array.isArray(params.itemCategory)) {
       params.itemCategory.forEach((category) => {
         slug.push(`itemCategory=${category}`);
+      });
+    }
+  }
+  if (params.gender) {
+    if (Array.isArray(params.gender)) {
+      params.gender.forEach((category) => {
+        slug.push(`gender=${category}`);
       });
     }
   }
@@ -71,6 +85,8 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
     minPrice,
     maxPrice,
     itemCategory,
+    gender,
+    metalType,
   } = extractKeyValuePairs(slug);
 
   const itemParams: ItemParams = {
@@ -86,10 +102,16 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
       ? [itemCategory]
       : undefined,
     goldPurity: Array.isArray(goldPurity)
-      ? goldPurity.map((value) => parseInt(value))
+      ? goldPurity
       : goldPurity
-      ? [parseInt(goldPurity)]
+      ? [goldPurity]
       : undefined,
+    metalType: Array.isArray(metalType)
+      ? metalType
+      : metalType
+      ? [metalType]
+      : undefined,
+    gender: Array.isArray(gender) ? gender : gender ? [gender] : undefined,
     skip: skip ? parseInt(skip as string) : undefined,
     limit: 50,
     minPrice: minPrice ? parseInt(minPrice as string) : undefined,
