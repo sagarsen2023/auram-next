@@ -45,7 +45,7 @@ export default function WelcomeLoader() {
     >
       <div className="absolute inset-0 bg-pink-100 opacity-0 animate-increase-width z-[99999]"></div>
       <div className="relative p-6 text-center z-[1000000]">
-        <div className="mb-10">
+        <div className="mb-10 w-48 sm:w-72 lg:w-full h-auto aspect-square">
           <Image src={auramLogo} alt="aurum" width={350} height={350} />
         </div>
       </div>
