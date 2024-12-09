@@ -3,12 +3,14 @@ import React, { ReactNode } from "react";
 import classNameMerger from "@/utils/class-name-merger";
 
 function PrimaryButtonCOmponent({
+  id,
   isLoading,
   className,
   children,
   onClick,
   loaderClassName,
 }: {
+  id?: string;
   loaderClassName?: string;
   isLoading?: boolean;
   className?: string;
@@ -17,6 +19,7 @@ function PrimaryButtonCOmponent({
 }) {
   return (
     <button
+      id={id}
       className={classNameMerger(
         "bg-primary text-white w-full py-2 rounded-lg px-3 flex items-center justify-center hover:bg-gray-800 hover:shadow-lg disabled:opacity-50 transition-opacity duration-250",
         className
