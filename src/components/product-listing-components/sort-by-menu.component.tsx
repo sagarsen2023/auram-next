@@ -34,7 +34,6 @@ const SortByMenuComponent = ({
         const link = `/products/${generateSlugFromParams(updatedParams)}`;
         return { ...option, link };
       });
-      console.log(newSortOptions)
       setUpdatedSortOptions(newSortOptions);
     }
   }, [sortOptions, currentParams]);

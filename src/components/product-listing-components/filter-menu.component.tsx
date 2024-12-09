@@ -1,12 +1,16 @@
 "use client";
+import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
 import React, { useState } from "react";
 
 function FilterMenuComponent({
+  currentParams,
   filterOptions,
 }: {
+  currentParams: ItemParams;
   filterOptions: SortFilterModel[] | null;
 }) {
+  console.log("itemParams", currentParams);
   const [menuOpen, setMenuOpen] = useState(false);
   const handleMenuOpen = () => {
     setMenuOpen(!menuOpen);
@@ -37,7 +41,10 @@ function FilterMenuComponent({
               <h2 className="font-bold text-lg mb-2">{filter.label}</h2>
               <ul className="space-y-2">
                 {filter.data?.map((item, itemIndex) => (
-                  <li key={itemIndex} className="text-sm pl-3 flex items-center">
+                  <li
+                    key={itemIndex}
+                    className="text-sm pl-3 flex items-center"
+                  >
                     <input type="checkbox" id={item.value} />
                     <label htmlFor={item.value} className="ml-2">
                       {item.label}

@@ -119,14 +119,12 @@ export async function getSortFilterOptions(): Promise<{
 }> {
   try {
     const response = await itemAPI.getSortFilers();
-    console.log(response)
     const data: SortFilterModel[] = response.data;
 
     const sortOptions: SortFilterModel[] = data?.filter(
       (option) => option.type === "sort"
     );
     const filterOptions = data?.filter((option) => option.type === "filter");
-    console.log("filterOptions", filterOptions);
     return {
       sortOptions,
       filterOptions,

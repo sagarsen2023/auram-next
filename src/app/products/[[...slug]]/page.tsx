@@ -33,7 +33,10 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
 
         {/* Sort and filter Menu */}
         <div className="flex justify-between items-center w-full my-3">
-          <FilterMenuComponent filterOptions={filterOptions} />
+          <FilterMenuComponent
+            currentParams={itemParams}
+            filterOptions={filterOptions}
+          />
           {sortOptions && sortOptions.length > 0 && (
             <SortByMenuComponent
               currentParams={itemParams}
