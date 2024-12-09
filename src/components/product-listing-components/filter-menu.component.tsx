@@ -5,6 +5,8 @@ import { ItemParams } from "@/models/product-category-collections/item-params.mo
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { FaXmark } from "react-icons/fa6";
+import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 
 function FilterMenuComponent({
   currentParams,
@@ -58,12 +60,12 @@ function FilterMenuComponent({
 
   return (
     <>
-      <button
+      <PrimaryButtonCOmponent
         onClick={handleMenuOpen}
-        className="lg:hidden bg-white border w-fit px-4 py-2 border-primary hover:bg-primary hover:text-white hover:shadow-lg transition-colors duration-250"
+        className="lg:hidden bg-white border w-fit px-4 py-2 text-primary border-primary hover:bg-primary hover:text-white hover:shadow-lg transition-colors duration-250"
       >
         Filters
-      </button>
+      </PrimaryButtonCOmponent>
 
       {/* Menu for mobile and tablet */}
       <div
@@ -73,17 +75,19 @@ function FilterMenuComponent({
       >
         <div className="flex justify-between w-full items-center mt-8 py-2 ">
           <h1 className="text-2xl font-bold">Apply Filters</h1>
-          <div>
-            <button onClick={() => router.push("/products")}>Clear</button>
+          <div className="flex items-center gap-2">
+            <PrimaryButtonCOmponent className="p-2  h-8" onClick={() => router.push("/products")}>
+              Clear
+            </PrimaryButtonCOmponent>
             <button
               className="rounded-full bg-primary p-2 w-8 h-8 text-white "
               onClick={handleMenuOpen}
             >
-              X
+              <FaXmark />
             </button>
           </div>
         </div>
-        <div className="w-full h-[75%] overflow-scroll">
+        <div className="w-full h-[80%] overflow-scroll">
           {filterOptions && filterOptions.length > 0 ? (
             filterOptions.map((filter, index) => (
               <div key={index} className="mb-6">
@@ -95,6 +99,7 @@ function FilterMenuComponent({
                       className="text-sm pl-3 flex items-center"
                     >
                       <input
+                        className="w-6 h-6 accent-black text-white checked:bg-black border-gray-300 rounded cursor-pointer transition-all duration-500"
                         type="checkbox"
                         id={item.value}
                         checked={selectedFilters.some(
@@ -135,7 +140,7 @@ function FilterMenuComponent({
             </p>
           )}
         </div>
-        <button
+        <PrimaryButtonCOmponent
           onClick={() => {
             const mergedParams = mergeFiltersToParams(
               currentParams,
@@ -145,10 +150,10 @@ function FilterMenuComponent({
             router.push(`/products/${newParams}`);
             setMenuOpen(false);
           }}
-          className="bg-primary text-white w-full py-2 rounded-lg mt-3"
+          className="my-2"
         >
           Apply Filters
-        </button>
+        </PrimaryButtonCOmponent>
       </div>
     </>
   );
