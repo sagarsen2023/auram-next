@@ -33,7 +33,10 @@ function FilterMenuComponent({
       >
         <div className="flex justify-between w-full items-center mt-8 py-2 ">
           <h1 className="text-2xl font-bold">Apply Filters</h1>
-          <button>Clear</button>
+          <div>
+            <button>Clear</button>
+            <button className="rounded-full bg-primary p-2 w-8 h-8 text-white " onClick={handleMenuOpen}>X</button>
+          </div>
         </div>
         {filterOptions && filterOptions.length > 0 ? (
           filterOptions.map((filter, index) => (
