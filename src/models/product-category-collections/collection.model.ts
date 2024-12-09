@@ -22,5 +22,5 @@ export interface CollectionItem {
 export default interface CollectionApiResponse extends BaseApiResponse {
   status: boolean;
   totalCount: number;
-  data: CollectionItem[];
+  data?: CollectionItem[];
 }
