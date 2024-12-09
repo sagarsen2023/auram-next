@@ -27,13 +27,13 @@ export const itemAPI = {
     const queryString = queryParamsFormatter({
       skip: params.skip,
       limit: params.limit,
-      sort: params.sortBy,
+      sortBy: params.sortBy,
       collections: params.collections,
       itemCategory: params.itemCategory,
       goldPurity: params.goldPurity,
+      gender: params.gender,
       priceRange: [params.minPrice, params.maxPrice],
     });
-    console.log("queryString", queryString);
     return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`);
   },
 };
