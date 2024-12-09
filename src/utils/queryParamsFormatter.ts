@@ -1,18 +1,25 @@
 export default function queryParamsFormatter(params: {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any;
-}) {
-  const queryString = new URLSearchParams(
-    Object.entries(params).reduce<Record<string, string>>(
-      (acc, [key, value]) => {
-        if (value === undefined || value === null || value === "") {
-          return acc;
+}): string {
+  const searchParams = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    if (value === undefined || value === null || value === "") {
+      return;
+    }
+
+    if (Array.isArray(value)) {
+      // Append each item in the array as a separate key-value pair
+      value.forEach((item) => {
+        if (item !== undefined && item !== null && item !== "") {
+          searchParams.append(key, String(item));
         }
-        acc[key] = String(value);
-        return acc;
-      },
-      {}
-    )
-  ).toString();
-  return queryString;
+      });
+    } else {
+      searchParams.append(key, String(value));
+    }
+  });
+
+  return searchParams.toString();
 }
