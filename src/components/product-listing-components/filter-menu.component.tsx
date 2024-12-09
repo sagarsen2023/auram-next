@@ -7,6 +7,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaXmark } from "react-icons/fa6";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
+import { getInitialFilters, mergeFiltersToParams } from "./utils";
 
 function FilterMenuComponent({
   currentParams,
@@ -22,36 +23,15 @@ function FilterMenuComponent({
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const initialFilters = Object.entries(currentParams).flatMap(
-      ([key, value]) =>
-        Array.isArray(value)
-          ? value.map((val) => ({ key, value: val }))
-          : [{ key, value }]
-    );
-    console.log("initialFilters", initialFilters);
+    const initialFilters = getInitialFilters(currentParams);
     setSelectedFilters(initialFilters);
   }, [currentParams]);
 
-  function mergeFiltersToParams(
-    currentParams: ItemParams,
-    selectedFilters: { key: string; value: string | string[] }[]
-  ): ItemParams {
-    const filters = selectedFilters.reduce((acc, filter) => {
-      const { key, value } = filter;
-      if (acc[key]) {
-        acc[key] = Array.isArray(acc[key])
-          ? [...acc[key], value].flat()
-          : [acc[key], value].flat();
-      } else {
-        acc[key] = Array.isArray(value) ? value : [value];
-      }
-      return acc;
-    }, {} as Record<string, string[]>);
-
-    return {
-      ...currentParams,
-      ...filters,
-    };
+  function handleApplyFilters() {
+    const mergedParams = mergeFiltersToParams(currentParams, selectedFilters);
+    const newParams = generateSlugFromParams(mergedParams);
+    router.push(`/products/${newParams}`);
+    setMenuOpen(false);
   }
 
   const handleMenuOpen = () => {
@@ -76,7 +56,10 @@ function FilterMenuComponent({
         <div className="flex justify-between w-full items-center mt-8 py-2 ">
           <h1 className="text-2xl font-bold">Apply Filters</h1>
           <div className="flex items-center gap-2">
-            <PrimaryButtonCOmponent className="p-2  h-8" onClick={() => router.push("/products")}>
+            <PrimaryButtonCOmponent
+              className="p-2  h-8"
+              onClick={() => router.push("/products")}
+            >
               Clear
             </PrimaryButtonCOmponent>
             <button
@@ -140,18 +123,7 @@ function FilterMenuComponent({
             </p>
           )}
         </div>
-        <PrimaryButtonCOmponent
-          onClick={() => {
-            const mergedParams = mergeFiltersToParams(
-              currentParams,
-              selectedFilters
-            );
-            const newParams = generateSlugFromParams(mergedParams);
-            router.push(`/products/${newParams}`);
-            setMenuOpen(false);
-          }}
-          className="my-2"
-        >
+        <PrimaryButtonCOmponent onClick={handleApplyFilters} className="my-2">
           Apply Filters
         </PrimaryButtonCOmponent>
       </div>
