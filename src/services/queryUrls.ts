@@ -11,11 +11,13 @@ export const BANNER_URL = `/banners/user`;
 // Collection
 export const COLLECTION_URL = `/collections/user`;
 
-// Featured Items Url
+// Item Urls
 export const FEATURED_ITEMS_URL = "/items/user/feature";
-
-// latest Items Url
 export const LATEST_ITEMS_URL = "/items/user/latest-items";
+export const ITEM_URL = "/items/user";
+
+// Sort Filters Url
+export const SORT_FILTERS_URL = "/items/user/sort-filter";
 
 // Contact Info Url
 export const CONTACT_INFO = `/general-infos`;

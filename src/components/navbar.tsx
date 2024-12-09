@@ -30,7 +30,9 @@ function NavBarComponent() {
           {/* <ThemeSwitchButtonComponent /> */}
           <div className="flex items-center gap-4 text-2xl">
             <div className="hidden md:flex gap-6 items-center font-[300] text-[14px] mr-8">
-              <span>PRODUCTS</span>
+              <Link href="/products">
+                <span>PRODUCTS</span>
+              </Link>
               <span>COLLECTIONS</span>
               <span>BESPOKE</span>
               <span>ABOUT US</span>
@@ -39,7 +41,11 @@ function NavBarComponent() {
 
             <CartButtonComponent />
             {/* Menu Toggler */}
-            <div className={`transition-all duration-500 ${menuOpen ? "rotate-180" : "rotate-0"} `}>
+            <div
+              className={`transition-all duration-500 ${
+                menuOpen ? "rotate-180" : "rotate-0"
+              } `}
+            >
               {menuOpen ? (
                 <FaXmark
                   className="md:hidden"
@@ -68,7 +74,9 @@ function NavBarComponent() {
       >
         <div>
           <div className="flex flex-col gap-6 items-center font-[300] text-[14px] mt-16">
-            <span>PRODUCTS</span>
+            <Link href="/products" onClick={()=>setMenuOpen(false)}>
+              <span>PRODUCTS</span>
+            </Link>
             <span>COLLECTIONS</span>
             <span>BESPOKE</span>
             <span>ABOUT US</span>

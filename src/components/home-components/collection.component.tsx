@@ -33,12 +33,19 @@ function CollectionComponent() {
     fetchCollection();
   }, []);
 
-  if (loading) return <DefaultLoaderComponent />;
+  if (loading)
+    return (
+      <div className="flex w-full justify-center items-center h-screen -mt-20">
+        <DefaultLoaderComponent />
+      </div>
+    );
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="pt-10 lg:pt-16 lg:pb-5 text-center">
         <p className="text-sm lg:text-xl">WE&apos;VE GOT EVERYTHING YOU NEED</p>
-        <p className="text-xl lg:text-3xl font-[600] mt-2">DISCOVER OUR COLLECTION</p>
+        <p className="text-xl lg:text-3xl font-[600] mt-2">
+          DISCOVER OUR COLLECTION
+        </p>
       </div>
       <Swiper
         spaceBetween={30}
