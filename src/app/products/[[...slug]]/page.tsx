@@ -47,7 +47,7 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
 
         {/* All Products Part */}
-        <div className="lg:flex gap-2 items-start">
+        <div className="lg:flex gap-5 items-start w-full h-full">
           <FilterSideBarComponent
             currentParams={itemParams}
             filterOptions={filterOptions}

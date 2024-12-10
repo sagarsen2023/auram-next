@@ -5,8 +5,8 @@ import { generateSlugFromParams } from "@/app/products/utils";
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
 import { useRouter } from "next/navigation";
-import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import { getInitialFilters, mergeFiltersToParams } from "./utils";
+import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 
 function FilterSideBarComponent({
   currentParams,
@@ -25,12 +25,6 @@ function FilterSideBarComponent({
     setSelectedFilters(initialFilters);
   }, [currentParams]);
 
-  function handleApplyFilters() {
-    const mergedParams = mergeFiltersToParams(selectedFilters);
-    const newParams = generateSlugFromParams(mergedParams);
-    router.push(`/products/${newParams}`);
-  }
-
   function handleFilterChange(filterType: string, value: string) {
     setSelectedFilters((prevFilters) => {
       const updatedFilters = prevFilters.filter(
@@ -39,25 +33,27 @@ function FilterSideBarComponent({
       if (updatedFilters.length === prevFilters.length) {
         updatedFilters.push({ key: filterType, value });
       }
+
+      const mergedParams = mergeFiltersToParams(updatedFilters);
+      const newParams = generateSlugFromParams(mergedParams);
+      router.push(`/products/${newParams}`);
+
       return updatedFilters;
     });
   }
 
   return (
-    <div className="hidden lg:block w-96 bg-gray-50 dark:bg-black/50 h-fit shadow-lg -mt-20">
-      <div className="flex justify-between w-full items-center pt-3 ">
+    <div className="hidden lg:block w-[26rem] bg-gray-50 dark:bg-black/50 h-full shadow-lg -mt-20 p-4">
+      <div className="flex justify-between w-full items-center pt-3">
         <h1 className="text-2xl font-bold">Apply Filters</h1>
         <PrimaryButtonCOmponent
-          className="p-2 h-8"
-          onClick={() => {
-            setSelectedFilters([]);
-            router.push("/products");
-          }}
+          className="p-2 w-fit h-8"
+          onClick={() => router.push("/products")}
         >
           Clear
         </PrimaryButtonCOmponent>
       </div>
-      <div className="w-full overflow-scroll">
+      <div className="w-full">
         {filterOptions && filterOptions.length > 0 ? (
           filterOptions.map((filter, index) => (
             <div key={index} className="mb-6">
@@ -69,7 +65,7 @@ function FilterSideBarComponent({
                     className="text-sm pl-3 flex items-center"
                   >
                     <input
-                      className="w-6 h-6 accent-black text-white checked:bg-black border-gray-300 rounded cursor-pointer transition-all duration-500"
+                      className="w-6 h-6 accent-black text-white checked:bg-black  rounded cursor-pointer transition-all duration-500"
                       type="checkbox"
                       id={item.value}
                       checked={selectedFilters.some(
@@ -95,9 +91,6 @@ function FilterSideBarComponent({
           </p>
         )}
       </div>
-      <PrimaryButtonCOmponent onClick={handleApplyFilters} className="my-2">
-        Apply Filters
-      </PrimaryButtonCOmponent>
     </div>
   );
 }
