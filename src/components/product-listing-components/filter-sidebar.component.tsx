@@ -19,11 +19,19 @@ function FilterSideBarComponent({
   const [selectedFilters, setSelectedFilters] = useState<
     { key: string; value: string | string[] }[]
   >([]);
+  const [mergedParams, setMergedParams] = useState<ItemParams | null>(null);
 
   useEffect(() => {
     const initialFilters = getInitialFilters(currentParams);
     setSelectedFilters(initialFilters);
   }, [currentParams]);
+
+  useEffect(() => {
+    if (mergedParams) {
+      const newParams = generateSlugFromParams(mergedParams);
+      router.push(`/products/${newParams}`);
+    }
+  }, [mergedParams, router]);
 
   function handleFilterChange(filterType: string, value: string) {
     setSelectedFilters((prevFilters) => {
@@ -33,18 +41,14 @@ function FilterSideBarComponent({
       if (updatedFilters.length === prevFilters.length) {
         updatedFilters.push({ key: filterType, value });
       }
-
-      const mergedParams = mergeFiltersToParams(updatedFilters);
-      const newParams = generateSlugFromParams(mergedParams);
-      router.push(`/products/${newParams}`);
-
+      setMergedParams(mergeFiltersToParams(updatedFilters));
       return updatedFilters;
     });
   }
 
   return (
     <div className="hidden lg:block w-[26rem] bg-gray-50 dark:bg-black/50 h-full shadow-lg -mt-20 p-4">
-      <div className="flex justify-between w-full items-center pt-3">
+      <div className="flex justify-between w-full items-center pt-3 mb-3">
         <h1 className="text-2xl font-bold">Apply Filters</h1>
         <PrimaryButtonCOmponent
           className="p-2 w-fit h-8"
