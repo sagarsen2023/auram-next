@@ -23,3 +23,35 @@
   width: 45px !important;
   height: 45px !important;
 }
+
+.contentbase__section p {
+  font-size: 16px;
+  line-height: 1.8;
+  padding-bottom: 10px;
+}
+
+.contentbase__section h4 {
+  margin-bottom: 8px;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.contentbase__section h3 {
+  margin-bottom: 8px;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.contentbase__section ul li,
+ol li {
+  padding-bottom: 12px;
+}
+
+.contentbase__section ul,
+ol {
+  padding-top: 5px;
+}
+
+.contentbase__section a {
+  color: #2196f3;
+}
