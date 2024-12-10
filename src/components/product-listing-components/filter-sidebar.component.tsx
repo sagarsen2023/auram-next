@@ -7,6 +7,7 @@ import { SortFilterModel } from "@/models/product-category-collections/sort-filt
 import { useRouter } from "next/navigation";
 import { getInitialFilters, mergeFiltersToParams } from "./utils";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
+import { FaXmark } from "react-icons/fa6";
 
 function FilterSideBarComponent({
   currentParams,
@@ -47,7 +48,7 @@ function FilterSideBarComponent({
   }
 
   return (
-    <div className="hidden lg:block w-[26rem] bg-gray-50 dark:bg-black/50 h-full shadow-lg -mt-20 p-4">
+    <div className="hidden lg:block w-[26rem] bg-gray-50 dark:bg-black/50 h-full shadow-lg -mt-20 p-4 border border-secondary/30 rounded-md">
       <div className="flex justify-between w-full items-center pt-3 mb-3">
         <h1 className="text-2xl font-bold">Apply Filters</h1>
         <PrimaryButtonCOmponent
@@ -55,13 +56,16 @@ function FilterSideBarComponent({
           onClick={() => router.push("/products")}
         >
           Clear
+          <FaXmark />
         </PrimaryButtonCOmponent>
       </div>
       <div className="w-full">
         {filterOptions && filterOptions.length > 0 ? (
           filterOptions.map((filter, index) => (
             <div key={index} className="mb-6">
-              <h2 className="font-bold text-lg mb-2">{filter.label}</h2>
+              <h2 className="font-bold text-xl w-fit border-b border-primary pb-2 mb-4">
+                {filter.label}
+              </h2>
               <ul className="space-y-2">
                 {filter.data?.map((item, itemIndex) => (
                   <li
@@ -69,7 +73,7 @@ function FilterSideBarComponent({
                     className="text-sm pl-3 flex items-center"
                   >
                     <input
-                      className="w-6 h-6 accent-black text-white checked:bg-black  rounded cursor-pointer transition-all duration-500"
+                      className="w-6 h-6 accent-black text-white checked:bg-black rounded cursor-pointer transition-all duration-500"
                       type="checkbox"
                       id={item.value}
                       checked={selectedFilters.some(
