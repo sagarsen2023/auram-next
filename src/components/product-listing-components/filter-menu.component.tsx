@@ -61,11 +61,11 @@ function FilterMenuComponent({
 
       {/* Menu for mobile and tablet */}
       <div
-        className={`fixed left-0 top-0 z-[99] w-full max-w-full bg-gray-50 dark:bg-black/50 h-screen px-4 py-10 shadow-lg transform transition-transform duration-300 ease-in-out ${
+        className={`fixed left-0 top-0 z-[99] w-full max-w-full bg-gray-50 dark:bg-black/50 h-screen py-10 shadow-lg transform transition-transform duration-300 ease-in-out ${
           menuOpen ? "translate-x-0" : "-translate-x-full"
         }`}
       >
-        <div className="flex justify-between w-full items-center mt-8 py-2 ">
+        <div className="flex justify-between w-full items-center mt-8 px-4 py-2 shadow-md">
           <h1 className="text-2xl font-bold">Apply Filters</h1>
           <div className="flex items-center gap-2">
             <PrimaryButtonCOmponent
@@ -82,7 +82,7 @@ function FilterMenuComponent({
             </button>
           </div>
         </div>
-        <div className="w-full h-[80%] overflow-scroll">
+        <div className="w-full h-[80%] overflow-scroll px-6">
           {filterOptions && filterOptions.length > 0 ? (
             filterOptions.map((filter, index) => (
               <div key={index} className="mb-6">
@@ -115,14 +115,18 @@ function FilterMenuComponent({
               </div>
             ))
           ) : (
-            <p className="text-center text-lg text-gray-500 py-10">
+            <p className="text-center text-lg text-gray-500 py-10 px-6">
               No filters available
             </p>
           )}
         </div>
-        <PrimaryButtonCOmponent onClick={handleApplyFilters} className="my-2">
-          Apply Filters
-        </PrimaryButtonCOmponent>
+        <div className="px-10 py-2">
+          <PrimaryButtonCOmponent
+            onClick={handleApplyFilters}
+          >
+            Apply Filters
+          </PrimaryButtonCOmponent>
+        </div>
       </div>
     </>
   );
