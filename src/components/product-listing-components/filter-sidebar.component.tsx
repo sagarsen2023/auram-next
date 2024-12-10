@@ -48,7 +48,7 @@ function FilterSideBarComponent({
   }
 
   return (
-    <div className="hidden lg:block w-[26rem] bg-gray-50 dark:bg-black/50 h-full shadow-lg -mt-20 p-4 border border-secondary/30 rounded-md">
+    <div className="hidden lg:block w-[26rem] bg-gray-50 dark:bg-black/50 h-full shadow-lg p-4 border border-secondary/30 rounded-md">
       <div className="flex justify-between w-full items-center pt-3 mb-3">
         <h1 className="text-2xl font-bold">Apply Filters</h1>
         <PrimaryButtonCOmponent
