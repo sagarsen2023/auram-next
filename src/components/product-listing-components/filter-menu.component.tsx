@@ -82,7 +82,7 @@ function FilterMenuComponent({
             </button>
           </div>
         </div>
-        <div className="w-full h-[80%] overflow-scroll px-6">
+        <div className="w-full h-[80%] overflow-scroll px-6 pt-4">
           {filterOptions && filterOptions.length > 0 ? (
             filterOptions.map((filter, index) => (
               <div key={index} className="mb-6">
