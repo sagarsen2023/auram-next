@@ -3,7 +3,9 @@ export interface ItemParams {
   limit?: number;
   collections?: string | string[];
   itemCategory?: string | string[];
-  goldPurity?: number | number[];
+  gender?: string | string[];
+  goldPurity?: string | string[];
+  metalType?: string | string[];
   sortBy?: string;
   minPrice?: number;
   maxPrice?: number;

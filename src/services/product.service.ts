@@ -23,9 +23,17 @@ export const itemAPI = {
   getLatestItems: async () => fetchAPI.get<ItemApiResponse>(LATEST_ITEMS_URL),
   getSortFilers: async () =>
     fetchAPI.get<SortFilterApiResponse>(SORT_FILTERS_URL),
-  getAllItems: async (params:ItemParams) => {
-    const queryString = queryParamsFormatter(params );
-    console.log("queryString", queryString);
+  getAllItems: async (params: ItemParams) => {
+    const queryString = queryParamsFormatter({
+      skip: params.skip,
+      limit: params.limit,
+      sortBy: params.sortBy,
+      collections: params.collections,
+      itemCategory: params.itemCategory,
+      goldPurity: params.goldPurity,
+      gender: params.gender,
+      priceRange: [params.minPrice, params.maxPrice],
+    });
     return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`);
   },
 };

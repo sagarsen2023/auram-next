@@ -4,6 +4,7 @@ import { SortFilterOptions } from "@/models/product-category-collections/sort-fi
 import React, { useEffect, useState } from "react";
 import { generateSlugFromParams } from "@/app/products/utils";
 import Link from "next/link";
+import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 
 const SortByMenuComponent = ({
   currentParams,
@@ -34,7 +35,6 @@ const SortByMenuComponent = ({
         const link = `/products/${generateSlugFromParams(updatedParams)}`;
         return { ...option, link };
       });
-      console.log(newSortOptions)
       setUpdatedSortOptions(newSortOptions);
     }
   }, [sortOptions, currentParams]);
@@ -47,15 +47,14 @@ const SortByMenuComponent = ({
 
   return (
     <div className="relative">
-      <button
-        id="dropdownDividerButton"
+      <PrimaryButtonCOmponent
+        id="dropdownDividerPrimaryButtonCOmponent"
         data-dropdown-toggle="dropdownDivider"
-        className="bg-white border w-fit px-4 py-2 border-primary hover:bg-primary hover:text-white hover:shadow-lg transition-colors duration-250"
-        type="button"
+        className="bg-white border text-primary w-fit border-primary hover:bg-primary hover:text-white hover:shadow-lg transition-colors duration-250"
         onClick={toggleDropdown}
       >
         {selectedOption}
-      </button>
+      </PrimaryButtonCOmponent>
 
       {/* Dropdown menu */}
       <div
@@ -72,7 +71,8 @@ const SortByMenuComponent = ({
         >
           {updatedSortOptions.map((item, index) => (
             <li key={index}>
-              <Link href={item.link?? ''}
+              <Link
+                href={item.link ?? ""}
                 className={`block px-4 py-2 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white ${
                   currentParams.sortBy === item.value
                     ? "bg-gray-200 dark:bg-gray-600"

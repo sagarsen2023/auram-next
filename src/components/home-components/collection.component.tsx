@@ -22,7 +22,7 @@ function CollectionComponent() {
   const fetchCollection = async () => {
     try {
       const response = await collectionAPI.getAllCollections();
-      setCollectionData(response.data);
+      setCollectionData(response?.data ?? []);
     } catch (error) {
       console.error(error);
     } finally {
@@ -75,7 +75,7 @@ function CollectionComponent() {
         className="w-full"
         loop
       >
-        {collectionData.map((collection) => (
+        {collectionData?.map((collection) => (
           <SwiperSlide key={collection._id}>
             <CollectionCardComponent collection={collection} />
           </SwiperSlide>

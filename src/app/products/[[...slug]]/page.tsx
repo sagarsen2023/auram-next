@@ -4,14 +4,18 @@ import DefaultLoaderComponent from "@/components/default-loader.component";
 import ProductCardComponent from "@/components/cards/product-card.component";
 import DualLineComponent from "@/components/ui/dual-line.component";
 import SortByMenuComponent from "@/components/product-listing-components/sort-by-menu.component";
+import FilterMenuComponent from "@/components/product-listing-components/filter-menu.component";
+import FilterSideBarComponent from "@/components/product-listing-components/filter-sidebar.component";
+import getRandomTagline from "@/constants/jewelry-taglines";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
-  const slug = (await params).slug
+  const slug = (await params).slug;
   const itemParams = getItemParams({ slug });
   const itemData = await getItems({
     params: itemParams,
   });
-  const { sortOptions } = await getSortFilterOptions();
+  const { sortOptions, filterOptions } = await getSortFilterOptions();
+  const randomTagLine = getRandomTagline();
 
   return (
     <Suspense
@@ -24,14 +28,21 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
       <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Top Heading Part */}
         <div className="flex justify-center flex-col gap-3 w-full pb-6">
-          <h1 className="font-[500] text-center text-2xl">
+          <h1 className="font-[500] text-center text-2xl lg:text-3xl">
             Our Elegant Products
           </h1>
+          <p className="text-center lg:hidden">{randomTagLine}</p>
           <DualLineComponent />
         </div>
 
         {/* Sort and filter Menu */}
-        <div className="flex justify-end items-center w-full my-3">
+        <div className="flex justify-between lg:hidden items-center w-full my-3">
+          {filterOptions && filterOptions.length > 0 && (
+            <FilterMenuComponent
+              currentParams={itemParams}
+              filterOptions={filterOptions}
+            />
+          )}
           {sortOptions && sortOptions.length > 0 && (
             <SortByMenuComponent
               currentParams={itemParams}
@@ -41,15 +52,33 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
 
         {/* All Products Part */}
-        {itemData && itemData.length ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4">
-            {itemData.map((item) => (
-              <ProductCardComponent key={item._id} item={item} />
-            ))}
+        <div className="lg:flex gap-5 items-start w-full h-full">
+          <FilterSideBarComponent
+            currentParams={itemParams}
+            filterOptions={filterOptions}
+          />
+          <div className="w-full">
+            {itemData && itemData.length ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div className="col-span-full w-full justify-between items-center hidden lg:flex">
+                  <p className="text-xl">{randomTagLine}</p>
+                  {sortOptions && sortOptions.length > 0 && (
+                    <SortByMenuComponent
+                      currentParams={itemParams}
+                      sortOptions={sortOptions[0].values}
+                    />
+                  )}
+                </div>
+
+                {itemData.map((item) => (
+                  <ProductCardComponent key={item._id} item={item} />
+                ))}
+              </div>
+            ) : (
+              <div>No Products to display</div>
+            )}
           </div>
-        ) : (
-          <div>No Products to display</div>
-        )}
+        </div>
       </div>
     </Suspense>
   );

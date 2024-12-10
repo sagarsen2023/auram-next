@@ -101,7 +101,7 @@ async function FooterComponent() {
   };
   try {
     const collectionResponse = await collectionAPI.getAllCollections();
-    collectionData = collectionResponse.data;
+    collectionData = collectionResponse?.data ?? [];
     const contactInfoResponse = await contactAPI.getAuramContactInfo();
     contactInfoData = contactInfoResponse.data;
   } catch {
@@ -139,7 +139,7 @@ async function FooterComponent() {
             <h1 className="pb-2 mb-2 border-b-2 border-secondary w-fit">
               Collections
             </h1>
-            {collectionData.map((collection) => (
+            {collectionData?.map((collection) => (
               <Link key={collection._id} href={"/"}>
                 <p className="py-1 lg:py-1.5 text-sm">{collection.title}</p>
               </Link>
@@ -217,38 +217,38 @@ async function FooterComponent() {
       {/* Social Icon and copyright */}
       <footer className="w-full bg-gray-100 flex flex-col items-center justify-center gap-5 py-5">
         <div className="flex items-center gap-5">
-          {contactInfoData.facebook && (
-            <Link href={contactInfoData.facebook}>
+          {contactInfoData?.facebook && (
+            <Link href={contactInfoData?.facebook}>
               <FaFacebook className="text-2xl" />
             </Link>
           )}
-          {contactInfoData.instagram && (
-            <Link href={contactInfoData.instagram}>
+          {contactInfoData?.instagram && (
+            <Link href={contactInfoData?.instagram}>
               <FaInstagram className="text-2xl" />
             </Link>
           )}
-          {contactInfoData.linkedin && (
-            <Link href={contactInfoData.linkedin}>
+          {contactInfoData?.linkedin && (
+            <Link href={contactInfoData?.linkedin}>
               <FaLinkedin className="text-2xl" />
             </Link>
           )}
-          {contactInfoData.twitter && (
-            <Link href={contactInfoData.twitter}>
+          {contactInfoData?.twitter && (
+            <Link href={contactInfoData?.twitter}>
               <FaTwitter className="text-2xl" />
             </Link>
           )}
-          {contactInfoData.youtube && (
-            <Link href={contactInfoData.youtube}>
+          {contactInfoData?.youtube && (
+            <Link href={contactInfoData?.youtube}>
               <FaYoutube className="text-2xl" />
             </Link>
           )}
-          {contactInfoData.whatsapp && (
-            <Link href={`https://wa.me/${contactInfoData.whatsapp}`}>
+          {contactInfoData?.whatsapp && (
+            <Link href={`https://wa.me/${contactInfoData?.whatsapp}`}>
               <FaWhatsapp className="text-2xl" />
             </Link>
           )}
-          {contactInfoData.email && (
-            <Link href={`mailto:${contactInfoData.email}`}>
+          {contactInfoData?.email && (
+            <Link href={`mailto:${contactInfoData?.email}`}>
               <FaEnvelope className="text-2xl" />
             </Link>
           )}
