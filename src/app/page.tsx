@@ -19,8 +19,10 @@ function Page() {
       <BannerComponent />
 
       {/* Collection */}
-      <div className={`${sectionClassNames} bg-gray-50`}>
-        <CollectionComponent />
+      <div className="w-full flex-col items-center bg-gray-50">
+        <div className={`${sectionClassNames}`}>
+          <CollectionComponent />
+        </div>
       </div>
 
       {/* New Arrival and Featured Items */}
