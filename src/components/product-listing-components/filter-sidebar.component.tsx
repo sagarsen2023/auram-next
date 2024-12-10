@@ -26,21 +26,36 @@ function FilterSideBarComponent({
   }, [currentParams]);
 
   function handleApplyFilters() {
-    const mergedParams = mergeFiltersToParams(currentParams, selectedFilters);
+    const mergedParams = mergeFiltersToParams(selectedFilters);
     const newParams = generateSlugFromParams(mergedParams);
     router.push(`/products/${newParams}`);
+  }
+
+  function handleFilterChange(filterType: string, value: string) {
+    setSelectedFilters((prevFilters) => {
+      const updatedFilters = prevFilters.filter(
+        (filter) => !(filter.key === filterType && filter.value === value)
+      );
+      if (updatedFilters.length === prevFilters.length) {
+        updatedFilters.push({ key: filterType, value });
+      }
+      return updatedFilters;
+    });
   }
 
   return (
     <div className="hidden lg:block w-96 bg-gray-50 dark:bg-black/50 h-fit shadow-lg -mt-20">
       <div className="flex justify-between w-full items-center pt-3 ">
         <h1 className="text-2xl font-bold">Apply Filters</h1>
-        {/* <PrimaryButtonCOmponent
+        <PrimaryButtonCOmponent
           className="p-2 h-8"
-          onClick={() => router.push("/products")}
+          onClick={() => {
+            setSelectedFilters([]);
+            router.push("/products");
+          }}
         >
           Clear
-        </PrimaryButtonCOmponent> */}
+        </PrimaryButtonCOmponent>
       </div>
       <div className="w-full overflow-scroll">
         {filterOptions && filterOptions.length > 0 ? (
@@ -62,23 +77,8 @@ function FilterSideBarComponent({
                           selected.key === filter.field &&
                           selected.value === item.value
                       )}
-                      onChange={(e) => {
-                        if (e.target.checked) {
-                          setSelectedFilters([
-                            ...selectedFilters,
-                            { key: filter.field, value: item.value },
-                          ]);
-                        } else {
-                          setSelectedFilters(
-                            selectedFilters.filter(
-                              (selected) =>
-                                !(
-                                  selected.key === filter.field &&
-                                  selected.value === item.value
-                                )
-                            )
-                          );
-                        }
+                      onChange={() => {
+                        handleFilterChange(filter.field, item.value);
                       }}
                     />
                     <label htmlFor={item.value} className="ml-2">

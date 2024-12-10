@@ -1,10 +1,9 @@
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 
 export function mergeFiltersToParams(
-  currentParams: ItemParams,
   selectedFilters: { key: string; value: string | string[] }[]
 ): ItemParams {
-  const filters = selectedFilters.reduce((acc, filter) => {
+  return selectedFilters.reduce((acc, filter) => {
     const { key, value } = filter;
     if (acc[key]) {
       acc[key] = Array.isArray(acc[key])
@@ -15,11 +14,6 @@ export function mergeFiltersToParams(
     }
     return acc;
   }, {} as Record<string, string[]>);
-
-  return {
-    ...currentParams,
-    ...filters,
-  };
 }
 
 export function getInitialFilters(

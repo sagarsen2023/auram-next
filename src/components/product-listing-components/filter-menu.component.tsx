@@ -27,8 +27,20 @@ function FilterMenuComponent({
     setSelectedFilters(initialFilters);
   }, [currentParams]);
 
+  function handleFilterChange(filterType: string, value: string) {
+    setSelectedFilters((prevFilters) => {
+      const updatedFilters = prevFilters.filter(
+        (filter) => !(filter.key === filterType && filter.value === value)
+      );
+      if (updatedFilters.length === prevFilters.length) {
+        updatedFilters.push({ key: filterType, value });
+      }
+      return updatedFilters;
+    });
+  }
+
   function handleApplyFilters() {
-    const mergedParams = mergeFiltersToParams(currentParams, selectedFilters);
+    const mergedParams = mergeFiltersToParams(selectedFilters);
     const newParams = generateSlugFromParams(mergedParams);
     router.push(`/products/${newParams}`);
     setMenuOpen(false);
@@ -90,23 +102,8 @@ function FilterMenuComponent({
                             selected.key === filter.field &&
                             selected.value === item.value
                         )}
-                        onChange={(e) => {
-                          if (e.target.checked) {
-                            setSelectedFilters([
-                              ...selectedFilters,
-                              { key: filter.field, value: item.value },
-                            ]);
-                          } else {
-                            setSelectedFilters(
-                              selectedFilters.filter(
-                                (selected) =>
-                                  !(
-                                    selected.key === filter.field &&
-                                    selected.value === item.value
-                                  )
-                              )
-                            );
-                          }
+                        onChange={() => {
+                          handleFilterChange(filter.field, item.value);
                         }}
                       />
                       <label htmlFor={item.value} className="ml-2">
