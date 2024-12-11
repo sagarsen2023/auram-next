@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tailwindcss/forms": "^0.5.9",
     "clsx": "^2.1.1",
     "jotai": "^2.10.3",
     "next": "15.0.4",

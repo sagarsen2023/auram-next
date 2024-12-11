@@ -70,12 +70,12 @@ function FilterSideBarComponent({
                 {filter.data?.map((item, itemIndex) => (
                   <li
                     key={itemIndex}
-                    className="text-sm pl-3 flex items-center"
+                    className="text-sm pl-3 flex items-center cursor-pointer"
                   >
                     <input
-                      className="w-6 h-6 accent-black text-white checked:bg-black rounded cursor-pointer transition-all duration-500"
+                      className="h-4 w-4 outline-none ring-0 checked:ring-0 active:ring-0 focus:ring-0 checked:bg-secondary transition-all duration-200 checked:hover:bg-secondary rounded-sm"
                       type="checkbox"
-                      id={item.value}
+                      id={`${item.label}${item.value}`}
                       checked={selectedFilters.some(
                         (selected) =>
                           selected.key === filter.field &&
@@ -85,7 +85,10 @@ function FilterSideBarComponent({
                         handleFilterChange(filter.field, item.value);
                       }}
                     />
-                    <label htmlFor={item.value} className="ml-2">
+                    <label
+                      htmlFor={`${item.label}${item.value}`}
+                      className="ml-2 cursor-pointer"
+                    >
                       {item.label}
                     </label>
                   </li>
