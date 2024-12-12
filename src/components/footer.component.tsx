@@ -1,7 +1,7 @@
 import { AuramContactInfoModel } from "@/models/contact/auram-contact-info.model";
 import { CollectionItem } from "@/models/product-category-collections/collection.model";
 import { contactAPI } from "@/services/contact.service";
-import { collectionAPI } from "@/services/product.service";
+import { collectionAPI } from "@/services/item.service";
 import Link from "next/link";
 import React from "react";
 import {
