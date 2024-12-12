@@ -74,7 +74,7 @@ function Page() {
               Send Us a Message
             </h2>
 
-            <BaseContactForm />
+            <BaseContactForm type="contact"/>
           </div>
         </div>
       </div>

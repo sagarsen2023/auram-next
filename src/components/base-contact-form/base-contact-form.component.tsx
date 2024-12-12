@@ -1,27 +1,49 @@
 "use client";
+
 import {
   BaseContactFormType,
   baseContactFormSchema,
 } from "@/validators/base-contact-form.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import TextInputComponent from "./text-input.component";
 import TextAreaComponent from "./text-area.component";
+import { contactAPI } from "@/services/contact.service";
+import { ContactUsParams } from "@/models/contact/contact-us.model";
+import { toast } from "sonner";
+import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 
-function BaseContactForm() {
+function BaseContactForm({ type }: { type: "bespoke" | "contact" }) {
+  const [loading, setLoading] = useState(false);
+
   const methods = useForm<BaseContactFormType>({
     resolver: zodResolver(baseContactFormSchema),
   });
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = methods;
 
-  const onSubmit = (data: BaseContactFormType) => {
-    console.log(data);
+  const onSubmit = async (data: BaseContactFormType) => {
+    try {
+      setLoading(true);
+      const response = await contactAPI.contactUs({
+        ...data,
+        whatsapp: data.whatsapp ?? "",
+        countryCode: "91",
+        type: type as ContactUsParams["type"],
+      });
+      if (response.error) {
+        throw new Error("Something went wrong");
+      }
+      toast.success("Message sent successfully. We will contact you soon.");
+    } catch {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -85,12 +107,9 @@ function BaseContactForm() {
         </div>
 
         <div className="text-center">
-          <button
-            type="submit"
-            className="w-full max-w-lg bg-gray-900 text-white py-3 px-4 rounded-md hover:bg-yellow-800 transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-1 focus:ring-yellow-400"
-          >
-            Send Message
-          </button>
+          <PrimaryButtonCOmponent isLoading={loading}>
+            {loading ? "Sending..." : "Send Message"}
+          </PrimaryButtonCOmponent>
         </div>
       </form>
     </FormProvider>
