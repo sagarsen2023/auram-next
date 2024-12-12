@@ -1,6 +1,6 @@
 import React from "react";
 import BannerComponent from "@/components/home-components/banner.component";
-import WelcomeLoader from "@/components/welcome-loader.component";
+import WelcomeLoader from "@/components/ui/welcome-loader.component";
 import CollectionComponent from "@/components/home-components/collection.component";
 import NewArrivalComponent from "@/components/home-components/new-arrival.component";
 import FeaturedItemComponent from "@/components/home-components/featured-items.component";

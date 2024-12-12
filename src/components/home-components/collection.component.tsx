@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import DefaultLoaderComponent from "../default-loader.component";
+import DefaultLoaderComponent from "../ui/default-loader.component";
 import { collectionAPI } from "@/services/item.service";
 import { CollectionItem } from "@/models/product-category-collections/collection.model";
 import CollectionCardComponent from "../cards/collection-card.component";

@@ -1,6 +1,6 @@
 import React, { Suspense } from "react";
 import { getItemParams, getItems, getSortFilterOptions } from "../utils";
-import DefaultLoaderComponent from "@/components/default-loader.component";
+import DefaultLoaderComponent from "@/components/ui/default-loader.component";
 import ProductCardComponent from "@/components/cards/product-card.component";
 import DualLineComponent from "@/components/ui/dual-line.component";
 import SortByMenuComponent from "@/components/product-listing-components/sort-by-menu.component";
