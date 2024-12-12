@@ -1,6 +1,6 @@
 "use client";
 
-import ContactForm from "@/components/contact-form";
+import BaseContactForm from "@/components/base-contact-form/base-contact-form.component";
 import Link from "next/link";
 import React from "react";
 import { FiPhoneMissed } from "react-icons/fi";
@@ -74,7 +74,7 @@ function Page() {
               Send Us a Message
             </h2>
 
-            <ContactForm />
+            <BaseContactForm />
           </div>
         </div>
       </div>
