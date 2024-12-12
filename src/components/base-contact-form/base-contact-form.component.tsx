@@ -79,7 +79,7 @@ function BaseContactForm({ type }: { type: "bespoke" | "contact" }) {
           </div>
           <div>
             <TextInputComponent
-              label="WhatsApp (Required)"
+              label="WhatsApp (Optional)"
               error={errors.whatsapp?.message}
               {...register("whatsapp")}
               placeholder="Enter your WhatsApp number"
