@@ -1,36 +1,109 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Auram Project Structure
 
-## Getting Started
+This repository contains a Next.js project with a well-organized structure to ensure scalability and maintainability. Below is an overview of the project structure and its purpose.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Project Files and Directories
+
+```plaintext
+README.md               - Project documentation
+next.config.ts          - Next.js configuration
+package-lock.json       - Auto-generated dependency lock file
+postcss.config.mjs      - PostCSS configuration for styling
+src/                    - Application source code
+tsconfig.json           - TypeScript configuration
+next-env.d.ts           - Next.js environment type declarations
+node_modules/           - Installed dependencies
+package.json            - Project dependencies and scripts
+public/                 - Static assets (images, icons, etc.)
+tailwind.config.ts      - Tailwind CSS configuration
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## `src/` Directory
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The `src/` directory contains the core application logic, separated into feature-specific folders for better organization:
 
-## Learn More
+### 1. **app/**
 
-To learn more about Next.js, take a look at the following resources:
+- Contains all the application pages.
+- Dynamic routes and static pages are organized based on their functionalities.
+- Example pages:
+  - `product-details/[id].tsx` - Product detail page.
+  - `collections/page.tsx` - Collections listing page.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### 2. **components/**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Holds all reusable components.
+- Naming convention: `<component_name>.component.tsx`
+- Example:
+  - `header.component.tsx` - Header UI component.
+  - `footer.component.tsx` - Footer UI component.
 
-## Deploy on Vercel
+### 3. **constants/**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Stores all constant values used across the application.
+- Examples:
+  - Fixed configuration values.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 4. **hooks/**
+
+- Contains custom React hooks to manage application logic.
+- Examples:
+  - `useAuthToken.ts` - Access user token.
+  - `useCartService.ts` - Manage cart functionality.
+
+### 5. **models/**
+
+- Defines TypeScript interfaces and types for request/response data and query parameters.
+- Naming convention: `<filename>.model.ts`
+- Examples:
+  - `item.model.ts` - Models for product-related data.
+  - `user.model.ts` - Models for user-related data.
+
+### 6. **services/**
+
+- Handles API calls and external data fetching logic.
+- Encapsulates communication with backend services.
+- Contains all the API end points in `queryUrl.ts` file.
+
+### 7. **utils/**
+
+- Contains utility functions for general-purpose operations.
+- Examples:
+  - `dateFormatter.ts` - Format date strings.
+  - `debounce.ts` - Debounce utility for optimizing performance.
+
+### 8. **validators/**
+
+- Holds validation schemas built using `zod`.
+- Examples:
+  - `product.validator.ts` - Validation for product data.
+  - `user.validator.ts` - Validation for user input data.
+
+---
+
+## Development Guide
+
+### Prerequisites
+
+- Node.js and npm installed.
+- Familiarity with Next.js, TypeScript, and Tailwind CSS.
+
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/sagarsen2023/auram-next.git
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+---
