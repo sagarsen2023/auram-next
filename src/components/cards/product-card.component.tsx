@@ -2,11 +2,15 @@ import { ItemModel } from "@/models/product-category-collections/item.model";
 import imageValidator from "@/utils/image-validator";
 import priceFormatter from "@/utils/price-formatter";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 function ProductCardComponent({ item }: { item: ItemModel }) {
   return (
-    <div className="hover:shadow-lg transition-all duration-300 border rounded-md flex flex-col gap-4 justify-between group hover:bg-gray-100">
+    <Link
+      href={`/product-details/${item._id}`}
+      className="hover:shadow-lg transition-all duration-300 border rounded-md flex flex-col gap-4 justify-between group hover:bg-gray-100"
+    >
       {/* Item image, title and description */}
       <div className="w-full">
         <div className="relative w-full h-[22rem] overflow-hidden">
@@ -44,7 +48,7 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
           Add to Cart
         </button>
       </div>
-    </div>
+    </Link>
   );
 }
 
