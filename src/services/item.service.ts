@@ -36,4 +36,6 @@ export const itemAPI = {
     });
     return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`);
   },
+  getItemDetails: async (id: string) =>
+    fetchAPI.get<ItemApiResponse>(`${ITEM_URL}/${id}`),
 };

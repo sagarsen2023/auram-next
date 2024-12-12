@@ -48,7 +48,7 @@ function FilterSideBarComponent({
   }
 
   return (
-    <div className="hidden lg:block w-[26rem] bg-gray-50 dark:bg-black/50 h-full shadow-lg p-4 border border-secondary/30 rounded-md">
+    <div className="hidden lg:block w-[26rem] dark:bg-black/50 h-full shadow-lg px-4 border-t border-secondary/30 rounded-md">
       <div className="flex justify-between w-full items-center pt-3 mb-3">
         <h1 className="text-2xl font-bold">Apply Filters</h1>
         <PrimaryButtonCOmponent
@@ -63,19 +63,19 @@ function FilterSideBarComponent({
         {filterOptions && filterOptions.length > 0 ? (
           filterOptions.map((filter, index) => (
             <div key={index} className="mb-6">
-              <h2 className="font-bold text-xl w-fit border-b border-primary pb-2 mb-4">
-                {filter.label}
+              <h2 className="font-bold text-[15px] w-fit border-b border-primary pb-1 mb-3">
+                {filter.label?.toUpperCase()}
               </h2>
-              <ul className="space-y-2">
+              <ul className="space-y-2 text-sm font-thin">
                 {filter.data?.map((item, itemIndex) => (
                   <li
                     key={itemIndex}
-                    className="text-sm pl-3 flex items-center"
+                    className="text-sm pl-3 flex items-center cursor-pointer"
                   >
                     <input
-                      className="w-6 h-6 accent-black text-white checked:bg-black rounded cursor-pointer transition-all duration-500"
+                      className="h-4 w-4 outline-none ring-0 checked:ring-0 active:ring-0 focus:ring-0 checked:bg-secondary transition-all duration-200 checked:hover:bg-secondary rounded-[4px]"
                       type="checkbox"
-                      id={item.value}
+                      id={`${item.label}${item.value}`}
                       checked={selectedFilters.some(
                         (selected) =>
                           selected.key === filter.field &&
@@ -85,7 +85,10 @@ function FilterSideBarComponent({
                         handleFilterChange(filter.field, item.value);
                       }}
                     />
-                    <label htmlFor={item.value} className="ml-2">
+                    <label
+                      htmlFor={`${item.label}${item.value}`}
+                      className="ml-2 cursor-pointer"
+                    >
                       {item.label}
                     </label>
                   </li>

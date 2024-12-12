@@ -1,7 +1,7 @@
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { ItemModel } from "@/models/product-category-collections/item.model";
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
-import { itemAPI } from "@/services/product.service";
+import { itemAPI } from "@/services/item.service";
 
 function extractKeyValuePairs(arr: string[]): {
   [key: string]: string | string[];
