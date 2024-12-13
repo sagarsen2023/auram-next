@@ -10,7 +10,8 @@ function ImageViewerComponent({ medias }: { medias: MediaResponse[] }) {
     medias[0]
   );
   return (
-    <div>
+    <div className="flex flex-col gap-4 lg:flex-row-reverse lg:gap-10">
+      {/* Main Image Part */}
       <div className="relative w-full h-auto aspect-square">
         <Image
           src={imageValidator(currentImage?.path)}
@@ -19,18 +20,19 @@ function ImageViewerComponent({ medias }: { medias: MediaResponse[] }) {
           className="object-cover w-full h-full rounded-md"
         />
       </div>
-      <div className="mt-5 grid grid-cols-3 gap-4">
+      {/* All Images Part */}
+      <div className="grid grid-cols-3 gap-4 lg:grid-cols-1 lg:w-56 lg:h-auto">
         {medias.map((media) => (
           <div
             key={media._id}
-            className="cursor-pointer relative w-full h-auto aspect-square"
+            className="cursor-pointer relative w-full aspect-square lg:aspect-auto"
             onClick={() => setCurrentImage(media)}
           >
             <Image
               src={imageValidator(media.path)}
               alt="product-image"
               fill
-              className={`object-cover w-20 h-20 rounded-md p-0.5 border ${
+              className={`object-cover rounded-md p-0.5 border ${
                 media._id === currentImage?._id
                   ? "border-primary"
                   : "border-gray-300"
