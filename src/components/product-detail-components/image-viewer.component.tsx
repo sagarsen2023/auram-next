@@ -10,7 +10,7 @@ function ImageViewerComponent({ medias }: { medias: MediaResponse[] }) {
     medias[0]
   );
   return (
-    <div className="flex flex-col gap-4 lg:flex-row-reverse lg:gap-10">
+    <div className="flex flex-col gap-4 lg:flex-row-reverse">
       {/* Main Image Part */}
       <div className="relative w-full h-auto aspect-square">
         <Image
@@ -21,7 +21,7 @@ function ImageViewerComponent({ medias }: { medias: MediaResponse[] }) {
         />
       </div>
       {/* All Images Part */}
-      <div className="grid grid-cols-3 gap-4 lg:grid-cols-1 lg:w-56 lg:h-auto">
+      <div className="grid grid-cols-3 gap-4 lg:grid-cols-1 lg:w-36 lg:h-96">
         {medias.map((media) => (
           <div
             key={media._id}

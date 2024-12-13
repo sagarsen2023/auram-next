@@ -15,7 +15,7 @@ function ItemDetailsAndPricing({ item }: { item: ItemModel }) {
       {/* Item description */}
       <div dangerouslySetInnerHTML={{ __html: item.itemDescription ?? "" }} />
       {/* A short details */}
-      <div className="flex justify-between text-center p-4  bg-secondary/20 rounded-lg">
+      <div className="flex justify-between text-center p-4 lg:w-2/3 bg-secondary/20 rounded-lg">
         <div>
           <p className="font-semibold">Gender</p>
           <p>{firstLetterCapitalize(item?.gender ?? "Unisex")}</p>
