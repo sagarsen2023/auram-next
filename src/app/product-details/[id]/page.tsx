@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import { fetchItemDetails } from "../utils";
 import DefaultLoaderComponent from "@/components/ui/default-loader.component";
 import ImageViewerComponent from "@/components/product-detail-components/image-viewer.component";
+import ItemDetailsAndPricing from "@/components/product-detail-components/item-details-and-pricing.component";
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -10,10 +11,12 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
   console.log("itemData", itemData);
   return (
     <Suspense fallback={<DefaultLoaderComponent />}>
-      <div className={`${basePageClassNames}`}>
+      <div className={`${basePageClassNames} space-y-3`}>
+        {/* Component to view images */}
         <ImageViewerComponent medias={itemData.itemMedia ?? []} />
+        {/* Item details and pricing */}
+        <ItemDetailsAndPricing item={itemData} />
       </div>
-      ;
     </Suspense>
   );
 }
