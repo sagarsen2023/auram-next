@@ -2,6 +2,7 @@ import { StoneDetails } from "@/models/product-category-collections/item.model";
 import firstLetterCapitalize from "@/utils/first-letter-capitalize";
 import priceFormatter from "@/utils/price-formatter";
 import React from "react";
+import { RiPokerDiamondsFill } from "react-icons/ri";
 
 function StoneDetailsComponent({
   stoneDetails,
@@ -16,7 +17,10 @@ function StoneDetailsComponent({
           className="p-3 border-secondary border-[0.5px] shadow-md bg-secondary/5 rounded-lg"
         >
           <div className="flex justify-between items-center">
-            <p className="font-bold">
+            <p className="font-bold flex items-center gap-2">
+              <span>
+                <RiPokerDiamondsFill />
+              </span>
               {firstLetterCapitalize(stone.type)}{" "}
               <span className="font-semibold">{stone.weight}g</span>
             </p>
