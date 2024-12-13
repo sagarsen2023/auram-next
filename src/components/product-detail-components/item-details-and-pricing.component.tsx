@@ -10,10 +10,12 @@ function ItemDetailsAndPricing({ item }: { item: ItemModel }) {
       {/* Item name */}
       <div className="flex gap-3 items-center">
         <h3 className="text-2xl font-semibold">{item.itemName}</h3>
-        <div className="flex items-center gap-1 text-sm text-yellow-200 bg-primary w-fit px-3 rounded-3xl ">
-          <MdDone />
-          Featured
-        </div>
+        {item.isFeatured && (
+          <div className="flex items-center gap-1 text-sm text-yellow-200 bg-primary w-fit px-3 rounded-3xl ">
+            <MdDone />
+            Featured
+          </div>
+        )}
       </div>
       {/* Item price */}
       <p className="font-bold text-xl">
