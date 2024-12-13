@@ -21,7 +21,7 @@ function ImageViewerComponent({ medias }: { medias: MediaResponse[] }) {
         />
       </div>
       {/* All Images Part */}
-      <div className="grid grid-cols-4 gap-4 lg:grid-cols-1 lg:w-36 lg:h-[33rem] overflow-y-auto scrollbar">
+      <div className="grid grid-cols-4 gap-4 lg:grid-cols-1 lg:w-36 lg:h-[33rem] place-content-start overflow-y-auto scrollbar">
         {medias.map((media, index) => (
           <div
             key={index}

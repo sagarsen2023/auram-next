@@ -2,12 +2,19 @@ import { ItemModel } from "@/models/product-category-collections/item.model";
 import firstLetterCapitalize from "@/utils/first-letter-capitalize";
 import priceFormatter from "@/utils/price-formatter";
 import React from "react";
+import { MdDone } from "react-icons/md";
 
 function ItemDetailsAndPricing({ item }: { item: ItemModel }) {
   return (
     <div className="space-y-4">
       {/* Item name */}
-      <h3 className="text-2xl font-semibold">{item.itemName}</h3>
+      <div className="flex gap-3 items-center">
+        <h3 className="text-2xl font-semibold">{item.itemName}</h3>
+        <div className="flex items-center gap-1 text-sm text-yellow-200 bg-primary w-fit px-3 rounded-3xl ">
+          <MdDone />
+          Featured
+        </div>
+      </div>
       {/* Item price */}
       <p className="font-bold text-xl">
         {priceFormatter(item.finalPrice ?? 0)}{" "}
