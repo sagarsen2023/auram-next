@@ -8,9 +8,9 @@ function AddToCartSectionComponent() {
   const maxQuantity = 10;
   const [quantity, setQuantity] = useState(1);
   return (
-    <div className="flex items-center gap-4 lg:w-1/2">
+    <div className="flex items-center gap-4 lg:w-2/3">
       {/* Increment and decrement quantity part */}
-      <div className="flex justify-between w-36 gap-4 items-center p-1 border border-primary">
+      <div className="flex justify-between w-36 gap-4 items-center p-1 border border-primary rounded-lg">
         <PrimaryButtonCOmponent
           disabled={quantity < 1}
           onClick={() => setQuantity(quantity - 1)}
@@ -28,7 +28,7 @@ function AddToCartSectionComponent() {
 
       {/* Add to cart button */}
       <PrimaryButtonCOmponent>
-        <RiShoppingCart2Fill className="mr-4" />
+        <RiShoppingCart2Fill className="mr-4 max-w-fit" />
         Add to cart
       </PrimaryButtonCOmponent>
     </div>
