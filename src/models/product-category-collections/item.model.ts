@@ -49,3 +49,8 @@ export default interface ItemApiResponse extends BaseApiResponse {
   status: boolean;
   data: ItemModel[];
 }
+
+export interface ItemDetailsResponse extends BaseApiResponse {
+  status: boolean;
+  data: ItemModel;
+}
