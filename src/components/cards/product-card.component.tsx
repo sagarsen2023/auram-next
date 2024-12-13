@@ -11,7 +11,7 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
   return (
     <Link
       href={`/product-details/${item.slug}`}
-      className="hover:shadow-lg transition-all duration-300 border rounded-md flex flex-col gap-4 justify-between group hover:bg-gray-100"
+      className="hover:shadow-lg transition-all duration-300 border rounded-md flex flex-col gap-4 justify-between group hover:bg-gray-100 overflow-hidden"
     >
       {/* Item image, title and description */}
       <div className="w-full">
