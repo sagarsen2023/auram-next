@@ -21,11 +21,11 @@ function ImageViewerComponent({ medias }: { medias: MediaResponse[] }) {
         />
       </div>
       {/* All Images Part */}
-      <div className="grid grid-cols-3 gap-4 lg:grid-cols-1 lg:w-36 lg:h-96">
-        {medias.map((media) => (
+      <div className="grid grid-cols-4 gap-4 lg:grid-cols-1 lg:w-36 lg:h-96">
+        {medias.map((media, index) => (
           <div
-            key={media._id}
-            className="cursor-pointer relative w-full aspect-square lg:aspect-auto"
+            key={index}
+            className="cursor-pointer relative w-full lg:w-28 lg:h-28 aspect-square lg:aspect-auto"
             onClick={() => setCurrentImage(media)}
           >
             <Image

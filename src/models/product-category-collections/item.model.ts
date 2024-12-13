@@ -23,7 +23,7 @@ export interface ItemModel {
   itemDescription?: string;
   itemCategory?: CategoryItem;
   itemMedia?: MediaResponse[];
-  thumbnail?: MediaResponse;
+  thumbnail: MediaResponse;
   goldPurity?: string;
   itemSpecification?: string;
   height?: string;

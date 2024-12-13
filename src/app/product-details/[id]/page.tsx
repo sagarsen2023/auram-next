@@ -9,6 +9,7 @@ import BreadCrumbComponent, {
 import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.component";
 import AddToCartSectionComponent from "@/components/product-detail-components/add-to-cart-section.component";
 import StoneDetailsComponent from "@/components/product-detail-components/stone-details.component";
+import MediaResponse from "@/models/common/media-response.model";
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -27,6 +28,11 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       name: itemData.itemName,
     },
   ];
+  const allItemImages: MediaResponse[] = [
+    itemData?.thumbnail ?? [],
+    ...(itemData?.itemMedia ?? []),
+    itemData?.hoverImage,
+  ];
   return (
     <Suspense fallback={<DefaultPageLoaderComponent />}>
       <div className={`${basePageClassNames}`}>
@@ -34,7 +40,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-10">
           {/* Component to view images */}
           <div>
-            <ImageViewerComponent medias={itemData.itemMedia ?? []} />
+            <ImageViewerComponent medias={allItemImages ?? []} />
           </div>
           <div className="space-y-4">
             {/* Item details and pricing */}
