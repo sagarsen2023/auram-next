@@ -7,6 +7,9 @@ import FilterMenuComponent from "@/components/product-listing-components/filter-
 import FilterSideBarComponent from "@/components/product-listing-components/filter-sidebar.component";
 import getRandomTagline from "@/constants/jewelry-taglines";
 import CollectionHeaderComponent from "@/components/product-listing-components/collection-header.component";
+import BreadCrumbComponent, {
+  BreadCrumbComponentProps,
+} from "@/components/ui/breadcrumb.component";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
@@ -17,6 +20,11 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { sortOptions, filterOptions } = await getSortFilterOptions();
   const randomTagLine = getRandomTagline();
 
+  const breadCrumbs: BreadCrumbComponentProps[] = [
+    { name: "Home", link: "/" },
+    { name: "Products", link: "/products" },
+  ];
+
   return (
     <Suspense
       fallback={
@@ -25,7 +33,10 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
       }
     >
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-4">
+        {/* BreadCrumb */}
+        <BreadCrumbComponent breadCrumbItems={breadCrumbs} />
+
         {/* Collection details with image part */}
         <CollectionHeaderComponent itemData={itemData?.[6]} />
 
