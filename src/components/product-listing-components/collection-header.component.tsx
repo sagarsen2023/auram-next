@@ -10,10 +10,10 @@ function CollectionHeaderComponent({ itemData }: { itemData?: ItemModel }) {
   const randomTagLine = getRandomTagline();
   return (
     <div
-      className="w-full h-36 sm:h-44 lg:h-64 xl:h-72 rounded-lg bg-no-repeat bg-cover bg-center relative"
+      className="w-full h-36 sm:h-44 lg:h-64 xl:h-72 rounded-lg bg-no-repeat bg-cover bg-center "
       style={{ backgroundImage: `url(${bgImage})` }}
     >
-      <div className="flex justify-center items-start flex-col gap-3 w-full h-full p-6 text-white absolute top-0 left-0 rounded-lg bg-black/30">
+      <div className="flex justify-center items-start flex-col gap-3 w-full h-full px-6 lg:px-12 text-white top-0 left-0 rounded-lg bg-black/30">
         <h1 className="font-[500] text-center text-2xl lg:text-3xl">
           Our Elegant Products
         </h1>
