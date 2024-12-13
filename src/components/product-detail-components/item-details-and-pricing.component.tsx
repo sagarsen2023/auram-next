@@ -34,8 +34,10 @@ function ItemDetailsAndPricing({ item }: { item: ItemModel }) {
           <p>{firstLetterCapitalize(item?.metalType ?? "")}</p>
         </div>
         <div>
-          <p className="font-semibold">Weight</p>
-          <p>{item?.itemWeight} g</p>
+          <p className="font-semibold">Weight & Purity</p>
+          <p>
+            {item?.itemWeight}g {item.goldPurity && ` | ${item.goldPurity} Kt`}
+          </p>
         </div>
       </div>
     </div>
