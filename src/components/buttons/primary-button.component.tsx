@@ -9,8 +9,10 @@ function PrimaryButtonCOmponent({
   children,
   onClick,
   loaderClassName,
+  disabled,
 }: {
   id?: string;
+  disabled?: boolean;
   loaderClassName?: string;
   isLoading?: boolean;
   className?: string;
@@ -25,7 +27,7 @@ function PrimaryButtonCOmponent({
         className
       )}
       onClick={onClick}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
     >
       {isLoading && (
         <svg
