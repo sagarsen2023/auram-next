@@ -5,11 +5,13 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
+// TODO: For now the link is with slug, but it should be with id
+
 function ProductCardComponent({ item }: { item: ItemModel }) {
   return (
     <Link
-      href={`/product-details/${item._id}`}
-      className="hover:shadow-lg transition-all duration-300 border rounded-md flex flex-col gap-4 justify-between group hover:bg-gray-100"
+      href={`/product-details/${item.slug}`}
+      className="hover:shadow-lg transition-all duration-300 border rounded-md flex flex-col gap-4 justify-between group hover:bg-gray-100 overflow-hidden"
     >
       {/* Item image, title and description */}
       <div className="w-full">

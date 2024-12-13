@@ -10,6 +10,23 @@
   overflow: hidden;
 }
 
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: 5px;
+    height: 20px;
+  }
+
+  .scrollbar::-webkit-scrollbar-track {
+    border-radius: 100vh;
+    background: #f7f4ed;
+  }
+
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #d2a83e;
+    border-radius: 100vh;
+  }
+}
+
 .swiper-button-prev:after,
 .swiper-button-next:after {
   font-size: 20px !important;

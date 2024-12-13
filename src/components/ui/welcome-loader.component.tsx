@@ -3,8 +3,8 @@ import { isFirstVisitAtom } from "@/hooks/useJotai";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
-import welcome from "../../public/images/welcome.png";
-import auramLogo from "../../public/images/auram-logo.png"
+import welcome from "../../../public/images/welcome.png";
+import auramLogo from "../../../public/images/auram-logo.png"
 
 export default function WelcomeLoader() {
   const [isFirstVisit, setIsFirstVisit] = useAtom(isFirstVisitAtom);

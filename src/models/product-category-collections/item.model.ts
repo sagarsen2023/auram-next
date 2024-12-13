@@ -23,7 +23,7 @@ export interface ItemModel {
   itemDescription?: string;
   itemCategory?: CategoryItem;
   itemMedia?: MediaResponse[];
-  thumbnail?: MediaResponse;
+  thumbnail: MediaResponse;
   goldPurity?: string;
   itemSpecification?: string;
   height?: string;
@@ -48,4 +48,9 @@ export interface ItemModel {
 export default interface ItemApiResponse extends BaseApiResponse {
   status: boolean;
   data: ItemModel[];
+}
+
+export interface ItemDetailsResponse extends BaseApiResponse {
+  status: boolean;
+  data: ItemModel;
 }
