@@ -4,7 +4,6 @@ import React from "react";
 import getRandomTagline from "@/constants/jewelry-taglines";
 
 function CollectionHeaderComponent({ itemData }: { itemData?: ItemModel }) {
-  console.log("collection", itemData);
   if (!itemData) return null;
   const bgImage = imageValidator(itemData.thumbnail?.path ?? "");
   const randomTagLine = getRandomTagline();
