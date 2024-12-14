@@ -13,6 +13,8 @@ import { FaXmark } from "react-icons/fa6";
 //   { ssr: false }
 // );
 
+// TODO: If required change the text style
+
 function NavBarComponent() {
   const [menuOpen, setMenuOpen] = useState(false);
 
@@ -32,6 +34,9 @@ function NavBarComponent() {
             <div className="hidden md:flex gap-6 items-center font-[300] text-[14px] mr-8">
               <Link href="/products">
                 <span>PRODUCTS</span>
+              </Link>
+              <Link href="/collections">
+                <span>COLLECTIONS</span>
               </Link>
               <Link href="/bespoke">
                 <span>BESPOKE</span>
@@ -82,7 +87,9 @@ function NavBarComponent() {
             <Link href="/products" onClick={() => setMenuOpen(false)}>
               <span>PRODUCTS</span>
             </Link>
-            <span>COLLECTIONS</span>
+            <Link href="/collections">
+              <span>COLLECTIONS</span>
+            </Link>
             <Link href="/bespoke">
               <span>BESPOKE</span>
             </Link>
