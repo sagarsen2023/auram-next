@@ -8,12 +8,19 @@ import BreadCrumbComponent, {
 } from "@/components/ui/breadcrumb.component";
 import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.component";
 import AddToCartSectionComponent from "@/components/product-detail-components/add-to-cart-section.component";
-import StoneDetailsComponent from "@/components/product-detail-components/stone-details.component";
+import StoneAndPricingDetailsComponent from "@/components/product-detail-components/stone-and-pricing-details.component";
 import MediaResponse from "@/models/common/media-response.model";
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const itemData = (await fetchItemDetails(id)).data;
+  const {
+    stoneDetails,
+    finalPrice,
+    withGstPrice,
+    withoutGstPrice,
+    makingCharge,
+  } = itemData;
   console.log("itemData", itemData);
   const breadcrumbs: BreadCrumbComponentProps[] = [
     {
@@ -48,11 +55,19 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             {/* Item Add to cart */}
             {/* TODO: Send item data to manage cart */}
             <AddToCartSectionComponent />
-            {/* Stone Details */}
-            {itemData.stoneDetails && (
-              <StoneDetailsComponent stoneDetails={itemData.stoneDetails} />
-            )}
           </div>
+        </div>
+        {/* Stone Pricing Details */}
+        <div className="w-full my-2 lg:my-5">
+          {stoneDetails && (
+            <StoneAndPricingDetailsComponent
+              makingCharge={makingCharge ?? 0}
+              finalPrice={finalPrice ?? 0}
+              withGstPrice={withGstPrice ?? 0}
+              withoutGstPrice={withoutGstPrice ?? 0}
+              stoneDetails={stoneDetails}
+            />
+          )}
         </div>
       </div>
     </Suspense>
