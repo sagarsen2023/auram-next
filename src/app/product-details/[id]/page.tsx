@@ -10,6 +10,7 @@ import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.comp
 import AddToCartSectionComponent from "@/components/product-detail-components/add-to-cart-section.component";
 import StoneAndPricingDetailsComponent from "@/components/product-detail-components/stone-and-pricing-details.component";
 import MediaResponse from "@/models/common/media-response.model";
+import TalkToAnExpertComponent from "@/components/product-detail-components/talk-to-expert.component";
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
@@ -58,7 +59,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
           </div>
         </div>
         {/* Stone Pricing Details */}
-        <div className="w-full my-2 lg:my-5">
+        <div className="w-full my-2 lg:my-5 space-y-4 lg:space-y-8">
           {stoneDetails && (
             <StoneAndPricingDetailsComponent
               makingCharge={makingCharge ?? 0}
@@ -68,7 +69,9 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
               stoneDetails={stoneDetails}
             />
           )}
+          <TalkToAnExpertComponent />
         </div>
+        {/* Talk to an expert */}
       </div>
     </Suspense>
   );
