@@ -22,7 +22,6 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     withoutGstPrice,
     makingCharge,
   } = itemData;
-  console.log("itemData", itemData);
   const breadcrumbs: BreadCrumbComponentProps[] = [
     {
       name: "Home",
