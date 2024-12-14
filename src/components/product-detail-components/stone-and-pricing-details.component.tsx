@@ -34,7 +34,7 @@ function StoneAndPricingDetailsComponent({
   return (
     <>
       <h1 className="text-2xl font-semibold my-3">Price Breakup</h1>
-      <div className="w-full bg-secondary/10 p-4 border-[0.5px] border-secondary rounded-lg shadow-md">
+      <div className="w-full bg-secondary/10 p-4 lg:px-8 border-[0.5px] text-lg border-secondary rounded-lg shadow-md">
         <div className="grid grid-cols-3 gap-5 text-xl font-bold mb-1 w-full">
           <p className="text-left border-b border-secondary pb-1 justify-self-start">
             Stone Type
@@ -67,7 +67,7 @@ function StoneAndPricingDetailsComponent({
         </div>
         <div className="grid grid-cols-2 my-2 border-t border-secondary pt-2">
           <p className="text-left flex items-center gap-1 font-bold">Total</p>
-          <p className="text-right">{priceFormatter(finalPrice)}</p>
+          <p className="text-right font-bold">{priceFormatter(finalPrice)}</p>
         </div>
       </div>
     </>
