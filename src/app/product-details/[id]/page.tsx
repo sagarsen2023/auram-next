@@ -8,13 +8,20 @@ import BreadCrumbComponent, {
 } from "@/components/ui/breadcrumb.component";
 import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.component";
 import AddToCartSectionComponent from "@/components/product-detail-components/add-to-cart-section.component";
-import StoneDetailsComponent from "@/components/product-detail-components/stone-details.component";
+import StoneAndPricingDetailsComponent from "@/components/product-detail-components/stone-and-pricing-details.component";
 import MediaResponse from "@/models/common/media-response.model";
+import TalkToAnExpertComponent from "@/components/product-detail-components/talk-to-expert.component";
 
 async function Page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const itemData = (await fetchItemDetails(id)).data;
-  console.log("itemData", itemData);
+  const {
+    stoneDetails,
+    finalPrice,
+    withGstPrice,
+    withoutGstPrice,
+    makingCharge,
+  } = itemData;
   const breadcrumbs: BreadCrumbComponentProps[] = [
     {
       name: "Home",
@@ -48,12 +55,22 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             {/* Item Add to cart */}
             {/* TODO: Send item data to manage cart */}
             <AddToCartSectionComponent />
-            {/* Stone Details */}
-            {itemData.stoneDetails && (
-              <StoneDetailsComponent stoneDetails={itemData.stoneDetails} />
-            )}
           </div>
         </div>
+        {/* Stone Pricing Details */}
+        <div className="w-full my-2 lg:my-5 space-y-4 lg:space-y-8">
+          {stoneDetails && (
+            <StoneAndPricingDetailsComponent
+              makingCharge={makingCharge ?? 0}
+              finalPrice={finalPrice ?? 0}
+              withGstPrice={withGstPrice ?? 0}
+              withoutGstPrice={withoutGstPrice ?? 0}
+              stoneDetails={stoneDetails}
+            />
+          )}
+          <TalkToAnExpertComponent />
+        </div>
+        {/* Talk to an expert */}
       </div>
     </Suspense>
   );

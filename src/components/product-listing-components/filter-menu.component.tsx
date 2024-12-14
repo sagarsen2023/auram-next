@@ -94,7 +94,7 @@ function FilterMenuComponent({
                       className="text-sm pl-3 flex items-center"
                     >
                       <input
-                        className="w-6 h-6 accent-black text-white checked:bg-black border-gray-300 rounded cursor-pointer transition-all duration-500"
+                        className="h-4 w-4 outline-none ring-0 checked:ring-0 active:ring-0 focus:ring-0 checked:bg-secondary transition-all duration-200 checked:hover:bg-secondary rounded-[4px]"
                         type="checkbox"
                         id={item.value}
                         checked={selectedFilters.some(
@@ -121,9 +121,7 @@ function FilterMenuComponent({
           )}
         </div>
         <div className="px-10 py-2">
-          <PrimaryButtonCOmponent
-            onClick={handleApplyFilters}
-          >
+          <PrimaryButtonCOmponent onClick={handleApplyFilters}>
             Apply Filters
           </PrimaryButtonCOmponent>
         </div>

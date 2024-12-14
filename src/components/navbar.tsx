@@ -18,8 +18,8 @@ function NavBarComponent() {
 
   return (
     <>
-      <div className="flex justify-center shadow-md fixed w-full bg-white dark:bg-black z-[9999]">
-        <div className="w-full px-4 lg:px-0 lg:max-w-8xl flex justify-between items-center p-2  bg-white dark:bg-black dark:text-black">
+      <div className="flex justify-center shadow-md fixed w-full bg-white/80 backdrop-blur-lg dark:bg-black z-[9999]">
+        <div className="w-full px-4 lg:px-0 lg:max-w-8xl flex justify-between items-center p-2 dark:bg-black dark:text-black">
           <Link href="/">
             <Image
               src={auramLogoWithText}
