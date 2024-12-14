@@ -9,8 +9,10 @@ function PrimaryButtonCOmponent({
   children,
   onClick,
   loaderClassName,
+  disabled,
 }: {
   id?: string;
+  disabled?: boolean;
   loaderClassName?: string;
   isLoading?: boolean;
   className?: string;
@@ -21,11 +23,11 @@ function PrimaryButtonCOmponent({
     <button
       id={id}
       className={classNameMerger(
-        "bg-primary text-white w-full py-2 rounded-lg px-3 flex items-center justify-center hover:bg-gray-800 hover:shadow-lg disabled:opacity-50 transition-opacity duration-250",
+        "bg-primary text-white w-full py-2 rounded-lg px-3 flex items-center justify-center hover:bg-gray-800 hover:shadow-lg disabled:opacity-30 transition-opacity duration-250",
         className
       )}
       onClick={onClick}
-      disabled={isLoading}
+      disabled={isLoading || disabled}
     >
       {isLoading && (
         <svg

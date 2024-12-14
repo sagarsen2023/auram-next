@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import DefaultLoaderComponent from "../default-loader.component";
-import { collectionAPI } from "@/services/product.service";
+import DefaultLoaderComponent from "../ui/default-loader.component";
+import { collectionAPI } from "@/services/item.service";
 import { CollectionItem } from "@/models/product-category-collections/collection.model";
 import CollectionCardComponent from "../cards/collection-card.component";
 import { Swiper, SwiperSlide } from "swiper/react";

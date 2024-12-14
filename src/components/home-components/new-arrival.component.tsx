@@ -1,8 +1,8 @@
 import { ItemModel } from "@/models/product-category-collections/item.model";
-import { itemAPI } from "@/services/product.service";
+import { itemAPI } from "@/services/item.service";
 import React, { Suspense } from "react";
 import ProductCardComponent from "../cards/product-card.component";
-import DefaultLoaderComponent from "../default-loader.component";
+import DefaultLoaderComponent from "../ui/default-loader.component";
 
 async function NewArrivalComponent() {
   let items: ItemModel[] = [];

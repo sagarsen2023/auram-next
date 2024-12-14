@@ -21,3 +21,4 @@ export const SORT_FILTERS_URL = "/items/user/sort-filter";
 
 // Contact Info Url
 export const CONTACT_INFO = `/general-infos`;
+export const CONTACT_US_URL = `/contact-us`;

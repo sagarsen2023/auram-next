@@ -18,8 +18,8 @@ function NavBarComponent() {
 
   return (
     <>
-      <div className="flex justify-center shadow-md fixed w-full bg-white dark:bg-black z-[9999]">
-        <div className="w-full px-4 lg:px-0 lg:max-w-8xl flex justify-between items-center p-2  bg-white dark:bg-black dark:text-black">
+      <div className="flex justify-center shadow-md fixed w-full bg-white/80 backdrop-blur-lg dark:bg-black z-[9999]">
+        <div className="w-full px-4 lg:px-0 lg:max-w-8xl flex justify-between items-center p-2 dark:bg-black dark:text-black">
           <Link href="/">
             <Image
               src={auramLogoWithText}
@@ -33,10 +33,15 @@ function NavBarComponent() {
               <Link href="/products">
                 <span>PRODUCTS</span>
               </Link>
-              <span>COLLECTIONS</span>
-              <span>BESPOKE</span>
-              <span>ABOUT US</span>
-              <span>CONTACT US</span>
+              <Link href="/bespoke">
+                <span>BESPOKE</span>
+              </Link>
+              <Link href="/about">
+                <span>ABOUT US</span>
+              </Link>
+              <Link href="/contact">
+                <span>CONTACT US</span>
+              </Link>
             </div>
 
             <CartButtonComponent />
@@ -74,13 +79,19 @@ function NavBarComponent() {
       >
         <div>
           <div className="flex flex-col gap-6 items-center font-[300] text-[14px] mt-16">
-            <Link href="/products" onClick={()=>setMenuOpen(false)}>
+            <Link href="/products" onClick={() => setMenuOpen(false)}>
               <span>PRODUCTS</span>
             </Link>
             <span>COLLECTIONS</span>
-            <span>BESPOKE</span>
-            <span>ABOUT US</span>
-            <span>CONTACT US</span>
+            <Link href="/bespoke">
+              <span>BESPOKE</span>
+            </Link>
+            <Link href="/about">
+              <span>ABOUT US</span>
+            </Link>
+            <Link href="/contact">
+              <span>CONTACT US</span>
+            </Link>
           </div>
         </div>
       </div>

@@ -7,7 +7,9 @@ import {
   LATEST_ITEMS_URL,
   SORT_FILTERS_URL,
 } from "./queryUrls";
-import ItemApiResponse from "@/models/product-category-collections/item.model";
+import ItemApiResponse, {
+  ItemDetailsResponse,
+} from "@/models/product-category-collections/item.model";
 import { SortFilterApiResponse } from "@/models/product-category-collections/sort-filter.model";
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import queryParamsFormatter from "@/utils/queryParamsFormatter";
@@ -36,4 +38,6 @@ export const itemAPI = {
     });
     return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`);
   },
+  getItemDetails: async (id: string) =>
+    fetchAPI.get<ItemDetailsResponse>(`${ITEM_URL}/${id}`),
 };

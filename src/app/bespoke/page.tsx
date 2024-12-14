@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import React from "react";
 import aboutImage from "../../../public/images/about.webp";
-import ContactForm from "@/components/contact-form";
+import BaseContactForm from "@/components/base-contact-form/base-contact-form.component";
 
 function Page() {
   return (
@@ -83,7 +83,7 @@ function Page() {
               Message Us Describing Your Requirements
             </h2>
 
-            <ContactForm />
+            <BaseContactForm type="bespoke" />
           </div>
         </div>
       </div>
