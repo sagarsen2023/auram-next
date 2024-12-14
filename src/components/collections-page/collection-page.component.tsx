@@ -1,38 +1,17 @@
-"use client";
-import React, { useEffect, useState } from "react";
-import DefaultLoaderComponent from "../ui/default-loader.component";
+import React, { Suspense } from "react";
 import { collectionAPI } from "@/services/item.service";
-import { CollectionItem } from "@/models/product-category-collections/collection.model";
-
 import Image from "next/image";
 import imageValidator from "@/utils/image-validator";
 import Link from "next/link";
+import DefaultPageLoaderComponent from "../ui/default-page-loader.component";
 
-function CollectionsPageComponent() {
-  const [loading, setLoading] = useState(true);
-  const [collectionData, setCollectionData] = useState<CollectionItem[]>([]);
-  const fetchCollection = async () => {
-    try {
-      const response = await collectionAPI.getAllCollections();
-      setCollectionData(response?.data ?? []);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoading(false);
-    }
-  };
-  useEffect(() => {
-    fetchCollection();
-  }, []);
+async function CollectionsPageComponent() {
+  const response = await collectionAPI.getAllCollections();
+  const collectionData = response.data ?? [];
 
-  if (loading)
-    return (
-      <div className="flex w-full justify-center items-center h-screen -mt-20">
-        <DefaultLoaderComponent />
-      </div>
-    );
+
   return (
-    <>
+    <Suspense fallback={<DefaultPageLoaderComponent />}>
       <div className="max-w-6xl mx-auto  pt-2 px-4 lg:px-0">
         <div className="relative overflow-hidden">
           {collectionData?.map((collection, index) =>
@@ -229,7 +208,7 @@ function CollectionsPageComponent() {
           )}
         </div>
       </div>
-    </>
+    </Suspense>
   );
 }
 
