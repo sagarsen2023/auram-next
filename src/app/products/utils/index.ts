@@ -1,5 +1,5 @@
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
-import { ItemModel } from "@/models/product-category-collections/item.model";
+import ItemApiResponse from "@/models/product-category-collections/item.model";
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
 import { itemAPI } from "@/services/item.service";
 
@@ -71,6 +71,9 @@ export function generateSlugFromParams(params: ItemParams): string {
   if (params.skip) {
     slug.push(`skip=${params.skip}`);
   }
+  if (params.limit) {
+    slug.push(`limit=${params.limit}`);
+  }
   return slug.join("/");
 }
 
@@ -87,6 +90,7 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
     itemCategory,
     gender,
     metalType,
+    limit,
   } = extractKeyValuePairs(slug);
 
   const itemParams: ItemParams = {
@@ -112,10 +116,10 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
       ? [metalType]
       : undefined,
     gender: Array.isArray(gender) ? gender : gender ? [gender] : undefined,
-    skip: skip ? parseInt(skip as string) : undefined,
-    limit: 50,
-    minPrice: minPrice ? parseInt(minPrice as string) : undefined,
-    maxPrice: maxPrice ? parseInt(maxPrice as string) : undefined,
+    skip: skip ? skip.toString() : undefined,
+    limit: limit ? limit.toString() : undefined,
+    minPrice: minPrice ? minPrice.toString() : undefined,
+    maxPrice: maxPrice ? maxPrice.toString() : undefined,
   };
 
   return itemParams;
@@ -125,10 +129,10 @@ export async function getItems({
   params,
 }: {
   params: ItemParams;
-}): Promise<ItemModel[] | null> {
+}): Promise<ItemApiResponse | null> {
   try {
     const response = await itemAPI.getAllItems(params);
-    return response.data;
+    return response;
   } catch (error) {
     console.error(error);
     return null;
