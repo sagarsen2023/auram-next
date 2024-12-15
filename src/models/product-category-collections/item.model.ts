@@ -47,6 +47,7 @@ export interface ItemModel {
 
 export default interface ItemApiResponse extends BaseApiResponse {
   status: boolean;
+  totalCount: number;
   data: ItemModel[];
 }
 

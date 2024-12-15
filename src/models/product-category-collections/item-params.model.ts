@@ -1,12 +1,12 @@
 export interface ItemParams {
-  skip?: number;
-  limit?: number;
+  skip?: string;
+  limit?: string;
   collections?: string | string[];
   itemCategory?: string | string[];
   gender?: string | string[];
   goldPurity?: string | string[];
   metalType?: string | string[];
   sortBy?: string;
-  minPrice?: number;
-  maxPrice?: number;
+  minPrice?: string;
+  maxPrice?: string;
 }
