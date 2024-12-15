@@ -87,6 +87,7 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
     itemCategory,
     gender,
     metalType,
+    limit,
   } = extractKeyValuePairs(slug);
 
   const itemParams: ItemParams = {
@@ -113,7 +114,7 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
       : undefined,
     gender: Array.isArray(gender) ? gender : gender ? [gender] : undefined,
     skip: skip ? parseInt(skip as string) : undefined,
-    limit: 50,
+    limit: limit ? parseInt(limit as string) : undefined,
     minPrice: minPrice ? parseInt(minPrice as string) : undefined,
     maxPrice: maxPrice ? parseInt(maxPrice as string) : undefined,
   };

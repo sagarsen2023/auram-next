@@ -28,7 +28,7 @@ export const itemAPI = {
   getAllItems: async (params: ItemParams) => {
     const queryString = queryParamsFormatter({
       skip: params.skip,
-      limit: params.limit,
+      limit: params.limit ?? 36,
       sortBy: params.sortBy,
       collections: params.collections,
       itemCategory: params.itemCategory,
@@ -36,6 +36,7 @@ export const itemAPI = {
       gender: params.gender,
       priceRange: [params.minPrice, params.maxPrice],
     });
+    console.log("queryString", queryString);
     return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`);
   },
   getItemDetails: async (id: string) =>
