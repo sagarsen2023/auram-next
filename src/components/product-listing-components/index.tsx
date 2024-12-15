@@ -11,6 +11,7 @@ import { ItemModel } from "@/models/product-category-collections/item.model";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
 import { getItems } from "@/app/products/utils";
+import { MdOutlineReadMore } from "react-icons/md";
 const getRandomTagline = dynamic(() => import("@/constants/jewelry-taglines"), {
   ssr: false,
 });
@@ -82,6 +83,7 @@ function ProductListingComponent({
                 disabled={itemData.length === totalCount}
                 onClick={handleLoadMore}
               >
+                <MdOutlineReadMore className="mr-3" />
                 Load More Products
               </PrimaryButtonCOmponent>
             </div>
