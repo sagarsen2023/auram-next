@@ -6,28 +6,27 @@ function Page() {
   return (
     <>
       <div className="px-2 py-6 w-full lg:max-w-8xl mx-auto">
-        <div className="container mx-auto px-4 py-12">
+        <div className="container mx-auto px-4 py-10">
+        <h1
+          className="relative pb-12 text-center text-[34px] font-normal 
+           before:absolute before:bottom-[22px] before:left-[calc(50%-50px)] 
+           before:block before:h-0.5 before:w-[80px] before:bg-black
+           after:absolute after:bottom-[15px] after:right-[calc(50%-50px)] 
+           after:block after:h-0.5 after:w-[80px] after:bg-black"
+        >
+          Unveiling Our Journey: The History of Aurum
+        </h1>
+          <div className="border-l-4 border-blue-500 pl-4 italic text-xl text-gray-700 mb-6">
+            Beauty is an experience, nothing else. It is not a fixed pattern or
+            an arrangement of features. It is something felt, a glow, or a
+            communicated sense of fineness.”
+            <span className="block text-base mt-2 text-gray-500">
+              - D. H. Lawrence
+            </span>
+          </div>
           <div className="grid md:grid-cols-2 gap-8 ">
-            <div className="relative">
-              <Image
-                src={aboutImage}
-                alt="About"
-                className="w-auto max-w-full h-auto rounded-lg shadow-lg"
-              />
-            </div>
-
-            <div className="space-y-6">
-              <div className="border-l-4 border-blue-500 pl-4 italic text-xl text-gray-700">
-                Beauty is an experience, nothing else. It is not a fixed pattern
-                or an arrangement of features. It is something felt, a glow, or
-                a communicated sense of fineness.”
-                <span className="block text-base mt-2 text-gray-500">
-                  - D. H. Lawrence
-                </span>
-              </div>
-              <h1 className="text-4xl font-bold text-gray-800">
-                Unveiling Our Journey: The History of Aurum
-              </h1>
+            <div className="space-y-4">
+             
 
               <p className="text-lg text-gray-600 leading-relaxed">
                 Jewellery is more than just stone and metal, it is an emotion.
@@ -63,6 +62,13 @@ function Page() {
                 witness the moments of your life, mark them in gold and cherish
                 them forever.
               </p>
+            </div>
+            <div className="relative">
+              <Image
+                src={aboutImage}
+                alt="About"
+                className="w-auto max-w-full h-auto rounded-lg shadow-lg"
+              />
             </div>
           </div>
         </div>

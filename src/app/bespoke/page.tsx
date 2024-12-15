@@ -22,7 +22,7 @@ function Page() {
       <div className="px-2 py-6 w-full lg:max-w-8xl mx-auto">
         <div className="container mx-auto px-4 pt-8 pb-2">
           <div className="grid  md:grid-cols-[50%_50%] gap-8 ">
-            <div className="relative">
+            <div className="relative order-2 md:order-1">
               <Image
                 src={aboutImage}
                 alt="About"
@@ -30,7 +30,7 @@ function Page() {
               />
             </div>
 
-            <div className="space-y-3">
+            <div className="space-y-3 order-1 md:order-2">
               <div className="border-l-4 border-gray-500 pl-4  text-2xl text-gray-700">
                 It’s your story, a very special memory piece, designed
                 especially for you.
