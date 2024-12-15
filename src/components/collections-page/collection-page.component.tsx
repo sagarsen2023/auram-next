@@ -9,7 +9,6 @@ async function CollectionsPageComponent() {
   const response = await collectionAPI.getAllCollections();
   const collectionData = response.data ?? [];
 
-
   return (
     <Suspense fallback={<DefaultPageLoaderComponent />}>
       <div className="max-w-6xl mx-auto  pt-2 px-4 lg:px-0">
@@ -59,19 +58,19 @@ async function CollectionsPageComponent() {
                       >
                         <p className="flex items-center">
                           <small style={{ color: collection.textColor }}>
-                            View Details
+                            View Products
                           </small>{" "}
                           <svg
                             className="transition-all duration-200 ml-[5px] group-hover:ml-[10px]"
                             width="23"
                             height="8"
                             viewBox="0 0 23 8"
-                            fill={collection.colorCode}
+                            fill={collection.textColor}
                             xmlns="http://www.w3.org/2000/svg"
                           >
                             <path
                               d="M1.48657 3.33917C1.21043 3.33917 0.986572 3.56303 0.986572 3.83917C0.986572 4.11531 1.21043 4.33917 1.48657 4.33917V3.33917ZM22.4416 4.19273C22.6368 3.99746 22.6368 3.68088 22.4416 3.48562L19.2596 0.303638C19.0643 0.108376 18.7477 0.108376 18.5525 0.303638C18.3572 0.498901 18.3572 0.815483 18.5525 1.01075L21.3809 3.83917L18.5525 6.6676C18.3572 6.86286 18.3572 7.17944 18.5525 7.37471C18.7477 7.56997 19.0643 7.56997 19.2596 7.37471L22.4416 4.19273ZM1.48657 4.33917H22.088V3.33917H1.48657V4.33917Z"
-                              fill={collection.colorCode}
+                              fill={collection.textColor}
                             />
                           </svg>
                         </p>
@@ -150,19 +149,19 @@ async function CollectionsPageComponent() {
                     >
                       <p className="flex items-center">
                         <small style={{ color: collection.textColor }}>
-                          View Details
+                          View Products
                         </small>{" "}
                         <svg
                           className="transition-all duration-200 ml-[5px] group-hover:ml-[10px]"
                           width="23"
                           height="8"
                           viewBox="0 0 23 8"
-                          fill={collection.colorCode}
+                          fill={collection.textColor}
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             d="M1.48657 3.33917C1.21043 3.33917 0.986572 3.56303 0.986572 3.83917C0.986572 4.11531 1.21043 4.33917 1.48657 4.33917V3.33917ZM22.4416 4.19273C22.6368 3.99746 22.6368 3.68088 22.4416 3.48562L19.2596 0.303638C19.0643 0.108376 18.7477 0.108376 18.5525 0.303638C18.3572 0.498901 18.3572 0.815483 18.5525 1.01075L21.3809 3.83917L18.5525 6.6676C18.3572 6.86286 18.3572 7.17944 18.5525 7.37471C18.7477 7.56997 19.0643 7.56997 19.2596 7.37471L22.4416 4.19273ZM1.48657 4.33917H22.088V3.33917H1.48657V4.33917Z"
-                            fill={collection.colorCode}
+                            fill={collection.textColor}
                           />
                         </svg>
                       </p>
