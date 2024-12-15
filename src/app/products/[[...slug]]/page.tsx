@@ -1,15 +1,13 @@
 import React, { Suspense } from "react";
 import { getItemParams, getItems, getSortFilterOptions } from "../utils";
 import DefaultLoaderComponent from "@/components/ui/default-loader.component";
-import ProductCardComponent from "@/components/cards/product-card.component";
 import SortByMenuComponent from "@/components/product-listing-components/sort-by-menu.component";
 import FilterMenuComponent from "@/components/product-listing-components/filter-menu.component";
-import FilterSideBarComponent from "@/components/product-listing-components/filter-sidebar.component";
-import getRandomTagline from "@/constants/jewelry-taglines";
 import CollectionHeaderComponent from "@/components/product-listing-components/collection-header.component";
 import BreadCrumbComponent, {
   BreadCrumbComponentProps,
 } from "@/components/ui/breadcrumb.component";
+import ProductListingComponent from "@/components/product-listing-components";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
@@ -18,7 +16,6 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
     params: itemParams,
   });
   const { sortOptions, filterOptions } = await getSortFilterOptions();
-  const randomTagLine = getRandomTagline();
 
   const breadCrumbs: BreadCrumbComponentProps[] = [
     { name: "Home", link: "/" },
@@ -38,7 +35,7 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         <BreadCrumbComponent breadCrumbItems={breadCrumbs} />
 
         {/* Collection details with image part */}
-        <CollectionHeaderComponent itemData={itemData?.[6]} />
+        <CollectionHeaderComponent itemData={itemData?.data?.[0]} />
 
         {/* Sort and filter Menu */}
         <div className="flex justify-between lg:hidden items-center w-full my-3">
@@ -57,33 +54,13 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
 
         {/* All Products Part */}
-        <div className="lg:flex gap-5 items-start w-full h-full">
-          <FilterSideBarComponent
-            currentParams={itemParams}
-            filterOptions={filterOptions}
-          />
-          <div className="w-full">
-            {itemData && itemData.length ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div className="col-span-full w-full justify-between items-center hidden lg:flex">
-                  <p className="text-xl">{randomTagLine}</p>
-                  {sortOptions && sortOptions.length > 0 && (
-                    <SortByMenuComponent
-                      currentParams={itemParams}
-                      sortOptions={sortOptions[0].values}
-                    />
-                  )}
-                </div>
-
-                {itemData.map((item) => (
-                  <ProductCardComponent key={item._id} item={item} />
-                ))}
-              </div>
-            ) : (
-              <div>No Products to display</div>
-            )}
-          </div>
-        </div>
+        <ProductListingComponent
+          totalCount={itemData?.totalCount ?? 0}
+          itemParams={itemParams}
+          sortOptions={sortOptions}
+          filterOptions={filterOptions}
+          initialItemData={itemData?.data ?? []}
+        />
       </div>
     </Suspense>
   );

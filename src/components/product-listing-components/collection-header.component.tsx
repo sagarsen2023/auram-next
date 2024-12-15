@@ -18,7 +18,7 @@ function CollectionHeaderComponent({ itemData }: { itemData?: ItemModel }) {
         </h1>
         <p className="text-center lg:hidden">{randomTagLine}</p>
         <div
-          className="text-center hidden lg:block lg:w-2/3"
+          className="text-left hidden lg:block lg:w-2/3"
           dangerouslySetInnerHTML={{ __html: itemData.itemDescription ?? "" }}
         />
       </div>
