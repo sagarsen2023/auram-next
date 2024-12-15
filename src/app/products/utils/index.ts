@@ -71,6 +71,9 @@ export function generateSlugFromParams(params: ItemParams): string {
   if (params.skip) {
     slug.push(`skip=${params.skip}`);
   }
+  if (params.limit) {
+    slug.push(`limit=${params.limit}`);
+  }
   return slug.join("/");
 }
 
@@ -113,10 +116,10 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
       ? [metalType]
       : undefined,
     gender: Array.isArray(gender) ? gender : gender ? [gender] : undefined,
-    skip: skip ? parseInt(skip as string) : undefined,
-    limit: limit ? parseInt(limit as string) : undefined,
-    minPrice: minPrice ? parseInt(minPrice as string) : undefined,
-    maxPrice: maxPrice ? parseInt(maxPrice as string) : undefined,
+    skip: skip ? skip.toString() : undefined,
+    limit: limit ? limit.toString() : undefined,
+    minPrice: minPrice ? minPrice.toString() : undefined,
+    maxPrice: maxPrice ? maxPrice.toString() : undefined,
   };
 
   return itemParams;
