@@ -7,6 +7,8 @@ import auramLogoWithText from "../../public/images/auram-logo-with-text.webp";
 import CartButtonComponent from "./buttons/cart-button.component";
 import Link from "next/link";
 import { FaXmark } from "react-icons/fa6";
+import ModalComponent from "./ui/modal.component";
+import RegistrationComponent from "./auth/registration/registration.component";
 // import dynamic from "next/dynamic";
 // const ThemeSwitchButtonComponent = dynamic(
 //   () => import("../components/buttons/theme-switch-button.component"),
@@ -17,7 +19,9 @@ import { FaXmark } from "react-icons/fa6";
 
 function NavBarComponent() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isModalOpen, setModalOpen] = useState(false);
 
+  const handleModalState = () => setModalOpen((prev) => !prev);
   return (
     <>
       <div className="flex justify-center shadow-md fixed w-full bg-white/80 backdrop-blur-lg dark:bg-black z-[9999]">
@@ -47,6 +51,7 @@ function NavBarComponent() {
               <Link href="/contact">
                 <span>CONTACT US</span>
               </Link>
+              <span onClick={handleModalState}>Sign In</span>
             </div>
 
             <CartButtonComponent />
@@ -102,6 +107,13 @@ function NavBarComponent() {
           </div>
         </div>
       </div>
+      <ModalComponent
+        isOpen={isModalOpen}
+        onClose={handleModalState}
+        size="3xl"
+      >
+        <RegistrationComponent />
+      </ModalComponent>
     </>
   );
 }
