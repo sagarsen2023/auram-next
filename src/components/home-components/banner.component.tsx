@@ -69,9 +69,7 @@ function BannerComponent() {
           Autoplay,
         ]}
         autoplay={{ delay: 3000 }}
-        // grabCursor={false}
         loop={true}
-        // scrollbar={{ draggable: true }}
       >
         {bannerData?.map((banner, index) => (
           <SwiperSlide key={banner._id}>
