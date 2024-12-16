@@ -34,9 +34,14 @@ export default {
           "0%, 100%": { borderColor: "transparent" },
           "50%": { borderColor: "#b3c002" },
         },
+        fadeIn: {
+          "0%": { opacity: "0", transform: "scale(0.9)" },
+          "100%": { opacity: "1", transform: "scale(1)" },
+        },
       },
       animation: {
         "increase-width": "increase-width 2.2s forwards",
+        "fade-in": "fadeIn 1s ease-out",
         typewriter:
           "typewriter 5s steps(20, end) forwards, blink 0.5s step-end infinite",
       },
