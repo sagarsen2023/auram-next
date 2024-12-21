@@ -8,6 +8,7 @@ function TextInputComponent({
   placeholder,
   type = "text",
   error,
+  disabled,
   ...rest
 }: {
   label?: string;
@@ -17,6 +18,7 @@ function TextInputComponent({
   placeholder?: string;
   type?: string;
   error?: string;
+  disabled?: boolean;
 }) {
   return (
     <>
@@ -38,7 +40,10 @@ function TextInputComponent({
           error
             ? "border-red-400 focus:border-secondary"
             : "focus:border-secondary"
-        } rounded-md shadow-sm focus:outline-none focus:ring-0`}
+        } 
+        disabled:opacity-50 disabled:bg-gray-100 disabled:border-gray-300
+        rounded-md shadow-sm focus:outline-none focus:ring-0`}
+        disabled={disabled}
         {...rest}
       />
       {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
