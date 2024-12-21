@@ -52,6 +52,7 @@ function RegistrationComponent() {
     register,
     handleSubmit,
     setValue,
+    setError,
     formState: { errors },
     watch,
   } = methods;
@@ -90,23 +91,31 @@ function RegistrationComponent() {
             <SelectComponent
               label="Select Honorific"
               menu={HonorificOptions}
-              onChange={(item) =>
+              onChange={(item) => {
                 setValue(
                   "honorific",
                   item.value as RegistrationSchemaType["honorific"]
-                )
-              }
+                );
+                setError("honorific", {
+                  type: "manual",
+                  message: "",
+                });
+              }}
               error={errors.honorific?.message}
             />
             <SelectComponent
               label="Select Gender"
               menu={genderOptions}
-              onChange={(item) =>
+              onChange={(item) => {
                 setValue(
                   "gender",
                   item.value as RegistrationSchemaType["gender"]
-                )
-              }
+                );
+                setError("gender", {
+                  type: "manual",
+                  message: "",
+                });
+              }}
               error={errors.gender?.message}
             />
           </div>
