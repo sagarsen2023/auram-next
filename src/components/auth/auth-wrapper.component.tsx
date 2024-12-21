@@ -1,19 +1,14 @@
 "use client";
 
-import TextInputComponent from "@/components/base-contact-form/text-input.component";
-import PrimaryButtonCOmponent from "@/components/buttons/primary-button.component";
-import Link from "next/link";
 import React from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoLockClosedOutline } from "react-icons/io5";
+import LoginComponent from "./login-component";
 
 function AuthWrapper() {
   return (
-    <div className=" flex">
-      <div
-        className="w-1/2 relative bg-gray-100 
-                      flex items-center justify-center p-12  overflow-hidden"
-      >
+    <div className="md:flex">
+      <div className="w-full relative bg-gray-100 flex items-center justify-center p-12 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-[-10%] left-[-10%] w-96 h-96 bg-yellow-500 rotate-45 rounded-full"></div>
           <div className="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-yellow-300 rotate-45 rounded-full"></div>
@@ -45,43 +40,7 @@ function AuthWrapper() {
           </div>
         </div>
       </div>
-      <div className="w-1/2 flex items-center justify-center bg-white p-12">
-        <div className="w-full max-w-md">
-          <div className=" mb-8">
-            <h2 className="text-3xl font-bold text-gray-800">
-              Welcome to Auram!
-            </h2>
-            <p className="text-gray-600 mt-2">
-              Enter your phone number to get started
-            </p>
-          </div>
-
-          <form className="space-y-4">
-            <div className="">
-              <div>
-                <TextInputComponent
-                  label="Phone Number (Required)"
-                  placeholder="Enter 10 digit mobile number"
-                />
-              </div>
-              <div className="mt-4">
-                <PrimaryButtonCOmponent>Request OTP</PrimaryButtonCOmponent>
-              </div>
-
-              <p className="text-gray-600 mt-6">
-                By continuing, I agree to{" "}
-                <Link href={""} className="text-yellow-600">
-                  Terms of Use
-                </Link>{" "}
-                &{" "}
-                <Link href={""} className="text-yellow-600">
-                  Privacy Policy
-                </Link>
-              </p>
-            </div>
-          </form>
-        </div>
-      </div>
+      <LoginComponent />
     </div>
   );
 }
