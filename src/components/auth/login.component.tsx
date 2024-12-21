@@ -12,6 +12,8 @@ import {
 import { authAPI } from "@/services/auth.service";
 import emailOrPhoneValidator from "@/utils/email-or-phone-validator";
 import { setAuthToken, setUserData } from "@/utils/token-store";
+import RegistrationComponent from "./registration.component";
+import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
 
 function LoginComponent({ onComplete }: { onComplete?: () => void }) {
   const [loading, setLoading] = useState(false);
@@ -23,7 +25,7 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
     otp: null,
   });
   const [currentState, setCurrentState] = useState<
-    "email-or-phone-input" | "otp-input"
+    "email-or-phone-input" | "otp-input" | "register"
   >("email-or-phone-input");
 
   const getOtp = async () => {
@@ -121,42 +123,63 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
         </div>
 
         <div className="">
-          <div>
-            <TextInputComponent
-              label="Phone Number or Email"
-              placeholder="Enter your phone number or email"
-              disabled={currentState !== "email-or-phone-input"}
-              onChange={(e) => {
-                setCredentials({
-                  ...credentials,
-                  emailOrPhone: e.target.value,
-                });
-              }}
-            />
-            {currentState === "otp-input" && (
-              <div className="mt-2">
-                <TextInputComponent
-                  label="OTP"
-                  placeholder="Enter OTP"
-                  onChange={(e) => {
-                    setCredentials({
-                      ...credentials,
-                      otp: e.target.value,
-                    });
-                  }}
-                />
+          {currentState === "register" ? (
+            // Registration form
+            <RegistrationComponent />
+          ) : (
+            // Login and OTP input
+            <div>
+              <TextInputComponent
+                label="Phone Number or Email"
+                placeholder="Enter your phone number or email"
+                disabled={currentState !== "email-or-phone-input"}
+                onChange={(e) => {
+                  setCredentials({
+                    ...credentials,
+                    emailOrPhone: e.target.value,
+                  });
+                }}
+              />
+              {currentState === "otp-input" && (
+                <div className="mt-2">
+                  <TextInputComponent
+                    label="OTP"
+                    placeholder="Enter OTP"
+                    onChange={(e) => {
+                      setCredentials({
+                        ...credentials,
+                        otp: e.target.value,
+                      });
+                    }}
+                  />
+                </div>
+              )}
+
+              <div className="mt-4">
+                <PrimaryButtonCOmponent
+                  disabled={loading}
+                  isLoading={loading}
+                  onClick={handleButtonClick}
+                >
+                  Request OTP
+                </PrimaryButtonCOmponent>
               </div>
-            )}
-          </div>
-          <div className="mt-4">
-            <PrimaryButtonCOmponent
-              disabled={loading}
-              isLoading={loading}
-              onClick={handleButtonClick}
-            >
-              Request OTP
-            </PrimaryButtonCOmponent>
-          </div>
+            </div>
+          )}
+
+          <button
+            className="w-full text-center text-yellow-600 mt-2 flex justify-center items-center gap-2"
+            onClick={() => {
+              setCurrentState(
+                currentState === "register"
+                  ? "email-or-phone-input"
+                  : "register"
+              );
+            }}
+          >
+            <GiDiamonds /> {currentState === "register" ? "Login" : "Register"}{" "}
+            <GiStrikingDiamonds />
+          </button>
 
           <p className="text-gray-600 mt-6">
             By continuing, I agree to{" "}

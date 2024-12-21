@@ -13,6 +13,7 @@ import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchBarComponent from "./search-bar.component";
 import SubNavComponent from "./sub-nav.component";
 import CustomerModel from "@/models/common/customer-model";
+import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 // import dynamic from "next/dynamic";
 // const ThemeSwitchButtonComponent = dynamic(
 //   () => import("../components/buttons/theme-switch-button.component"),
@@ -127,6 +128,21 @@ function NavBarComponent() {
             <Link href="/contact">
               <span>CONTACT US</span>
             </Link>
+          </div>
+
+          <div>
+            <div className="flex gap-4 items-center mt-8">
+              <PrimaryButtonCOmponent onClick={handleModalState}>
+                <CiUser className="text-2xl" />
+              </PrimaryButtonCOmponent>
+              <PrimaryButtonCOmponent>
+                <CiHeart className="text-2xl" />
+              </PrimaryButtonCOmponent>
+              <PrimaryButtonCOmponent>
+                <IoIosNotificationsOutline className="text-2xl" />
+              </PrimaryButtonCOmponent>
+              <CartButtonComponent />
+            </div>
           </div>
         </div>
       </div>
