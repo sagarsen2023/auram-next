@@ -2,13 +2,15 @@
 
 import Image from "next/image";
 import React, { useState } from "react";
-import { CiMenuFries } from "react-icons/ci";
-import auramLogoWithText from "../../public/images/auram-logo-with-text.webp";
+import { CiHeart, CiMenuFries, CiUser } from "react-icons/ci";
+import auramLogoWithText from "../../../public/images/auram-logo-with-text.webp";
 import CartButtonComponent from "../buttons/cart-button.component";
 import Link from "next/link";
 import { FaXmark } from "react-icons/fa6";
 import ModalComponent from "../ui/modal.component";
 import AuthWrapper from "../auth/auth-wrapper.component";
+import { IoIosNotificationsOutline } from "react-icons/io";
+import SearchBarComponent from "./search-bar.component";
 // import dynamic from "next/dynamic";
 // const ThemeSwitchButtonComponent = dynamic(
 //   () => import("../components/buttons/theme-switch-button.component"),
@@ -24,17 +26,24 @@ function NavBarComponent() {
     <>
       <div className="flex justify-center shadow-md fixed w-full bg-white/80 backdrop-blur-lg dark:bg-black z-[9999]">
         <div className="w-full px-4 lg:max-w-8xl flex justify-between items-center p-2 dark:bg-black dark:text-black">
-          <Link href="/">
-            <Image
-              src={auramLogoWithText}
-              alt="Auram Logo with text"
-              className="w-auto h-12 lg:h-16"
-            />
-          </Link>
-          {/* <ThemeSwitchButtonComponent /> */}
+          {/* Auram Logo */}
+          <div className="w-1/3">
+            <Link href="/">
+              <Image
+                src={auramLogoWithText}
+                alt="Auram Logo with text"
+                className="w-auto h-12 lg:h-16 min-w-36"
+              />
+            </Link>
+          </div>
+
+          {/* Search Bar */}
+          <SearchBarComponent />
+
+          {/* Other redirection */}
           <div className="flex items-center gap-4 text-2xl">
             <div className="hidden md:flex gap-6 items-center font-[300] text-[14px] mr-8">
-              <Link href="/products">
+              {/* <Link href="/products">
                 <span>PRODUCTS</span>
               </Link>
               <Link href="/collections">
@@ -48,11 +57,19 @@ function NavBarComponent() {
               </Link>
               <Link href="/contact">
                 <span>CONTACT US</span>
-              </Link>
-              <span onClick={handleModalState}>Sign In</span>
-            </div>
+              </Link> */}
+              <button onClick={handleModalState}>
+                <CiUser className="text-2xl" />
+              </button>
+              <button>
+                <CiHeart className="text-2xl" />
+              </button>
+              <button>
+                <IoIosNotificationsOutline className="text-2xl" />
+              </button>
 
-            <CartButtonComponent />
+              <CartButtonComponent />
+            </div>
             {/* Menu Toggler */}
             <div
               className={`transition-all duration-500 ${
