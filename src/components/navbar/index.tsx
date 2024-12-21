@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { CiHeart, CiMenuFries, CiUser } from "react-icons/ci";
 import auramLogoWithText from "../../../public/images/auram-logo-with-text.webp";
 import CartButtonComponent from "../buttons/cart-button.component";
@@ -12,6 +12,7 @@ import AuthWrapper from "../auth/auth-wrapper.component";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchBarComponent from "./search-bar.component";
 import SubNavComponent from "./sub-nav.component";
+import CustomerModel from "@/models/common/customer-model";
 // import dynamic from "next/dynamic";
 // const ThemeSwitchButtonComponent = dynamic(
 //   () => import("../components/buttons/theme-switch-button.component"),
@@ -21,8 +22,16 @@ import SubNavComponent from "./sub-nav.component";
 function NavBarComponent() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [userName, setUserName] = useState<string | null>(null);
   const handleModalState = () => setIsModalOpen((prev) => !prev);
+
+  useEffect(() => {
+    const userData: CustomerModel = JSON.parse(
+      localStorage.getItem("userData") ?? "{}"
+    );
+    setUserName(userData.fullName);
+  }, [handleModalState]);
+
   return (
     <>
       <div className="shadow-md fixed w-full z-[9999]">
@@ -44,9 +53,13 @@ function NavBarComponent() {
             {/* Other redirection */}
             <div className="flex items-center gap-4 text-2xl">
               <div className="hidden md:flex gap-6 items-center font-[300] text-[14px] mr-8">
-                <button onClick={handleModalState}>
-                  <CiUser className="text-2xl" />
-                </button>
+                {userName ? (
+                  <span>{userName}</span>
+                ) : (
+                  <button onClick={handleModalState}>
+                    <CiUser className="text-2xl" />
+                  </button>
+                )}
                 <button>
                   <CiHeart className="text-2xl" />
                 </button>
