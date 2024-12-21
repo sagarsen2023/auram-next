@@ -12,7 +12,7 @@ function TextInputComponent({
   ...rest
 }: TextInputProps) {
   return (
-    <>
+    <div>
       {label && (
         <label
           htmlFor="name"
@@ -33,7 +33,7 @@ function TextInputComponent({
         {...rest}
       />
       {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
-    </>
+    </div>
   );
 }
 
