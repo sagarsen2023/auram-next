@@ -119,7 +119,7 @@ function NavBarComponent() {
         onClose={handleModalState}
         size="3xl"
       >
-        <AuthWrapper />
+        <AuthWrapper onComplete={handleModalState} />
       </ModalComponent>
     </>
   );

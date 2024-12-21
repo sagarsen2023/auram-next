@@ -12,7 +12,7 @@ import {
 import { authAPI } from "@/services/auth.service";
 import emailOrPhoneValidator from "@/utils/email-or-phone-validator";
 
-function LoginComponent() {
+function LoginComponent({ onComplete }: { onComplete?: () => void }) {
   const [loading, setLoading] = useState(false);
   const [credentials, setCredentials] = useState<{
     emailOrPhone: string | null;
@@ -82,7 +82,15 @@ function LoginComponent() {
         toast.error("Invalid OTP");
         return;
       }
+      if (response.data.isNewUser) {
+        // Redirect to signup page
+        return;
+      }
+      // Store token in local storage and cookie
       toast.success("You have successfully logged in");
+      if (onComplete) {
+        onComplete();
+      }
     } catch {
       toast.error("Something went wrong");
     } finally {

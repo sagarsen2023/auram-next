@@ -5,7 +5,7 @@ import { FaRegHeart } from "react-icons/fa6";
 import { IoLockClosedOutline } from "react-icons/io5";
 import LoginComponent from "./login-component";
 
-function AuthWrapper() {
+function AuthWrapper({ onComplete }: { onComplete?: () => void }) {
   return (
     <div className="md:flex">
       <div className="w-full relative bg-gray-100 flex items-center justify-center p-12 overflow-hidden">
@@ -40,7 +40,7 @@ function AuthWrapper() {
           </div>
         </div>
       </div>
-      <LoginComponent />
+      <LoginComponent onComplete={onComplete} />
     </div>
   );
 }
