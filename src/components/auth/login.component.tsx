@@ -32,8 +32,6 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
     const { isEmail, isPhone } = emailOrPhoneValidator(
       credentials.emailOrPhone ?? ""
     );
-    console.log("isEmail", isEmail);
-    console.log("isPhone", isPhone);
     if (!isEmail && !isPhone) {
       toast.error("Invalid email or phone number");
       return;

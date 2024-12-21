@@ -5,7 +5,7 @@ import {
   RegistrationSchemaType,
 } from "@/validators/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect } from "react";
+import React from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import TextInputComponent from "../ui/form-inputs/text-input.component";
 import PrimaryButtonComponent from "../buttons/primary-button.component";
@@ -56,10 +56,6 @@ function RegistrationComponent() {
     formState: { errors },
     watch,
   } = methods;
-
-  useEffect(() => {
-    console.log("errors", errors);
-  }, [errors]);
 
   const onSubmit = (data: RegistrationSchemaType) => {
     console.log("data", data);
