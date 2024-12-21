@@ -8,7 +8,6 @@ import ShippingInfoComponent from "@/components/home-components/shipping-info.co
 import ConnectWithUsComponent from "@/components/home-components/connect-with-us.component";
 
 function Page() {
-  const baseSectionClassNames = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8";
   return (
     <div>
       {/* This loader will display for the first time */}
@@ -19,13 +18,13 @@ function Page() {
 
       {/* Collection */}
       <div className="w-full flex-col items-center bg-gray-50">
-        <div className={`${baseSectionClassNames}`}>
+        <div className={`base-section`}>
           <CollectionComponent />
         </div>
       </div>
 
       {/* New Arrival and Featured Items */}
-      <div className={`${baseSectionClassNames} space-y-5 pb-20`}>
+      <div className={`base-section space-y-5 pb-20`}>
         <NewArrivalComponent />
         <FeaturedItemComponent />
       </div>
@@ -34,7 +33,7 @@ function Page() {
       <ShippingInfoComponent />
 
       {/* Connect with us */}
-      <div className={baseSectionClassNames}>
+      <div className="base-section">
         <ConnectWithUsComponent />
       </div>
     </div>
