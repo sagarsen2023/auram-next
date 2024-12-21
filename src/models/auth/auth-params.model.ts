@@ -4,3 +4,7 @@ export interface LoginParams {
   type: "PHONE" | "EMAIL";
   email?: string;
 }
+
+export interface OtpVerificationParams extends LoginParams {
+  otp: string;
+}
