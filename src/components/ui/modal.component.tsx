@@ -80,6 +80,8 @@ const ModalComponent: React.FC<ModalProps> = ({
               : "opacity-0 translate-y-4 scale-95"
           }
           relative
+          max-h-[90vh]
+          overflow-y-auto
         `}
         onClick={(e) => e.stopPropagation()}
       >
