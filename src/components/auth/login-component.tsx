@@ -11,6 +11,7 @@ import {
 } from "@/models/auth/auth-params.model";
 import { authAPI } from "@/services/auth.service";
 import emailOrPhoneValidator from "@/utils/email-or-phone-validator";
+import { setAuthToken, setUserData } from "@/utils/token-store";
 
 function LoginComponent({ onComplete }: { onComplete?: () => void }) {
   const [loading, setLoading] = useState(false);
@@ -86,7 +87,8 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
         // Redirect to signup page
         return;
       }
-      // Store token in local storage and cookie
+      setAuthToken(response.data.token);
+      setUserData(response.data.customer);
       toast.success("You have successfully logged in");
       if (onComplete) {
         onComplete();
