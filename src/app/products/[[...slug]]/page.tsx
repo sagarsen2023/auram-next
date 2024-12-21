@@ -8,7 +8,6 @@ import BreadCrumbComponent, {
   BreadCrumbComponentProps,
 } from "@/components/ui/breadcrumb.component";
 import ProductListingComponent from "@/components/product-listing-components";
-import { basePageClassNames } from "@/constants/universal-css";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
@@ -31,9 +30,7 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
       }
     >
-      <div
-        className={`${basePageClassNames} space-y-2`}
-      >
+      <div className={`base-page space-y-2`}>
         {/* BreadCrumb */}
         <BreadCrumbComponent breadCrumbItems={breadCrumbs} />
 
