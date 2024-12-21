@@ -14,7 +14,7 @@ function SearchBarComponent() {
         <input
           placeholder="Search for products"
           type="text"
-          className="px-3 py-2 outline-none rounded-md focus:ring-0 placeholder:font-thin"
+          className="w-full bg-transparent px-3 py-2 outline-none rounded-md focus:ring-0 placeholder:font-thin"
           style={{ border: "none", boxShadow: "none" }}
         />
       </div>

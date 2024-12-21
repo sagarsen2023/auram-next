@@ -24,26 +24,27 @@ function NavBarComponent() {
   const handleModalState = () => setIsModalOpen((prev) => !prev);
   return (
     <>
-      <div className="flex justify-center shadow-md fixed w-full bg-white/80 backdrop-blur-lg dark:bg-black z-[9999]">
-        <div className="w-full px-4 lg:max-w-8xl flex justify-between items-center p-2 dark:bg-black dark:text-black">
-          {/* Auram Logo */}
-          <div className="w-1/3">
-            <Link href="/">
-              <Image
-                src={auramLogoWithText}
-                alt="Auram Logo with text"
-                className="w-auto h-12 lg:h-16 min-w-36"
-              />
-            </Link>
-          </div>
+      <div className="shadow-md fixed w-full z-[9999]">
+        <div className="flex justify-center bg-white">
+          <div className="w-full px-4 lg:max-w-8xl flex justify-between items-center p-2">
+            {/* Auram Logo */}
+            <div className="w-1/3">
+              <Link href="/">
+                <Image
+                  src={auramLogoWithText}
+                  alt="Auram Logo with text"
+                  className="w-auto h-12 lg:h-16 min-w-36"
+                />
+              </Link>
+            </div>
 
-          {/* Search Bar */}
-          <SearchBarComponent />
+            {/* Search Bar */}
+            <SearchBarComponent />
 
-          {/* Other redirection */}
-          <div className="flex items-center gap-4 text-2xl">
-            <div className="hidden md:flex gap-6 items-center font-[300] text-[14px] mr-8">
-              {/* <Link href="/products">
+            {/* Other redirection */}
+            <div className="flex items-center gap-4 text-2xl">
+              <div className="hidden md:flex gap-6 items-center font-[300] text-[14px] mr-8">
+                {/* <Link href="/products">
                 <span>PRODUCTS</span>
               </Link>
               <Link href="/collections">
@@ -58,40 +59,46 @@ function NavBarComponent() {
               <Link href="/contact">
                 <span>CONTACT US</span>
               </Link> */}
-              <button onClick={handleModalState}>
-                <CiUser className="text-2xl" />
-              </button>
-              <button>
-                <CiHeart className="text-2xl" />
-              </button>
-              <button>
-                <IoIosNotificationsOutline className="text-2xl" />
-              </button>
+                <button onClick={handleModalState}>
+                  <CiUser className="text-2xl" />
+                </button>
+                <button>
+                  <CiHeart className="text-2xl" />
+                </button>
+                <button>
+                  <IoIosNotificationsOutline className="text-2xl" />
+                </button>
 
-              <CartButtonComponent />
+                <CartButtonComponent />
+              </div>
+              {/* Menu Toggler */}
+              <div
+                className={`transition-all duration-500 ${
+                  menuOpen ? "rotate-180" : "rotate-0"
+                } `}
+              >
+                {menuOpen ? (
+                  <FaXmark
+                    className="md:hidden"
+                    onClick={() => {
+                      setMenuOpen(!menuOpen);
+                    }}
+                  />
+                ) : (
+                  <CiMenuFries
+                    className="md:hidden"
+                    onClick={() => {
+                      setMenuOpen(!menuOpen);
+                    }}
+                  />
+                )}
+              </div>
             </div>
-            {/* Menu Toggler */}
-            <div
-              className={`transition-all duration-500 ${
-                menuOpen ? "rotate-180" : "rotate-0"
-              } `}
-            >
-              {menuOpen ? (
-                <FaXmark
-                  className="md:hidden"
-                  onClick={() => {
-                    setMenuOpen(!menuOpen);
-                  }}
-                />
-              ) : (
-                <CiMenuFries
-                  className="md:hidden"
-                  onClick={() => {
-                    setMenuOpen(!menuOpen);
-                  }}
-                />
-              )}
-            </div>
+          </div>
+        </div>
+        <div className="w-full bg-white/80 border-t backdrop-blur-xl flex justify-center">
+          <div className="w-full px-4 lg:max-w-8xl flex justify-between items-center p-2">
+            Hi
           </div>
         </div>
       </div>
