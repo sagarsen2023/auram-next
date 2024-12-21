@@ -12,6 +12,7 @@ import dynamic from "next/dynamic";
 import { toast } from "sonner";
 import { getItems } from "@/app/products/utils";
 import { MdOutlineReadMore } from "react-icons/md";
+import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
 const getRandomTagline = dynamic(() => import("@/constants/jewelry-taglines"), {
   ssr: false,
 });
@@ -61,9 +62,9 @@ function ProductListingComponent({
       <div className="w-full">
         {itemData && itemData.length ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div className="col-span-full w-full justify-between items-center hidden lg:flex">
-              <p className="text-xl">
-                <RandomTaglineComponent />
+            <div className="col-span-full w-full justify-between items-center hidden lg:flex mt-2">
+              <p className="text-xl flex items-center gap-3">
+                <GiDiamonds /> <RandomTaglineComponent /> <GiStrikingDiamonds />
               </p>
               {sortOptions && sortOptions.length > 0 && (
                 <SortByMenuComponent
