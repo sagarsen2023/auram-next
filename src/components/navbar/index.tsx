@@ -29,15 +29,14 @@ function NavBarComponent() {
         <div className="flex justify-center bg-white">
           <div className="w-full px-4 lg:max-w-8xl flex justify-between items-center p-2">
             {/* Auram Logo */}
-            <div className="w-1/3">
-              <Link href="/">
-                <Image
-                  src={auramLogoWithText}
-                  alt="Auram Logo with text"
-                  className="w-auto h-12 lg:h-16 min-w-36"
-                />
-              </Link>
-            </div>
+
+            <Link href="/">
+              <Image
+                src={auramLogoWithText}
+                alt="Auram Logo with text"
+                className="w-auto h-12 lg:h-16"
+              />
+            </Link>
 
             {/* Search Bar */}
             <SearchBarComponent />
