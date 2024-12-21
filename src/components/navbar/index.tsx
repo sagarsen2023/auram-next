@@ -4,24 +4,22 @@ import Image from "next/image";
 import React, { useState } from "react";
 import { CiMenuFries } from "react-icons/ci";
 import auramLogoWithText from "../../public/images/auram-logo-with-text.webp";
-import CartButtonComponent from "./buttons/cart-button.component";
+import CartButtonComponent from "../buttons/cart-button.component";
 import Link from "next/link";
 import { FaXmark } from "react-icons/fa6";
-import ModalComponent from "./ui/modal.component";
-import RegistrationComponent from "./auth/registration/registration.component";
+import ModalComponent from "../ui/modal.component";
+import AuthWrapper from "../auth/auth-wrapper.component";
 // import dynamic from "next/dynamic";
 // const ThemeSwitchButtonComponent = dynamic(
 //   () => import("../components/buttons/theme-switch-button.component"),
 //   { ssr: false }
 // );
 
-// TODO: If required change the text style
-
 function NavBarComponent() {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isModalOpen, setModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleModalState = () => setModalOpen((prev) => !prev);
+  const handleModalState = () => setIsModalOpen((prev) => !prev);
   return (
     <>
       <div className="flex justify-center shadow-md fixed w-full bg-white/80 backdrop-blur-lg dark:bg-black z-[9999]">
@@ -112,7 +110,7 @@ function NavBarComponent() {
         onClose={handleModalState}
         size="3xl"
       >
-        <RegistrationComponent />
+        <AuthWrapper />
       </ModalComponent>
     </>
   );
