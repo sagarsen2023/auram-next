@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import TextInputComponent from "../base-contact-form/text-input.component";
+import TextInputComponent from "../ui/form-inputs/text-input.component";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import Link from "next/link";
 import { toast } from "sonner";

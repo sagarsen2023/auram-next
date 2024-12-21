@@ -7,8 +7,8 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
-import TextInputComponent from "./text-input.component";
-import TextAreaComponent from "./text-area.component";
+import TextInputComponent from "../ui/form-inputs/text-input.component";
+import TextAreaComponent from "../ui/form-inputs/text-area.component";
 import { contactAPI } from "@/services/contact.service";
 import { ContactUsParams } from "@/models/contact/contact-us.model";
 import { toast } from "sonner";
