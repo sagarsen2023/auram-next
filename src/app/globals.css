@@ -72,3 +72,6 @@ ol {
 .contentbase__section a {
   color: #2196f3;
 }
+.base-page {
+  @apply max-w-8xl mx-auto px-4 py-16 min-h-screen;
+}

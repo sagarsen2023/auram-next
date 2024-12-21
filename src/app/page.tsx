@@ -6,9 +6,9 @@ import NewArrivalComponent from "@/components/home-components/new-arrival.compon
 import FeaturedItemComponent from "@/components/home-components/featured-items.component";
 import ShippingInfoComponent from "@/components/home-components/shipping-info.component";
 import ConnectWithUsComponent from "@/components/home-components/connect-with-us.component";
-import { baseSectionClassNames } from "@/constants/universal-css";
 
 function Page() {
+  const baseSectionClassNames = "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8";
   return (
     <div>
       {/* This loader will display for the first time */}
