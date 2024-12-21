@@ -11,6 +11,7 @@ import ModalComponent from "../ui/modal.component";
 import AuthWrapper from "../auth/auth-wrapper.component";
 import { IoIosNotificationsOutline } from "react-icons/io";
 import SearchBarComponent from "./search-bar.component";
+import SubNavComponent from "./sub-nav.component";
 // import dynamic from "next/dynamic";
 // const ThemeSwitchButtonComponent = dynamic(
 //   () => import("../components/buttons/theme-switch-button.component"),
@@ -44,21 +45,6 @@ function NavBarComponent() {
             {/* Other redirection */}
             <div className="flex items-center gap-4 text-2xl">
               <div className="hidden md:flex gap-6 items-center font-[300] text-[14px] mr-8">
-                {/* <Link href="/products">
-                <span>PRODUCTS</span>
-              </Link>
-              <Link href="/collections">
-                <span>COLLECTIONS</span>
-              </Link>
-              <Link href="/bespoke">
-                <span>BESPOKE</span>
-              </Link>
-              <Link href="/about">
-                <span>ABOUT US</span>
-              </Link>
-              <Link href="/contact">
-                <span>CONTACT US</span>
-              </Link> */}
                 <button onClick={handleModalState}>
                   <CiUser className="text-2xl" />
                 </button>
@@ -96,9 +82,9 @@ function NavBarComponent() {
             </div>
           </div>
         </div>
-        <div className="w-full bg-white/80 border-t backdrop-blur-xl flex justify-center">
-          <div className="w-full px-4 lg:max-w-8xl flex justify-between items-center p-2">
-            Hi
+        <div className="w-full bg-white/80 border-t backdrop-blur-xl justify-center hidden md:flex">
+          <div className="w-full px-4 lg:max-w-8xl p-2">
+            <SubNavComponent />
           </div>
         </div>
       </div>
