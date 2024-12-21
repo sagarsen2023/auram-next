@@ -1,8 +1,7 @@
-export interface GetOtpResponse {
-    error: boolean;
+import BaseApiResponse from "../common/base-api-response.model";
+
+export interface GetOtpResponse extends BaseApiResponse {
     status: boolean;
-    statusCode: number;
-    responseTimestamp: string;
     data: {
       success: boolean;
       message: string;

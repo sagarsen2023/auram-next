@@ -7,6 +7,7 @@ import Link from "next/link";
 import { toast } from "sonner";
 import { LoginParams } from "@/models/auth/auth-params.model";
 import { authAPI } from "@/services/auth.service";
+import emailOrPhoneValidator from "@/utils/email-or-phone-validator";
 
 function LoginComponent() {
   const [loading, setLoading] = useState(false);
@@ -22,14 +23,14 @@ function LoginComponent() {
   >("email-or-phone-input");
 
   const getOtp = async () => {
-    const isEmail = /\S+@\S+\.\S+/.test(credentials.emailOrPhone ?? "");
-    let isPhone = /^\d{10}$/.test(credentials.emailOrPhone ?? "");
-    if (!isEmail) {
-      isPhone = /^\d{10}$/.test(credentials.emailOrPhone ?? "");
-      if (!isPhone) {
-        toast.error("Invalid phone number or email");
-        return;
-      }
+    const { isEmail, isPhone } = emailOrPhoneValidator(
+      credentials.emailOrPhone ?? ""
+    );
+    console.log("isEmail", isEmail);
+    console.log("isPhone", isPhone);
+    if (!isEmail && !isPhone) {
+      toast.error("Invalid email or phone number");
+      return;
     }
     const formData: LoginParams = {
       countryCode: "91",
@@ -48,18 +49,26 @@ function LoginComponent() {
         return;
       }
       setCurrentState("otp-input");
-      toast.success(response.data.message);
+      toast.success(`OTP sent to your ${isEmail ? "email" : "phone"}`);
     } catch {
       toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
-    toast.success(`OTP sent to your ${isEmail ? "email" : "phone"}`);
+  };
+
+  const verifyOtp = async () => {
+    if (!credentials.otp) {
+      toast.error("Please enter OTP");
+      return;
+    }
   };
 
   const handleButtonClick = () => {
     if (currentState === "email-or-phone-input") {
       getOtp();
+    } else {
+      verifyOtp();
     }
   };
 
@@ -88,6 +97,20 @@ function LoginComponent() {
                 });
               }}
             />
+            {currentState === "otp-input" && (
+              <div className="mt-2">
+                <TextInputComponent
+                  label="OTP"
+                  placeholder="Enter OTP"
+                  onChange={(e) => {
+                    setCredentials({
+                      ...credentials,
+                      otp: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+            )}
           </div>
           <div className="mt-4">
             <PrimaryButtonCOmponent
