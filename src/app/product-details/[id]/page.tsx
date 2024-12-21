@@ -36,9 +36,9 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     },
   ];
   const allItemImages: MediaResponse[] = [
-    itemData?.thumbnail ?? [],
+    ...(itemData?.thumbnail ? [itemData.thumbnail] : []),
     ...(itemData?.itemMedia ?? []),
-    itemData?.hoverImage,
+    ...(itemData?.hoverImage ? [itemData.hoverImage] : []),
   ];
   return (
     <Suspense fallback={<DefaultPageLoaderComponent />}>
