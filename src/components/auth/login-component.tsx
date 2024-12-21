@@ -5,7 +5,10 @@ import TextInputComponent from "../base-contact-form/text-input.component";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import Link from "next/link";
 import { toast } from "sonner";
-import { LoginParams } from "@/models/auth/auth-params.model";
+import {
+  LoginParams,
+  OtpVerificationParams,
+} from "@/models/auth/auth-params.model";
 import { authAPI } from "@/services/auth.service";
 import emailOrPhoneValidator from "@/utils/email-or-phone-validator";
 
@@ -61,6 +64,29 @@ function LoginComponent() {
     if (!credentials.otp) {
       toast.error("Please enter OTP");
       return;
+    }
+    const { isEmail, isPhone } = emailOrPhoneValidator(
+      credentials.emailOrPhone ?? ""
+    );
+    const formData: OtpVerificationParams = {
+      countryCode: "91",
+      phone: isPhone ? credentials.emailOrPhone ?? "" : "",
+      type: isEmail ? "EMAIL" : "PHONE",
+      email: isEmail ? credentials.emailOrPhone ?? "" : "",
+      otp: credentials.otp ?? "",
+    };
+    try {
+      setLoading(true);
+      const response = await authAPI.verifyOtp(formData);
+      if (response.error) {
+        toast.error("Invalid OTP");
+        return;
+      }
+      toast.success("You have successfully logged in");
+    } catch {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
