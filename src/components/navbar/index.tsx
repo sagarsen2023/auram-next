@@ -23,14 +23,17 @@ function NavBarComponent() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [userName, setUserName] = useState<string | null>(null);
-  const handleModalState = () => setIsModalOpen((prev) => !prev);
+  const handleModalState = React.useCallback(
+    () => setIsModalOpen((prev) => !prev),
+    []
+  );
 
   useEffect(() => {
     const userData: CustomerModel = JSON.parse(
       localStorage.getItem("userData") ?? "{}"
     );
     setUserName(userData.fullName);
-  }, [handleModalState]);
+  }, [isModalOpen]);
 
   return (
     <>
