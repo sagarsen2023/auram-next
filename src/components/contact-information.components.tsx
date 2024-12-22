@@ -22,7 +22,7 @@ async function ContactCards() {
     const contactInfoResponse = await contactAPI.getAuramContactInfo();
     contactInfoData = contactInfoResponse.data;
   } catch {
-    console.error("Error fetching collections");
+    console.error("Error fetching contact info");
   }
 
   return (
