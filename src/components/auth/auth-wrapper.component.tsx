@@ -29,12 +29,16 @@ function AuthWrapper({ onComplete }: { onComplete?: () => void }) {
                 className="mx-auto mb-2 text-yellow-600"
                 size={36}
               />
-              <p className="text-xl font-bold ">100% Secure</p>
+              <p className="text-sm md:text-lg xl:text-xl font-bold">
+                100% Secure
+              </p>
               <p className="text-sm">Private Registration</p>
             </div>
             <div className="bg-white/30 p-4 rounded-lg text-center">
               <FaRegHeart className="mx-auto mb-2 text-yellow-600" size={36} />
-              <p className="text-xl font-bold ">Personalized</p>
+              <p className="text-sm md:text-lg xl:text-xl font-bold">
+                Personalized
+              </p>
               <p className="text-sm ">Curated Collections</p>
             </div>
           </div>
