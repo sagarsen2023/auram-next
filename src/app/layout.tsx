@@ -31,7 +31,7 @@ export default function RootLayout({
         <Toaster richColors theme="light" position="top-center" />
         {/* <Providers> */}
         <NavBarComponent />
-        <div className="mt-16 lg:mt-20">{children}</div>
+        <div className="mt-16 lg:mt-32">{children}</div>
         <FooterComponent />
         {/* </Providers> */}
       </body>
