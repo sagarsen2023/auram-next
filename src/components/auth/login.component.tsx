@@ -13,7 +13,6 @@ import { authAPI } from "@/services/auth.service";
 import emailOrPhoneValidator from "@/utils/email-or-phone-validator";
 import { setAuthToken, setUserData } from "@/utils/token-store";
 import RegistrationComponent from "./registration.component";
-import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
 import SelectComponent from "../ui/form-inputs/select.component";
 import { countryCodeOptions } from "@/constants/generic-select-options";
 
@@ -131,7 +130,7 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
         <div className="">
           {currentState === "register" ? (
             // Registration form
-            <RegistrationComponent />
+            <RegistrationComponent onComplete={onComplete} />
           ) : (
             // Login and OTP input
             <div>
@@ -190,20 +189,6 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
               </div>
             </div>
           )}
-
-          <button
-            className="w-full text-center text-yellow-600 mt-2 flex justify-center items-center gap-2"
-            onClick={() => {
-              setCurrentState(
-                currentState === "register"
-                  ? "email-or-phone-input"
-                  : "register"
-              );
-            }}
-          >
-            <GiDiamonds /> {currentState === "register" ? "Login" : "Register"}{" "}
-            <GiStrikingDiamonds />
-          </button>
 
           <p className="text-gray-600 mt-6">
             By continuing, I agree to{" "}

@@ -16,8 +16,9 @@ import DatePickerComponent from "../ui/form-inputs/date-picker.component";
 import { countryCodeOptions } from "@/constants/generic-select-options";
 import { authAPI } from "@/services/auth.service";
 import { toast } from "sonner";
+import { setAuthToken, setUserData } from "@/utils/token-store";
 
-function RegistrationComponent() {
+function RegistrationComponent({ onComplete }: { onComplete?: () => void }) {
   const [loading, setLoading] = useState(false);
   const genderOptions: SelectOption[] = [
     {
@@ -34,18 +35,18 @@ function RegistrationComponent() {
     },
   ];
 
-  const HonorificOptions: SelectOption[] = [
+  const honorificOptions: SelectOption[] = [
     {
       label: "Mr",
-      value: "Mr",
+      value: "Mr.",
     },
     {
       label: "Mrs",
-      value: "Mrs",
+      value: "Mrs.",
     },
     {
       label: "Ms",
-      value: "Ms",
+      value: "Ms.",
     },
   ];
   const methods = useForm<RegistrationSchemaType>({
@@ -68,11 +69,18 @@ function RegistrationComponent() {
 
   const onSubmit = async (data: RegistrationSchemaType) => {
     localStorage.removeItem("registrationId");
-    console.log("data", data);
     try {
       setLoading(true);
       const response = await authAPI.registerCustomer(data);
-      console.log("response", response);
+      if (response.error) {
+        throw new Error("Something went wrong");
+      }
+      setAuthToken(response.data.token);
+      setUserData(response.data.customer);
+      toast.success("Registration successful");
+      if (onComplete) {
+        onComplete();
+      }
     } catch {
       toast.error("Something went wrong");
     } finally {
@@ -125,7 +133,7 @@ function RegistrationComponent() {
           <div className="flex gap-3">
             <SelectComponent
               label="Select Honorific"
-              menu={HonorificOptions}
+              menu={honorificOptions}
               onChange={(item) => {
                 setValue(
                   "honorific",
@@ -167,7 +175,12 @@ function RegistrationComponent() {
             <DatePickerComponent
               label="Date of Birth"
               selected={watch("dob") ? new Date(watch("dob")) : null}
-              onChange={(date) => setValue("dob", Array.isArray(date) ? date[0] : date ?? new Date())}
+              onChange={(date) =>
+                setValue(
+                  "dob",
+                  Array.isArray(date) ? date[0] : date ?? new Date()
+                )
+              }
               error={errors.dob?.message}
             />
 
@@ -181,7 +194,10 @@ function RegistrationComponent() {
                   : null
               }
               onChange={(date) =>
-                setValue("dateOfAnniversary", Array.isArray(date) ? date[0] : date ?? new Date())
+                setValue(
+                  "dateOfAnniversary",
+                  Array.isArray(date) ? date[0] : date ?? new Date()
+                )
               }
               error={errors.dateOfAnniversary?.message}
             />

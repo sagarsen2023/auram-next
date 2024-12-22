@@ -16,3 +16,14 @@ export interface VerifyOtpResponse extends BaseApiResponse {
     customer: CustomerModel;
   };
 }
+
+export interface RegistrationResponse extends BaseApiResponse {
+  data: {
+    _id: string;
+    token: string;
+    customer: CustomerModel;
+    createdAt: string;
+    updatedAt: string;
+    expiryAt: number;
+  };
+}
