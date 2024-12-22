@@ -84,7 +84,11 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
         return;
       }
       if (response.data.isNewUser) {
-        // Redirect to signup page
+        setCurrentState("register");
+        localStorage.setItem(
+          "registrationId",
+          response.data.registrationId ?? ""
+        );
         return;
       }
       setAuthToken(response.data.token);
