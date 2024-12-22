@@ -28,3 +28,7 @@ export const SORT_FILTERS_URL = "/items/user/sort-filter";
 // Contact Info Url
 export const CONTACT_INFO = `/general-infos`;
 export const CONTACT_US_URL = `/contact-us`;
+
+// Cart Urls
+export const ADD_TO_CART_URL = "/carts/add-to-cart";
+export const GET_CART_URL = "/carts/get-cart";
