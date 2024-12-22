@@ -73,5 +73,9 @@ ol {
   color: #2196f3;
 }
 .base-page {
-  @apply max-w-8xl mx-auto px-4 py-16 min-h-screen;
+  @apply max-w-8xl mx-auto p-4 md:py-16 min-h-screen;
+}
+
+.base-section {
+  @apply max-w-8xl mx-auto px-4 py-8;
 }

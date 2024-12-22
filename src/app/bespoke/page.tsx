@@ -2,7 +2,7 @@ import Image from "next/image";
 
 import React from "react";
 import aboutImage from "../../../public/images/about.webp";
-import BaseContactForm from "@/components/base-contact-form/base-contact-form.component";
+import BaseContactForm from "@/components/base-contact-form";
 
 function Page() {
   return (

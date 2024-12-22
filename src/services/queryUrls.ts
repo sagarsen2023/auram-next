@@ -5,6 +5,11 @@ export const IMAGE_URL =
   process.env.NEXT_PUBLIC_IMAGE_BASE_URL ??
   "https://pub-d7fc7e0204644a99b00264cba5e82690.r2.dev";
 
+// Customer Auth Urls
+export const SEND_OTP_URL = "/customer-auths/send-otp";
+export const VERIFY_OTP_URL = "/customer-auths/verify-otp";
+export const REGISTRATION_URL = "/customer-auths/registration";
+
 // Banner
 export const BANNER_URL = `/banners/user`;
 

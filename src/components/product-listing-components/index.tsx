@@ -44,7 +44,6 @@ function ProductListingComponent({
           limit: "24",
         },
       });
-      console.log("response", response);
       setItemData((prev) => [...(prev || []), ...(response?.data || [])]);
     } catch {
       toast.error("Error loading more products");

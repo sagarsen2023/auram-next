@@ -3,9 +3,9 @@
 import React from "react";
 import { FaRegHeart } from "react-icons/fa6";
 import { IoLockClosedOutline } from "react-icons/io5";
-import LoginComponent from "./login-component";
+import LoginComponent from "./login.component";
 
-function AuthWrapper() {
+function AuthWrapper({ onComplete }: { onComplete?: () => void }) {
   return (
     <div className="md:flex">
       <div className="w-full relative bg-gray-100 flex items-center justify-center p-12 overflow-hidden">
@@ -29,18 +29,22 @@ function AuthWrapper() {
                 className="mx-auto mb-2 text-yellow-600"
                 size={36}
               />
-              <p className="text-xl font-bold ">100% Secure</p>
+              <p className="text-sm md:text-lg xl:text-xl font-bold">
+                100% Secure
+              </p>
               <p className="text-sm">Private Registration</p>
             </div>
             <div className="bg-white/30 p-4 rounded-lg text-center">
               <FaRegHeart className="mx-auto mb-2 text-yellow-600" size={36} />
-              <p className="text-xl font-bold ">Personalized</p>
+              <p className="text-sm md:text-lg xl:text-xl font-bold">
+                Personalized
+              </p>
               <p className="text-sm ">Curated Collections</p>
             </div>
           </div>
         </div>
       </div>
-      <LoginComponent />
+      <LoginComponent onComplete={onComplete} />
     </div>
   );
 }
