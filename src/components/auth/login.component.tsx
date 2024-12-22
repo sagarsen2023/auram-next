@@ -73,7 +73,7 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
       credentials.emailOrPhone ?? ""
     );
     const formData: OtpVerificationParams = {
-      countryCode: credentials.countryCode ?? "",
+      countryCode: credentials.countryCode ?? "91",
       phone: isPhone ? credentials.emailOrPhone ?? "" : "",
       type: isEmail ? "EMAIL" : "PHONE",
       email: isEmail ? credentials.emailOrPhone ?? "" : "",
@@ -137,6 +137,7 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
               <div className="flex gap-3">
                 <div className="w-1/3">
                   <SelectComponent
+                    value={countryCodeOptions[0]}
                     label="Country Code"
                     placeholder="Country Code"
                     menu={countryCodeOptions}

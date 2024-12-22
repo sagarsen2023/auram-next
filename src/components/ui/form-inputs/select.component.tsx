@@ -9,6 +9,7 @@ export interface SelectOption {
 }
 
 const SelectComponent = ({
+  value,
   label,
   menu,
   onChange,
@@ -17,6 +18,7 @@ const SelectComponent = ({
   disabled,
   placeholder,
 }: {
+  value?: SelectOption;
   label?: string;
   menu: SelectOption[];
   onChange: (item: SelectOption) => void;
@@ -71,7 +73,9 @@ const SelectComponent = ({
         disabled={disabled}
       >
         <span className="block truncate">
-          {selectedItem ? selectedItem.label : placeholder ?? "Select an option" }
+          {selectedItem
+            ? selectedItem.label
+            : value?.label ?? placeholder ?? "Select an option"}
         </span>
       </button>
       {error && <p className="text-red-400 text-sm mt-1">{error}</p>}
