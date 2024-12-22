@@ -1,6 +1,6 @@
 "use client";
 
-import BaseContactForm from "@/components/base-contact-form/base-contact-form.component";
+import BaseContactForm from "@/components/base-contact-form";
 import Link from "next/link";
 import React from "react";
 import { FiPhoneMissed } from "react-icons/fi";

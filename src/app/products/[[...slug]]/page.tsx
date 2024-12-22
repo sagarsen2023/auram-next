@@ -30,7 +30,7 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
       }
     >
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-4">
+      <div className={`base-page space-y-2`}>
         {/* BreadCrumb */}
         <BreadCrumbComponent breadCrumbItems={breadCrumbs} />
 
