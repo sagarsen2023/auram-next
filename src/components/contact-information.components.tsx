@@ -11,12 +11,7 @@ async function ContactCards() {
     address: "",
     whatsapp: "",
     email: "",
-    facebook: "",
-    instagram: "",
-    linkedin: "",
     phone: "",
-    twitter: "",
-    youtube: "",
   };
   try {
     const contactInfoResponse = await contactAPI.getAuramContactInfo();
