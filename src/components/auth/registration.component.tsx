@@ -84,10 +84,11 @@ function RegistrationComponent() {
             {...register("email")}
             error={errors.email?.message}
           />
-          <div className="flex gap-3">
-            <div className="w-1/3">
+          <div className="md:flex gap-3">
+            <div className="w-2/5">
               <SelectComponent
                 label="Country Code"
+                placeholder="Country Code"
                 menu={countryCodeOptions}
                 onChange={(item) => {
                   setValue("countryCode", item.value);
@@ -99,12 +100,14 @@ function RegistrationComponent() {
                 error={errors.countryCode?.message}
               />
             </div>
-            <TextInputComponent
-              label="Phone"
-              placeholder="Enter your phone number"
-              {...register("phone")}
-              error={errors.phone?.message}
-            />
+            <div className="w-full">
+              <TextInputComponent
+                label="Phone"
+                placeholder="Enter your phone number"
+                {...register("phone")}
+                error={errors.phone?.message}
+              />
+            </div>
           </div>
 
           <div className="flex gap-3">
@@ -158,7 +161,7 @@ function RegistrationComponent() {
             />
 
             <DatePickerComponent
-              label="Select Date of Anniversary"
+              label="Date of Anniversary"
               selected={
                 watch("dateOfAnniversary")
                   ? new Date(

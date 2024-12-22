@@ -102,7 +102,7 @@ const DatePickerComponent = ({
   return (
     <div className="relative w-full" ref={datePickerRef}>
       {label && (
-        <label className="block text-sm font-medium text-gray-700 mb-1">
+        <label className="block text-sm font-medium text-gray-700 mb-2">
           {label}
         </label>
       )}

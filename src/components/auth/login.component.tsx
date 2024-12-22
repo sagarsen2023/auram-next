@@ -117,7 +117,7 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
   };
 
   return (
-    <div className="w-full flex items-center justify-center bg-white p-12">
+    <div className="w-full flex items-center justify-center bg-white p-8">
       <div className="w-full max-w-md">
         <div className="mb-4">
           <h2 className="text-3xl font-bold text-gray-800">
