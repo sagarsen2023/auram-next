@@ -87,7 +87,7 @@ const ModalComponent: React.FC<ModalProps> = ({
       >
         {/* Modal Close component */}
         <button
-          className="absolute top-0 right-0 text-2xl text-gray-500 p-4"
+          className="absolute top-0 right-0 text-2xl text-gray-500 p-4 z-50"
           onClick={onClose}
         >
           <FaXmark />
