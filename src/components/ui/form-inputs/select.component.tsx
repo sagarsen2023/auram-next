@@ -15,6 +15,7 @@ const SelectComponent = ({
   error,
   buttonClassName,
   disabled,
+  placeholder,
 }: {
   label?: string;
   menu: SelectOption[];
@@ -22,6 +23,7 @@ const SelectComponent = ({
   error?: string;
   buttonClassName?: string;
   disabled?: boolean;
+  placeholder?: string;
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState<SelectOption | null>(null);
@@ -69,7 +71,7 @@ const SelectComponent = ({
         disabled={disabled}
       >
         <span className="block truncate">
-          {selectedItem ? selectedItem.label : "Select an option"}
+          {selectedItem ? selectedItem.label : placeholder ?? "Select an option" }
         </span>
         <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
           <svg
