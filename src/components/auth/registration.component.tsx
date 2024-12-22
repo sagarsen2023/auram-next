@@ -5,7 +5,7 @@ import {
   RegistrationSchemaType,
 } from "@/validators/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import TextInputComponent from "../ui/form-inputs/text-input.component";
 import PrimaryButtonComponent from "../buttons/primary-button.component";
@@ -13,6 +13,7 @@ import SelectComponent, {
   SelectOption,
 } from "../ui/form-inputs/select.component";
 import DatePickerComponent from "../ui/form-inputs/date-picker.component";
+import { countryCodeOptions } from "@/constants/generic-select-options";
 
 function RegistrationComponent() {
   const genderOptions: SelectOption[] = [
@@ -57,7 +58,13 @@ function RegistrationComponent() {
     watch,
   } = methods;
 
+  useEffect(() => {
+    setValue("registrationId", localStorage.getItem("registrationId") ?? "");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const onSubmit = (data: RegistrationSchemaType) => {
+    localStorage.removeItem("registrationId");
     console.log("data", data);
   };
 
@@ -77,12 +84,29 @@ function RegistrationComponent() {
             {...register("email")}
             error={errors.email?.message}
           />
-          <TextInputComponent
-            label="Phone"
-            placeholder="Enter your phone number"
-            {...register("phone")}
-            error={errors.phone?.message}
-          />
+          <div className="flex gap-3">
+            <div className="w-1/3">
+              <SelectComponent
+                label="Country Code"
+                menu={countryCodeOptions}
+                onChange={(item) => {
+                  setValue("countryCode", item.value);
+                  setError("countryCode", {
+                    type: "manual",
+                    message: "",
+                  });
+                }}
+                error={errors.countryCode?.message}
+              />
+            </div>
+            <TextInputComponent
+              label="Phone"
+              placeholder="Enter your phone number"
+              {...register("phone")}
+              error={errors.phone?.message}
+            />
+          </div>
+
           <div className="flex gap-3">
             <SelectComponent
               label="Select Honorific"
