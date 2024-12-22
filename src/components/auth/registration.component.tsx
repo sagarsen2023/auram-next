@@ -5,7 +5,7 @@ import {
   RegistrationSchemaType,
 } from "@/validators/auth.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import TextInputComponent from "../ui/form-inputs/text-input.component";
 import PrimaryButtonComponent from "../buttons/primary-button.component";
@@ -14,8 +14,11 @@ import SelectComponent, {
 } from "../ui/form-inputs/select.component";
 import DatePickerComponent from "../ui/form-inputs/date-picker.component";
 import { countryCodeOptions } from "@/constants/generic-select-options";
+import { authAPI } from "@/services/auth.service";
+import { toast } from "sonner";
 
 function RegistrationComponent() {
+  const [loading, setLoading] = useState(false);
   const genderOptions: SelectOption[] = [
     {
       label: "Male",
@@ -63,9 +66,18 @@ function RegistrationComponent() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const onSubmit = (data: RegistrationSchemaType) => {
+  const onSubmit = async (data: RegistrationSchemaType) => {
     localStorage.removeItem("registrationId");
     console.log("data", data);
+    try {
+      setLoading(true);
+      const response = await authAPI.registerCustomer(data);
+      console.log("response", response);
+    } catch {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -155,8 +167,7 @@ function RegistrationComponent() {
             <DatePickerComponent
               label="Date of Birth"
               selected={watch("dob") ? new Date(watch("dob")) : null}
-              onChange={(date) => setValue("dob", date ?? new Date())}
-              placeholder="Choose a date"
+              onChange={(date) => setValue("dob", Array.isArray(date) ? date[0] : date ?? new Date())}
               error={errors.dob?.message}
             />
 
@@ -170,15 +181,18 @@ function RegistrationComponent() {
                   : null
               }
               onChange={(date) =>
-                setValue("dateOfAnniversary", date ?? new Date())
+                setValue("dateOfAnniversary", Array.isArray(date) ? date[0] : date ?? new Date())
               }
-              placeholder="Choose a date"
               error={errors.dateOfAnniversary?.message}
             />
           </div>
         </div>
 
-        <PrimaryButtonComponent onClick={handleSubmit(onSubmit)}>
+        <PrimaryButtonComponent
+          isLoading={loading}
+          disabled={loading}
+          onClick={handleSubmit(onSubmit)}
+        >
           Register
         </PrimaryButtonComponent>
       </FormProvider>
