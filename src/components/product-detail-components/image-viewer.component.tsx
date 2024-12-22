@@ -22,24 +22,26 @@ function ImageViewerComponent({ medias }: { medias: MediaResponse[] }) {
       </div>
       {/* All Images Part */}
       <div className="grid grid-cols-4 gap-4 lg:grid-cols-1 lg:w-36 lg:h-[33rem] place-content-start overflow-y-auto scrollbar">
-        {medias.map((media, index) => (
-          <div
-            key={index}
-            className="cursor-pointer relative w-full lg:w-24 lg:h-28 aspect-square lg:aspect-auto"
-            onClick={() => setCurrentImage(media)}
-          >
-            <Image
-              src={imageValidator(media.path)}
-              alt="product-image"
-              fill
-              className={`object-cover rounded-md p-0.5 border ${
-                media._id === currentImage?._id
-                  ? "border-primary"
-                  : "border-gray-300"
-              }`}
-            />
-          </div>
-        ))}
+        {medias.length > 0
+          ? medias.map((media, index) => (
+              <div
+                key={index}
+                className="cursor-pointer relative w-full lg:w-24 lg:h-28 aspect-square lg:aspect-auto"
+                onClick={() => setCurrentImage(media)}
+              >
+                <Image
+                  src={imageValidator(media?.path)}
+                  alt="product-image"
+                  fill
+                  className={`object-cover rounded-md p-0.5 border ${
+                    media._id === currentImage?._id
+                      ? "border-primary"
+                      : "border-gray-300"
+                  }`}
+                />
+              </div>
+            ))
+          : null}
       </div>
     </div>
   );

@@ -21,10 +21,23 @@ export const collectionAPI = {
 
 export const itemAPI = {
   getFeaturedItems: async () =>
-    fetchAPI.get<ItemApiResponse>(FEATURED_ITEMS_URL),
-  getLatestItems: async () => fetchAPI.get<ItemApiResponse>(LATEST_ITEMS_URL),
+    fetchAPI.get<ItemApiResponse>(FEATURED_ITEMS_URL, {
+      next: {
+        revalidate: 60,
+      },
+    }),
+  getLatestItems: async () =>
+    fetchAPI.get<ItemApiResponse>(LATEST_ITEMS_URL, {
+      next: {
+        revalidate: 60,
+      },
+    }),
   getSortFilers: async () =>
-    fetchAPI.get<SortFilterApiResponse>(SORT_FILTERS_URL),
+    fetchAPI.get<SortFilterApiResponse>(SORT_FILTERS_URL, {
+      next: {
+        revalidate: 120,
+      },
+    }),
   getAllItems: async (params: ItemParams) => {
     const queryString = queryParamsFormatter({
       skip: params.skip,
@@ -36,7 +49,6 @@ export const itemAPI = {
       gender: params.gender,
       priceRange: [params.minPrice, params.maxPrice],
     });
-    console.log("queryString", queryString);
     return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`);
   },
   getItemDetails: async (id: string) =>

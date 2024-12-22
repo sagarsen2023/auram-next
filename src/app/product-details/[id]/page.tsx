@@ -1,4 +1,3 @@
-import { basePageClassNames } from "@/constants/universal-css";
 import React, { Suspense } from "react";
 import { fetchItemDetails } from "../utils";
 import ImageViewerComponent from "@/components/product-detail-components/image-viewer.component";
@@ -36,13 +35,13 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     },
   ];
   const allItemImages: MediaResponse[] = [
-    itemData?.thumbnail ?? [],
+    ...(itemData?.thumbnail ? [itemData.thumbnail] : []),
     ...(itemData?.itemMedia ?? []),
-    itemData?.hoverImage,
+    ...(itemData?.hoverImage ? [itemData.hoverImage] : []),
   ];
   return (
     <Suspense fallback={<DefaultPageLoaderComponent />}>
-      <div className={`${basePageClassNames}`}>
+      <div className={"base-page"}>
         <BreadCrumbComponent breadCrumbItems={breadcrumbs} />
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-10">
           {/* Component to view images */}
