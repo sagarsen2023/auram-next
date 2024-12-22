@@ -14,13 +14,17 @@ import emailOrPhoneValidator from "@/utils/email-or-phone-validator";
 import { setAuthToken, setUserData } from "@/utils/token-store";
 import RegistrationComponent from "./registration.component";
 import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
+import SelectComponent from "../ui/form-inputs/select.component";
+import { countryCodeOptions } from "@/constants/generic-select-options";
 
 function LoginComponent({ onComplete }: { onComplete?: () => void }) {
   const [loading, setLoading] = useState(false);
   const [credentials, setCredentials] = useState<{
+    countryCode: string | null;
     emailOrPhone: string | null;
     otp: string | null;
   }>({
+    countryCode: null,
     emailOrPhone: null,
     otp: null,
   });
@@ -70,7 +74,7 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
       credentials.emailOrPhone ?? ""
     );
     const formData: OtpVerificationParams = {
-      countryCode: "91",
+      countryCode: credentials.countryCode ?? "",
       phone: isPhone ? credentials.emailOrPhone ?? "" : "",
       type: isEmail ? "EMAIL" : "PHONE",
       email: isEmail ? credentials.emailOrPhone ?? "" : "",
@@ -131,17 +135,35 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
           ) : (
             // Login and OTP input
             <div>
-              <TextInputComponent
-                label="Phone Number or Email"
-                placeholder="Enter your phone number or email"
-                disabled={currentState !== "email-or-phone-input"}
-                onChange={(e) => {
-                  setCredentials({
-                    ...credentials,
-                    emailOrPhone: e.target.value,
-                  });
-                }}
-              />
+              <div className="flex gap-3">
+                <div className="w-1/3">
+                  <SelectComponent
+                    label="Country Code"
+                    placeholder="Country Code"
+                    menu={countryCodeOptions}
+                    onChange={(item) => {
+                      setCredentials({
+                        ...credentials,
+                        countryCode: item.value,
+                      });
+                    }}
+                    disabled={currentState !== "email-or-phone-input"}
+                  />
+                </div>
+
+                <TextInputComponent
+                  label="Phone Number or Email"
+                  placeholder="Enter your phone number or email"
+                  disabled={currentState !== "email-or-phone-input"}
+                  onChange={(e) => {
+                    setCredentials({
+                      ...credentials,
+                      emailOrPhone: e.target.value,
+                    });
+                  }}
+                />
+              </div>
+
               {currentState === "otp-input" && (
                 <div className="mt-2">
                   <TextInputComponent
