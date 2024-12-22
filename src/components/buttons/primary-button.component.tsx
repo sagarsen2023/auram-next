@@ -1,6 +1,12 @@
 "use client";
-import React, { ReactNode } from "react";
+import React, { ButtonHTMLAttributes, ReactNode } from "react";
 import classNameMerger from "@/utils/class-name-merger";
+
+interface PrimaryButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  isLoading?: boolean;
+  loaderClassName?: string;
+  children?: ReactNode;
+}
 
 function PrimaryButtonCOmponent({
   id,
@@ -10,15 +16,7 @@ function PrimaryButtonCOmponent({
   onClick,
   loaderClassName,
   disabled,
-}: {
-  id?: string;
-  disabled?: boolean;
-  loaderClassName?: string;
-  isLoading?: boolean;
-  className?: string;
-  children?: ReactNode;
-  onClick?: () => void;
-}) {
+}: PrimaryButtonProps) {
   return (
     <button
       id={id}
@@ -52,7 +50,7 @@ function PrimaryButtonCOmponent({
             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
           ></path>
         </svg>
-      )}{" "}
+      )}
       {children}
     </button>
   );
