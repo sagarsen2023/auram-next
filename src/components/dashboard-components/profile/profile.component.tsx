@@ -1,6 +1,7 @@
 "use client";
-import TextInputComponent from "@/components/base-contact-form/text-input.component";
+
 import PrimaryButtonCOmponent from "@/components/buttons/primary-button.component";
+import TextInputComponent from "@/components/ui/form-inputs/text-input.component";
 import React from "react";
 
 const MyProfile = () => {
