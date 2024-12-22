@@ -1,7 +1,6 @@
 import BreadCrumbComponent, {
   BreadCrumbComponentProps,
 } from "@/components/ui/breadcrumb.component";
-import { basePageClassNames } from "@/constants/universal-css";
 import React from "react";
 
 function Page() {
@@ -15,7 +14,7 @@ function Page() {
     },
   ];
   return (
-    <div className={`${basePageClassNames}`}>
+    <div className={`base-page`}>
       <BreadCrumbComponent breadCrumbItems={breadcrumbs} />
     </div>
   );
