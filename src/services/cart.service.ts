@@ -1,3 +1,4 @@
+import { CartResponse } from "@/models/cart/cart-response";
 import { fetchAPI } from "./config";
 import { ADD_TO_CART_URL } from "./queryUrls";
 
@@ -9,7 +10,7 @@ const cartAPI = {
     itemId: string;
     quantity: number;
   }) => {
-    return await fetchAPI.post(
+    return await fetchAPI.post<CartResponse>(
       ADD_TO_CART_URL,
       { itemId, quantity },
       {
