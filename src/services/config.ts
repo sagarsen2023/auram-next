@@ -1,4 +1,3 @@
-// import { getToken } from "../hooks/token";
 import { BASE_URL } from "./queryUrls";
 
 interface APIOptions extends RequestInit {
@@ -11,14 +10,13 @@ async function request<T>(
   options: APIOptions = {}
 ): Promise<T> {
   const url = `${BASE_URL}${endpoint}`;
-  //   const token = await getToken();
 
   const response = await fetch(url, {
     ...options,
     method,
     headers: {
       "Content-Type": "application/json",
-      //   ...(typeof token === "string" && { Authorization: `Bearer ${token}` }),
+      // ...(typeof token === "string" && { Authorization: `Bearer ${token}` }),
 
       ...options.headers,
     },

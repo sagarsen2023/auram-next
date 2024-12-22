@@ -9,6 +9,7 @@ export const IMAGE_URL =
 export const SEND_OTP_URL = "/customer-auths/send-otp";
 export const VERIFY_OTP_URL = "/customer-auths/verify-otp";
 export const REGISTRATION_URL = "/customer-auths/registration";
+export const SET_TOKEN_URL = "/api/set-token"; // Next js api route
 
 // Banner
 export const BANNER_URL = `/banners/user`;
