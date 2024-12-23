@@ -52,8 +52,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             {/* Item details and pricing */}
             <ItemDetailsAndPricing item={itemData} />
             {/* Item Add to cart */}
-            {/* TODO: Send item data to manage cart */}
-            <AddToCartSectionComponent />
+            <AddToCartSectionComponent itemId={itemData._id} />
           </div>
         </div>
         {/* Stone Pricing Details */}
