@@ -2,8 +2,6 @@ import { CartResponse } from "@/models/cart/cart-response";
 import { fetchAPI } from "./config";
 import { ADD_TO_CART_URL, GET_CART_URL } from "./queryUrls";
 
-const token = `Bearer ${localStorage.getItem("token")}`;
-
 const cartAPI = {
   addToCart: async ({
     itemId,
@@ -17,7 +15,7 @@ const cartAPI = {
       { itemId, quantity },
       {
         headers: {
-          authorization: token,
+          authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       }
     );
@@ -25,7 +23,7 @@ const cartAPI = {
   getCartData: async () => {
     return await fetchAPI.get<CartResponse>(GET_CART_URL, {
       headers: {
-        authorization: token,
+        authorization: `Bearer ${localStorage.getItem("token")}`,
       },
     });
   },
