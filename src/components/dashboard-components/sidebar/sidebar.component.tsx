@@ -15,7 +15,6 @@ interface NavItem {
 
 interface NavItemProps extends NavItem {
   isActive: boolean;
-  onClick: (href: string) => void;
 }
 
 // NavItem Component
@@ -25,11 +24,9 @@ const NavItemComponent: React.FC<NavItemProps> = ({
   href,
   color = "bg-yellow-600",
   isActive,
-  onClick,
 }) => (
   <Link
     href={href}
-    onClick={() => onClick(href)}
     className={`
       group relative flex items-center py-3 px-4 
       transition-all duration-300 ease-in-out
@@ -126,7 +123,6 @@ const SidebarComponent = () => {
               key={item.href}
               {...item}
               isActive={activeItem === item.href}
-              onClick={setActiveItem}
             />
           ))}
         </nav>
