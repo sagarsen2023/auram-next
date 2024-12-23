@@ -8,6 +8,7 @@ export interface AddressesModel {
   city: string;
   state: string;
   country: string;
+  pincode: string;
   isDefault: boolean;
   status: boolean;
   isDeleted: boolean;
