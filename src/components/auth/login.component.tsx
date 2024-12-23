@@ -130,7 +130,11 @@ function LoginComponent({ onComplete }: { onComplete?: () => void }) {
         <div className="">
           {currentState === "register" ? (
             // Registration form
-            <RegistrationComponent onComplete={onComplete} />
+            <RegistrationComponent
+              countryCode={credentials.countryCode ?? "91"}
+              phone={credentials.emailOrPhone ?? ""}
+              onComplete={onComplete}
+            />
           ) : (
             // Login and OTP input
             <div>
