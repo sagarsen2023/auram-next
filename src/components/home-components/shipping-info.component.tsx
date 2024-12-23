@@ -1,9 +1,10 @@
 import React from "react";
 import { TbTruckDelivery, TbTruckReturn } from "react-icons/tb";
 import { RiSecurePaymentLine } from "react-icons/ri";
+import parallx from "../../../public/images/parallx.jpg";
 
 function ShippingInfoComponent() {
-  const shipptingInfo = [
+  const shippingInfo = [
     {
       icon: (
         <TbTruckDelivery
@@ -39,8 +40,11 @@ function ShippingInfoComponent() {
     },
   ];
   return (
-    <div className="bg-[url('/images/parallx.jpg')] bg-fixed px-6 py-12 flex flex-col lg:flex-row md:px-36 md:py-24 justify-center items-center select-none gap-10">
-      {shipptingInfo.map((info, index) => (
+    <div
+      className=" bg-fixed px-6 py-12 flex flex-col lg:flex-row md:px-36 md:py-24 justify-center items-center select-none gap-10"
+      style={{ backgroundImage: `url(${parallx.src})` }}
+    >
+      {shippingInfo.map((info, index) => (
         <div
           key={index}
           className="text-white group w-full flex flex-col justify-center items-center text-center gap-2"
