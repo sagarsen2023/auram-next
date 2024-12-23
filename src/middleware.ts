@@ -27,7 +27,7 @@ const matchDynamicRoute = ({
   if (pathname.startsWith("/products/")) {
     return true;
   }
-  if (pathname.startsWith("/my/")) {
+  if (pathname.startsWith("/my")) {
     if (ifTokenNotExist) {
       return false;
     }
