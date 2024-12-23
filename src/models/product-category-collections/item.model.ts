@@ -43,6 +43,7 @@ export interface ItemModel {
   hoverImage: MediaResponse;
   grossWeight?: number;
   isFeatured: boolean;
+  isAddedToCart?: boolean;
 }
 
 export default interface ItemApiResponse extends BaseApiResponse {
