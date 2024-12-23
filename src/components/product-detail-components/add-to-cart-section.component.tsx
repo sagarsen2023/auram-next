@@ -5,6 +5,7 @@ import { FaMinus, FaPlus } from "react-icons/fa6";
 import { RiShoppingCart2Fill } from "react-icons/ri";
 import cartAPI from "@/services/cart.service";
 import { toast } from "sonner";
+import { getAuthToken } from "@/utils/token-store";
 
 function AddToCartSectionComponent({ itemId }: { itemId: string }) {
   const maxQuantity = 10;
@@ -13,6 +14,11 @@ function AddToCartSectionComponent({ itemId }: { itemId: string }) {
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
   const handleAddToCart = async () => {
+    const token = getAuthToken();
+    if (!token) {
+      toast.error("Please login to add to cart");
+      return;
+    }
     try {
       setLoading(true);
       const response = await cartAPI.addToCart({
@@ -54,7 +60,11 @@ function AddToCartSectionComponent({ itemId }: { itemId: string }) {
         isLoading={loading}
         disabled={loading}
         onClick={handleAddToCart}
-        className={`${isAddedToCart ? "bg-transparent text-primary border-2 border-secondary hover:bg-transparent" : ""}`}
+        className={`${
+          isAddedToCart
+            ? "bg-transparent text-primary border-2 border-secondary hover:bg-transparent"
+            : ""
+        }`}
       >
         <RiShoppingCart2Fill className="mr-4 max-w-fit" />
         {isAddedToCart ? "Already in cart" : "Add to cart"}

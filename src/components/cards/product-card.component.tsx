@@ -9,12 +9,18 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
+import { getAuthToken } from "@/utils/token-store";
 
 function ProductCardComponent({ item }: { item: ItemModel }) {
   const [loading, setLoading] = useState(false);
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
+    const token = getAuthToken();
+    if (!token) {
+      toast.error("Please login to add to cart");
+      return;
+    }
     try {
       setLoading(true);
       const response = await cartAPI.addToCart({
