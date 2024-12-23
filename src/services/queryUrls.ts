@@ -9,6 +9,7 @@ export const IMAGE_URL =
 export const SEND_OTP_URL = "/customer-auths/send-otp";
 export const VERIFY_OTP_URL = "/customer-auths/verify-otp";
 export const REGISTRATION_URL = "/customer-auths/registration";
+export const SET_TOKEN_URL = "/api/set-token"; // Next js api route
 
 // Banner
 export const BANNER_URL = `/banners/user`;
@@ -27,3 +28,7 @@ export const SORT_FILTERS_URL = "/items/user/sort-filter";
 // Contact Info Url
 export const CONTACT_INFO = `/general-infos`;
 export const CONTACT_US_URL = `/contact-us`;
+
+// Cart Urls
+export const ADD_TO_CART_URL = "/carts/add-to-cart";
+export const GET_CART_URL = "/carts/get-cart";

@@ -18,19 +18,15 @@ import homeAPI from "@/services/home.service";
 import Image from "next/image";
 import { IMAGE_URL } from "@/services/queryUrls";
 import { useRouter } from "next/navigation";
+import DefaultPageLoaderComponent from "../ui/default-page-loader.component";
 
 function BannerComponent() {
   const router = useRouter();
+  const [loading, setLoading] = useState(true);
   const [bannerData, setBannerData] = useState<BannerModel[]>([]);
-  const [delayAnimation, setDelayAnimation] = useState(10000);
 
   useEffect(() => {
-    setTimeout(() => {
-      setDelayAnimation(3000);
-    }, 5000);
-  });
-
-  useEffect(() => {
+    setLoading(true);
     homeAPI
       .fetchBanner()
       .then((response) => {
@@ -39,8 +35,14 @@ function BannerComponent() {
       .catch((error) => {
         console.log(error);
       })
-      .finally(() => {});
-  }, []); 
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <DefaultPageLoaderComponent />;
+  }
 
   return (
     <div className="relative bg-white">
@@ -66,10 +68,8 @@ function BannerComponent() {
           EffectCoverflow,
           Autoplay,
         ]}
-        autoplay={{ delay: delayAnimation }}
-        grabCursor={false}
+        autoplay={{ delay: 3000 }}
         loop={true}
-        scrollbar={{ draggable: true }}
       >
         {bannerData?.map((banner, index) => (
           <SwiperSlide key={banner._id}>

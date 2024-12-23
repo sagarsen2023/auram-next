@@ -1,5 +1,5 @@
 "use client";
-import { isFirstVisitAtom } from "@/hooks/useJotai";
+import { isFirstVisitAtom } from "@/store/useJotai";
 import { useAtom } from "jotai";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";

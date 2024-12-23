@@ -18,7 +18,15 @@ import { authAPI } from "@/services/auth.service";
 import { toast } from "sonner";
 import { setAuthToken, setUserData } from "@/utils/token-store";
 
-function RegistrationComponent({ onComplete }: { onComplete?: () => void }) {
+function RegistrationComponent({
+  countryCode,
+  phone,
+  onComplete,
+}: {
+  countryCode: string;
+  phone: string;
+  onComplete?: () => void;
+}) {
   const [loading, setLoading] = useState(false);
   const genderOptions: SelectOption[] = [
     {
@@ -64,6 +72,8 @@ function RegistrationComponent({ onComplete }: { onComplete?: () => void }) {
 
   useEffect(() => {
     setValue("registrationId", localStorage.getItem("registrationId") ?? "");
+    setValue("countryCode", countryCode);
+    setValue("phone", phone);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -107,16 +117,13 @@ function RegistrationComponent({ onComplete }: { onComplete?: () => void }) {
           <div className="md:flex gap-3">
             <div className="w-2/5">
               <SelectComponent
+                value={countryCodeOptions.find(
+                  (item) => item.value === countryCode
+                )}
                 label="Country Code"
                 placeholder="Country Code"
                 menu={countryCodeOptions}
-                onChange={(item) => {
-                  setValue("countryCode", item.value);
-                  setError("countryCode", {
-                    type: "manual",
-                    message: "",
-                  });
-                }}
+                disabled
                 error={errors.countryCode?.message}
               />
             </div>
@@ -125,6 +132,7 @@ function RegistrationComponent({ onComplete }: { onComplete?: () => void }) {
                 label="Phone"
                 placeholder="Enter your phone number"
                 {...register("phone")}
+                disabled
                 error={errors.phone?.message}
               />
             </div>
