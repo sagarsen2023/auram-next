@@ -1,3 +1,5 @@
+"use client";
+
 import BreadCrumbComponent, {
   BreadCrumbComponentProps,
 } from "@/components/ui/breadcrumb.component";
