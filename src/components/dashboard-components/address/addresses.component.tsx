@@ -3,6 +3,7 @@ import ModalComponent from "@/components/ui/modal.component";
 import React, { useState } from "react";
 import { MdDeleteOutline, MdEditNote } from "react-icons/md";
 import AddUpdateAddress from "./add-update-address.comonent";
+import Popover from "@/components/ui/popover.component";
 function MyAddresses() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleAddressModalState = React.useCallback(
@@ -93,6 +94,12 @@ function MyAddresses() {
         {/* <AuthWrapper onComplete={handleAddressModalState} /> */}
         <AddUpdateAddress />
       </ModalComponent>
+      <Popover
+        trigger={<button>Open Popover</button>}
+        content={<div>Your popover content goes here!</div>}
+        onOk={() => console.log("OK clicked")}
+        onCancel={() => console.log("Cancel clicked")}
+      />
     </>
   );
 }
