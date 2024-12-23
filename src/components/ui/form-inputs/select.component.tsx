@@ -21,7 +21,7 @@ const SelectComponent = ({
   value?: SelectOption;
   label?: string;
   menu: SelectOption[];
-  onChange: (item: SelectOption) => void;
+  onChange?: (item: SelectOption) => void;
   error?: string;
   buttonClassName?: string;
   disabled?: boolean;
@@ -50,7 +50,7 @@ const SelectComponent = ({
 
   const handleSelect = (item: SelectOption) => {
     setSelectedItem(item);
-    onChange(item);
+    if (onChange) onChange(item);
     setIsOpen(false);
   };
 
