@@ -1,10 +1,13 @@
+"use client";
+
 import { CartItem, CartResponse } from "@/models/cart/cart-response.model";
 import imageValidator from "@/utils/image-validator";
 import priceFormatter from "@/utils/price-formatter";
 import Image from "next/image";
 import React, { useState, useEffect } from "react";
 import PrimaryButtonComponent from "../buttons/primary-button.component";
-import { FaMinus, FaPlus } from "react-icons/fa6";
+import { FaMinus, FaPlus, FaXmark } from "react-icons/fa6";
+import Link from "next/link";
 
 function CartItemListingComponent({
   cartResponse,
@@ -37,22 +40,27 @@ function CartItemListingComponent({
       {items?.map((item) => (
         <div
           key={item._id}
-          className="border-[0.3px] border-secondary/60 rounded-xl p-2"
+          className="border-[0.3px] border-secondary/60 rounded-xl p-2 relative"
         >
-          <div className="flex items-start gap-4">
-            <div className="relative w-24 h-24 shrink-0">
-              <div className="absolute inset-0 p-2 border rounded-xl">
-                <div className="relative w-full h-full">
-                  <Image
-                    src={imageValidator(item.itemCopy.thumbnail.path)}
-                    alt={item.itemCopy.itemName}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 96px) 100vw, 96px"
-                  />
+          <button className="absolute top-2 right-2 text-red-500">
+            <FaXmark />
+          </button>
+          <div className="flex items-start gap-4 pr-5">
+            <Link href={`/product-details/${item.itemCopy._id}`}>
+              <div className="relative w-24 h-24 shrink-0">
+                <div className="absolute inset-0 p-2 border rounded-xl">
+                  <div className="relative w-full h-full">
+                    <Image
+                      src={imageValidator(item.itemCopy?.thumbnail?.path)}
+                      alt={item.itemCopy.itemName}
+                      fill
+                      className="object-contain"
+                      sizes="(max-width: 96px) 100vw, 96px"
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
             <div className="flex-1 min-w-0">
               <p className="text-lg font-bold truncate">
                 {item.itemCopy.itemName}
