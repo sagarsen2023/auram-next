@@ -15,7 +15,6 @@ function Page() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);
   const [cartResponse, setCartResponse] = useState<CartResponse | null>(null);
-  // const [cartData, setCartData] = useState<CartData | null>(null);
   const breadcrumbs: BreadCrumbComponentProps[] = [
     {
       name: "Home",
@@ -45,8 +44,6 @@ function Page() {
   };
 
   const addOrRemoveItem = async (itemId: string, change: number) => {
-    console.log("itemId", itemId);
-    console.log("change", change);
     try {
       setLoading(true);
       const response = await cartAPI.addToCart({
@@ -61,6 +58,22 @@ function Page() {
       }
     } catch {
       toast.error("Failed to add or remove item");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteItem = async (itemId: string) => {
+    try {
+      setLoading(true);
+      const response = await cartAPI.deleteCartItem(itemId);
+      if (!response.error) {
+        fetchCartData();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      toast.error("Failed to delete item");
     } finally {
       setLoading(false);
     }
@@ -83,6 +96,7 @@ function Page() {
         <CartItemListingComponent
           cartResponse={cartResponse}
           onQuantityChange={addOrRemoveItem}
+          onDelete={deleteItem}
         />
       </div>
     </div>

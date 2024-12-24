@@ -12,9 +12,11 @@ import Link from "next/link";
 function CartItemListingComponent({
   cartResponse,
   onQuantityChange,
+  onDelete,
 }: {
   cartResponse: CartResponse | null;
   onQuantityChange: (itemId: string, change: number) => void;
+  onDelete: (itemId: string) => void;
 }) {
   const { data: cartData } = cartResponse ?? {};
   const [items, setItems] = useState<CartItem[] | undefined>(cartData?.items);
@@ -45,7 +47,10 @@ function CartItemListingComponent({
           key={item._id}
           className="border-[0.3px] border-secondary/60 rounded-xl p-2 relative"
         >
-          <button className="absolute top-2 right-2 text-red-500">
+          <button
+            className="absolute top-2 right-2 text-red-500"
+            onClick={() => onDelete(item.itemId)}
+          >
             <FaXmark />
           </button>
           <div className="flex items-start gap-4 pr-5">
