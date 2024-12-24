@@ -1,4 +1,4 @@
-import { CartResponse } from "@/models/cart/cart-response";
+import { CartResponse } from "@/models/cart/cart-response.model";
 import { fetchAPI } from "./config";
 import { ADD_TO_CART_URL, GET_CART_URL } from "./queryUrls";
 import { getAuthToken } from "@/utils/token-store";
