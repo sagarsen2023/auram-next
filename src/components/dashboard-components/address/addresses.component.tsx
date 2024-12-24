@@ -95,11 +95,12 @@ function MyAddresses() {
         <AddUpdateAddress />
       </ModalComponent>
       <Popover
-        trigger={<button>Open Popover</button>}
         content={<div>Your popover content goes here!</div>}
         onOk={() => console.log("OK clicked")}
         onCancel={() => console.log("Cancel clicked")}
-      />
+      >
+        <button>Open Popover</button>
+      </Popover>
     </>
   );
 }
