@@ -40,7 +40,10 @@ export const itemAPI = {
         revalidate: 120,
       },
     }),
-  getAllItems: async (params: ItemParams, token?: string) => {
+  getAllItems: async ({
+    params,
+    token,
+  }:{params: ItemParams, token?: string}) => {
     const queryString = queryParamsFormatter({
       skip: params.skip,
       limit: params.limit ?? 36,
