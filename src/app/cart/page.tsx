@@ -10,6 +10,8 @@ import { useRouter } from "next/navigation";
 import cartAPI from "@/services/cart.service";
 import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.component";
 import CartItemListingComponent from "@/components/cart-components/cart-item-listing.component";
+import CartPricingDetailsComponent from "@/components/cart-components/cart-pricing-details.component";
+import DualLineComponent from "@/components/ui/dual-line.component";
 
 function Page() {
   const router = useRouter();
@@ -91,13 +93,17 @@ function Page() {
   return (
     <div className={`base-page`}>
       <BreadCrumbComponent breadCrumbItems={breadcrumbs} />
-      <div className="text-2xl font-bold mt-3 mb-4">Cart</div>
-      <div>
+      <div className="flex justify-center items-center flex-col gap-3 mt-2 mb-4">
+        <span className="text-2xl font-bold">Cart</span>
+        <DualLineComponent />
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <CartItemListingComponent
           cartResponse={cartResponse}
           onQuantityChange={addOrRemoveItem}
           onDelete={deleteItem}
         />
+        <CartPricingDetailsComponent cartResponse={cartResponse} />
       </div>
     </div>
   );
