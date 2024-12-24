@@ -16,7 +16,7 @@ const cartAPI = {
       { itemId, quantity },
       {
         headers: {
-          authorization: `Bearer ${getAuthToken()})}`,
+          authorization: `Bearer ${getAuthToken()}`,
         },
       }
     );
@@ -24,7 +24,7 @@ const cartAPI = {
   getCartData: async () => {
     return await fetchAPI.get<CartResponse>(GET_CART_URL, {
       headers: {
-        authorization: `Bearer ${getAuthToken()})}`,
+        authorization: `Bearer ${getAuthToken()}`,
       },
     });
   },
