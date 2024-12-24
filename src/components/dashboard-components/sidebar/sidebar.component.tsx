@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { IconType } from "react-icons";
 import { FaHome, FaUser, FaCog, FaChartBar, FaEnvelope } from "react-icons/fa";
@@ -9,7 +9,13 @@ import { FaHome, FaUser, FaCog, FaChartBar, FaEnvelope } from "react-icons/fa";
 interface NavItem {
   icon: IconType;
   label: string;
-  href: string;
+  href:
+    | "/my"
+    | "/my/profile"
+    | "/my/analytics"
+    | "/my/messages"
+    | "/my/settings";
+  componentKey: "profile" | "analytics" | "messages" | "settings" | "dashboard";
   color?: string;
 }
 
@@ -72,62 +78,67 @@ const NAV_ITEMS: NavItem[] = [
     icon: FaHome,
     label: "Dashboard",
     href: "/my",
+    componentKey: "dashboard",
     color: "bg-yellow-600",
   },
   {
     icon: FaUser,
     label: "Profile",
-    href: "/profile",
+    href: "/my/profile",
+    componentKey: "profile",
     color: "bg-yellow-600",
   },
   {
     icon: FaChartBar,
     label: "Analytics",
-    href: "/analytics",
+    href: "/my/analytics",
+    componentKey: "analytics",
     color: "bg-yellow-600",
   },
   {
     icon: FaEnvelope,
     label: "Messages",
-    href: "/messages",
+    href: "/my/messages",
+    componentKey: "messages",
     color: "bg-yellow-600",
   },
   {
     icon: FaCog,
     label: "Settings",
-    href: "/settings",
+    href: "/my/settings",
+    componentKey: "settings",
     color: "bg-yellow-600",
   },
 ];
 
 // Main Sidebar Component
-const SidebarComponent = () => {
-  const [activeItem, setActiveItem] = useState("/my");
-
+const SidebarComponent = ({
+  activeComponentKey,
+}: {
+  activeComponentKey: string;
+}) => {
   return (
-    <>
-      <div className="bg-white border border-gray-200 flex flex-col transition-all duration-100 ease-in-out w-72 z-10">
-        <div className="flex items-center p-5 justify-between">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 rounded-full bg-gray-200" />
-            <div>
-              <h2 className="text-xl font-bold text-gray-800">Sajal Jana</h2>
-              <p className="text-xs text-gray-500">9800328275</p>
-            </div>
+    <div className="bg-white border border-gray-200 flex flex-col transition-all duration-100 ease-in-out w-72 z-10">
+      <div className="flex items-center p-5 justify-between">
+        <div className="flex items-center space-x-3">
+          <div className="w-12 h-12 rounded-full bg-gray-200" />
+          <div>
+            <h2 className="text-xl font-bold text-gray-800">Sajal Jana</h2>
+            <p className="text-xs text-gray-500">9800328275</p>
           </div>
         </div>
-
-        <nav className="flex-grow px-3 py-5 space-y-2">
-          {NAV_ITEMS.map((item) => (
-            <NavItemComponent
-              key={item.href}
-              {...item}
-              isActive={activeItem === item.href}
-            />
-          ))}
-        </nav>
       </div>
-    </>
+
+      <nav className="flex-grow px-3 py-5 space-y-2">
+        {NAV_ITEMS.map((item, index) => (
+          <NavItemComponent
+            key={index}
+            {...item}
+            isActive={activeComponentKey === item.componentKey}
+          />
+        ))}
+      </nav>
+    </div>
   );
 };
 
