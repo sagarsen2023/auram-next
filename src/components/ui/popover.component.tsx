@@ -79,15 +79,15 @@ const Popover = ({
 
       {isOpen && (
         <div
-          className={`absolute bg-white shadow-lg ${positionClass[position]} ${sizeClass[size]} z-[999]`}
+          className={`absolute shadow-lg ${positionClass[position]} ${sizeClass[size]} z-[999] `}
         >
-          <div className="p-4">
+          <div className="rounded-md p-4 bg-gradient-to-br from-slate-100 to-white  shadow-lg border border-indigo-100  min-w-[280px] backdrop-blur-sm relative">
             <div className="mb-4">{content}</div>
 
             <div className="flex justify-end space-x-2">
               <button
                 className={classNameMerger([
-                  "px-4 py-2 rounded-md",
+                  "px-4 py-2 bg-gray-100 text-gray-700 text-sm rounded-lg font-medium hover:bg-gray-100 transition-colors duration-200",
                   cancelButtonClassName,
                 ])}
                 onClick={handleCancel}
@@ -96,7 +96,7 @@ const Popover = ({
               </button>
               <button
                 className={classNameMerger([
-                  "px-4 py-2 rounded-md",
+                  "px-4 py-2 bg-gradient-to-r   from-yellow-500    via-yellow-600   to-yellow-700  hover:from-yellow-700   hover:via-yellow-800  hover:to-yellow-900 text-white text-sm rounded-lg font-medium hover:shadow-lg hover:shadow-indigo-100 transition-all duration-200",
                   okButtonClassName,
                 ])}
                 onClick={handleOk}
