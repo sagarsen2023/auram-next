@@ -20,7 +20,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     withGstPrice,
     withoutGstPrice,
     makingCharge,
-  } = itemData;
+  } = itemData ?? {};
   const breadcrumbs: BreadCrumbComponentProps[] = [
     {
       name: "Home",
@@ -31,7 +31,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       link: "/products",
     },
     {
-      name: itemData.itemName,
+      name: itemData?.itemName,
     },
   ];
   const allItemImages: MediaResponse[] = [

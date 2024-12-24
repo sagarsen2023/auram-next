@@ -8,6 +8,7 @@ import BreadCrumbComponent, {
   BreadCrumbComponentProps,
 } from "@/components/ui/breadcrumb.component";
 import ProductListingComponent from "@/components/product-listing-components";
+import { getAuthToken } from "@/utils/cookie-store";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
@@ -16,6 +17,7 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
     params: itemParams,
   });
   const { sortOptions, filterOptions } = await getSortFilterOptions();
+  const token = await getAuthToken();
 
   const breadCrumbs: BreadCrumbComponentProps[] = [
     { name: "Home", link: "/" },
@@ -55,6 +57,7 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
 
         {/* All Products Part */}
         <ProductListingComponent
+          token={token}
           totalCount={itemData?.totalCount ?? 0}
           itemParams={itemParams}
           sortOptions={sortOptions}
