@@ -3,19 +3,20 @@
 import React from "react";
 import Link from "next/link";
 import { IconType } from "react-icons";
-import { FaHome, FaUser, FaCog, FaChartBar, FaEnvelope } from "react-icons/fa";
+import {
+  FaHome,
+  FaUser,
+  FaCog,
+  FaRegAddressCard,
+  FaDolly,
+} from "react-icons/fa";
 
 // Types
 interface NavItem {
   icon: IconType;
   label: string;
-  href:
-    | "/my"
-    | "/my/profile"
-    | "/my/analytics"
-    | "/my/messages"
-    | "/my/settings";
-  componentKey: "profile" | "analytics" | "messages" | "settings" | "dashboard";
+  href: "/my" | "/my/profile" | "/my/addresses" | "/my/orders" | "/my/settings";
+  componentKey: "profile" | "addresses" | "orders" | "settings" | "dashboard";
   color?: string;
 }
 
@@ -89,17 +90,17 @@ const NAV_ITEMS: NavItem[] = [
     color: "bg-yellow-600",
   },
   {
-    icon: FaChartBar,
-    label: "Analytics",
-    href: "/my/analytics",
-    componentKey: "analytics",
+    icon: FaRegAddressCard,
+    label: "Addresses",
+    href: "/my/addresses",
+    componentKey: "addresses",
     color: "bg-yellow-600",
   },
   {
-    icon: FaEnvelope,
-    label: "Messages",
-    href: "/my/messages",
-    componentKey: "messages",
+    icon: FaDolly,
+    label: "Orders",
+    href: "/my/orders",
+    componentKey: "orders",
     color: "bg-yellow-600",
   },
   {
