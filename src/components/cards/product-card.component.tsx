@@ -10,15 +10,22 @@ import React, { useState } from "react";
 import { toast } from "sonner";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import { getAuthToken } from "@/utils/token-store";
+import { useRouter } from "next/navigation";
 
 function ProductCardComponent({ item }: { item: ItemModel }) {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [isAddedToCart, setIsAddedToCart] = useState(item.isAddedToCart);
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
     const token = getAuthToken();
     if (!token) {
       toast.error("Please login to add to cart");
+      return;
+    }
+    if (isAddedToCart) {
+      router.push("/cart");
       return;
     }
     try {
@@ -30,6 +37,7 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
       if (response.error) {
         throw new Error();
       }
+      setIsAddedToCart(true);
       toast.success("Item added to cart");
     } catch {
       toast.error("Failed to add to cart");
@@ -77,9 +85,13 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
           disabled={loading}
           isLoading={loading}
           onClick={handleAddToCart}
-          className="w-fit bg-transparent text-primary rounded-3xl border-2 border-secondary px-4 py-2 group-hover:bg-secondary group-hover:text-white transition-colors duration-300"
+          className={`w-fit rounded-3xl px-4 py-2 transition-colors duration-300 ${
+            isAddedToCart
+              ? "bg-secondary text-white border-2 border-secondary"
+              : "bg-transparent text-primary border-2 border-secondary group-hover:bg-secondary group-hover:text-white"
+          }`}
         >
-          Add to Cart
+          {isAddedToCart ? "View in cart" : "Add to cart"}
         </PrimaryButtonCOmponent>
       </div>
     </Link>
