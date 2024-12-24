@@ -11,8 +11,10 @@ import Link from "next/link";
 
 function CartItemListingComponent({
   cartResponse,
+  onQuantityChange,
 }: {
   cartResponse: CartResponse | null;
+  onQuantityChange: (itemId: string, change: number) => void;
 }) {
   const { data: cartData } = cartResponse ?? {};
   const [items, setItems] = useState<CartItem[] | undefined>(cartData?.items);
@@ -27,6 +29,7 @@ function CartItemListingComponent({
     const updatedItems = items.map((item) => {
       if (item.itemId === itemId) {
         const newQuantity = Math.max(1, item.quantity + change);
+        onQuantityChange(itemId, newQuantity);
         return { ...item, quantity: newQuantity };
       }
       return item;

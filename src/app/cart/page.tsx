@@ -44,6 +44,28 @@ function Page() {
     }
   };
 
+  const addOrRemoveItem = async (itemId: string, change: number) => {
+    console.log("itemId", itemId);
+    console.log("change", change);
+    try {
+      setLoading(true);
+      const response = await cartAPI.addToCart({
+        itemId,
+        quantity: change,
+      });
+      if (!response.error) {
+        setCartResponse(response);
+        fetchCartData();
+      } else {
+        throw new Error();
+      }
+    } catch {
+      toast.error("Failed to add or remove item");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     fetchCartData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -58,7 +80,10 @@ function Page() {
       <BreadCrumbComponent breadCrumbItems={breadcrumbs} />
       <div className="text-2xl font-bold mt-3 mb-4">Cart</div>
       <div>
-        <CartItemListingComponent cartResponse={cartResponse} />
+        <CartItemListingComponent
+          cartResponse={cartResponse}
+          onQuantityChange={addOrRemoveItem}
+        />
       </div>
     </div>
   );
