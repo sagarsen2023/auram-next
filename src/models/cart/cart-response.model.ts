@@ -1,13 +1,15 @@
 import BaseApiResponse from "../common/base-api-response.model";
-import { ItemModel } from "../product-category-collections/item.model";
+import CustomerModel from "../common/customer-model";
+import { ItemModel } from "../common/item.model";
+
 
 export interface CartItem {
   quantity: number;
   _id: string;
   cartId: string;
-  itemId: string;
+  itemId: ItemModel;
   itemCopy: ItemModel;
-  customerId: string;
+  customerId: CustomerModel;
   createdAt: string;
   updatedAt: string;
   taxAmount: number;

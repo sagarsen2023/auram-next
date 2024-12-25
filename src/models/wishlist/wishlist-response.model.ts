@@ -1,6 +1,6 @@
 import BaseApiResponse from "../common/base-api-response.model";
 import CustomerModel from "../common/customer-model";
-import { ItemModel } from "../product-category-collections/item.model";
+import { ItemModel } from "../common/item.model";
 
 export interface AddToWishlistResponse extends BaseApiResponse {
   data: {
@@ -15,7 +15,7 @@ export interface AddToWishlistResponse extends BaseApiResponse {
 
 export interface WishlistModel {
   _id: string;
-  user: CustomerModel;
+  customerId: CustomerModel;
   item: ItemModel;
   createdBy: string;
   createdAt: string;
