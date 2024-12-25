@@ -1,6 +1,7 @@
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
 import { itemAPI } from "@/services/item.service";
+import queryParamsFormatter from "./queryParamsFormatter";
 
 function extractKeyValuePairs(arr: string[]): {
   [key: string]: string | string[];
@@ -147,4 +148,18 @@ export async function getSortFilterOptions(): Promise<{
       filterOptions: null,
     };
   }
+}
+
+export function generateQueryStringWithSortFilter(params: ItemParams): string {
+  const queryString = queryParamsFormatter({
+    skip: params.skip,
+    limit: params.limit ?? 36,
+    sortBy: params.sortBy,
+    collections: params.collections,
+    itemCategory: params.itemCategory,
+    goldPurity: params.goldPurity,
+    gender: params.gender,
+    priceRange: [params.minPrice, params.maxPrice],
+  });
+  return queryString;
 }
