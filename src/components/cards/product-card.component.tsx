@@ -11,6 +11,8 @@ import { toast } from "sonner";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import { getAuthToken } from "@/utils/token-store";
 import { useRouter } from "next/navigation";
+import { FaHeart } from "react-icons/fa6";
+import wishlistAPI from "@/services/wishlist.service";
 
 function ProductCardComponent({ item }: { item: ItemModel }) {
   const router = useRouter();
@@ -46,6 +48,27 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
     }
   };
 
+  const handleAddToWishList = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    const token = getAuthToken();
+    if (!token) {
+      toast.error("Please login to add to wishlist");
+      return;
+    }
+    try {
+      setLoading(true);
+      const response = await wishlistAPI.addToWishList(item._id);
+      if (response.error) {
+        throw new Error();
+      }
+      toast.success("Item added to wishlist");
+    } catch {
+      toast.error("Failed to add to wishlist");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Link
       href={`/product-details/${item.slug}`}
@@ -59,7 +82,13 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
             alt={item.itemName}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-125 rounded-md"
-          />{" "}
+          />
+          <button
+            onClick={handleAddToWishList}
+            className="absolute top-2 right-2 text-lg text-secondary bg-white border-secondary border p-1.5 rounded-full shadow-md hover:scale-110 transition-all duration-200"
+          >
+            <FaHeart />
+          </button>
         </div>
         <div className="px-4 md:px-6 pb-4 md:pb-6 md:mt-4">
           <p className="text-xl font-[700] mt-2">{item.itemName}</p>
