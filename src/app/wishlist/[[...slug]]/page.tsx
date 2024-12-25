@@ -1,34 +1,30 @@
-import React, { Suspense } from "react";
-import {
-  getItemParams,
-  getSortFilterOptions,
-} from "@/utils/sort-filter";
-import DefaultLoaderComponent from "@/components/ui/default-loader.component";
-import SortByMenuComponent from "@/components/sort-filter-components/sort-by-menu.component";
 import FilterMenuComponent from "@/components/sort-filter-components/filter-menu.component";
-import CollectionHeaderComponent from "@/components/product-listing-components/collection-header.component";
+import SortByMenuComponent from "@/components/sort-filter-components/sort-by-menu.component";
 import BreadCrumbComponent, {
   BreadCrumbComponentProps,
 } from "@/components/ui/breadcrumb.component";
-import ProductListingComponent from "@/components/product-listing-components";
+import DefaultLoaderComponent from "@/components/ui/default-loader.component";
+import { getItemParams, getSortFilterOptions } from "@/utils/sort-filter";
+import React, { Suspense } from "react";
+import { fetchWishlist } from "../utils";
+import WishlistListingComponent from "@/components/wishlist-components";
 import { getAuthToken } from "@/utils/cookie-store";
-import { getItems } from "../utils";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
-  const itemParams = getItemParams({ slug });
-  const token = await getAuthToken();
-  const itemData = await getItems({
-    params: itemParams,
-    token,
-  });
   const { sortOptions, filterOptions } = await getSortFilterOptions();
-
-  const breadCrumbs: BreadCrumbComponentProps[] = [
-    { name: "Home", link: "/" },
-    { name: "Products", link: "/products" },
+  const itemParams = getItemParams({ slug });
+  const response = await fetchWishlist({ params: itemParams });
+  const token = await getAuthToken();
+  const breadcrumbs: BreadCrumbComponentProps[] = [
+    {
+      name: "Home",
+      link: "/",
+    },
+    {
+      name: "Wishlist",
+    },
   ];
-
   return (
     <Suspense
       fallback={
@@ -37,39 +33,34 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
       }
     >
-      <div className={`base-page space-y-2`}>
+      <div className="base-page">
         {/* BreadCrumb */}
-        <BreadCrumbComponent breadCrumbItems={breadCrumbs} />
-
-        {/* Collection details with image part */}
-        <CollectionHeaderComponent itemData={itemData?.data?.[0]} />
-
+        <BreadCrumbComponent breadCrumbItems={breadcrumbs} />
         {/* Sort and filter Menu */}
         <div className="flex justify-between lg:hidden items-center w-full my-3">
           {filterOptions && filterOptions.length > 0 && (
             <FilterMenuComponent
-              sortFor="/products"
+              sortFor="/wishlist"
               currentParams={itemParams}
               filterOptions={filterOptions}
             />
           )}
           {sortOptions && sortOptions.length > 0 && (
             <SortByMenuComponent
-              sortFor="/products"
+              sortFor="/wishlist"
               currentParams={itemParams}
               sortOptions={sortOptions[0].values}
             />
           )}
         </div>
-
-        {/* All Products Part */}
-        <ProductListingComponent
+        {/* Product Listing */}
+        <WishlistListingComponent
           token={token}
-          totalCount={itemData?.totalCount ?? 0}
+          totalCount={response?.totalCount || 0}
           itemParams={itemParams}
-          sortOptions={sortOptions}
           filterOptions={filterOptions}
-          initialItemData={itemData?.data ?? []}
+          sortOptions={sortOptions}
+          initialItemData={response?.data || null}
         />
       </div>
     </Suspense>
