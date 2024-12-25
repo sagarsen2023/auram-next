@@ -40,10 +40,24 @@ function AddUpdateAddress() {
                 />
               </div>
             </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+              <div>
+                <TextInputComponent
+                  label="City/Locality (Required)"
+                  placeholder="Enter Locality"
+                />
+              </div>
+              <div>
+                <TextInputComponent
+                  label="Country (Required)"
+                  placeholder="Enter locality"
+                />
+              </div>
+            </div>
             <div className="grid grid-cols-1 gap-4 mb-4">
               <div>
                 <TextInputComponent
-                  label="Complete address (Required)"
+                  label="Complete address including House No, Building, Street, Area (Required)"
                   placeholder="Enter address"
                 />
               </div>
@@ -51,25 +65,12 @@ function AddUpdateAddress() {
             <div className="grid grid-cols-1 gap-4 mb-4">
               <div>
                 <TextInputComponent
-                  label="House No, Building, Street, Area (Optional)"
+                  label="Land Mark (Optional)"
                   placeholder="Enter.. "
                 />
               </div>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <TextInputComponent
-                  label="Locality  (Optional)"
-                  placeholder="Enter locality"
-                />
-              </div>
-              <div>
-                <TextInputComponent
-                  label="City/District (Required)"
-                  placeholder="Enter City/District"
-                />
-              </div>
-            </div>
+
             <div className="grid grid-cols-1 gap-4 mb-4">
               <div>
                 <PrimaryButtonCOmponent>
