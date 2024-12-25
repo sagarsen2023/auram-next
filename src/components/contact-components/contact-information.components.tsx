@@ -5,7 +5,7 @@ import React from "react";
 import { FiPhoneMissed } from "react-icons/fi";
 import { IoMailOutline, IoMapOutline } from "react-icons/io5";
 
-async function ContactCards() {
+async function ContactInformationComponent() {
   let contactInfoData: AuramContactInfoModel = {
     _id: "",
     address: "",
@@ -84,4 +84,4 @@ async function ContactCards() {
   );
 }
 
-export default ContactCards;
+export default ContactInformationComponent;

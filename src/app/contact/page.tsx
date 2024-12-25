@@ -1,5 +1,5 @@
 import BaseContactForm from "@/components/base-contact-form";
-import ContactCards from "@/components/contact-information.components";
+import ContactInformationComponent from "@/components/contact-components/contact-information.components";
 import React from "react";
 
 function Page() {
@@ -17,7 +17,7 @@ function Page() {
         </h1>
       </div>
 
-      <ContactCards />
+      <ContactInformationComponent />
       <div className="min-h-screen  py-12 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto grid md:grid-cols-1 gap-8">
           <div className="bg-gray-50 border rounded-lg p-8">
