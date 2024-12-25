@@ -21,8 +21,12 @@ export interface AddressesModel {
   updatedAt: string;
 }
 
-export default interface AllAddressApiResponse extends BaseApiResponse {
-  status: boolean;
+export interface AllAddressApiResponse extends BaseApiResponse {
   totalCount: number;
   data: AddressesModel[];
+}
+
+export interface SingleAddressApiResponse extends BaseApiResponse {
+  totalCount: number;
+  data: AddressesModel;
 }
