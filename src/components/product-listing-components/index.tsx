@@ -1,16 +1,16 @@
 "use client";
 
 import React, { useState } from "react";
-import FilterSideBarComponent from "./filter-sidebar.component";
+import FilterSideBarComponent from "../sort-filter-components/filter-sidebar.component";
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import ProductCardComponent from "../cards/product-card.component";
-import SortByMenuComponent from "./sort-by-menu.component";
+import SortByMenuComponent from "../sort-filter-components/sort-by-menu.component";
 import { ItemModel } from "@/models/product-category-collections/item.model";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
-import { getItems } from "@/app/products/utils";
+import { getItems } from "@/utils/sort-filter";
 import { MdOutlineReadMore } from "react-icons/md";
 import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
 const getRandomTagline = dynamic(() => import("@/constants/jewelry-taglines"), {
@@ -44,7 +44,7 @@ function ProductListingComponent({
           skip: itemData?.length.toString(),
           limit: "24",
         },
-        token
+        token,
       });
       setItemData((prev) => [...(prev || []), ...(response?.data || [])]);
     } catch {
@@ -57,6 +57,7 @@ function ProductListingComponent({
   return (
     <div className="lg:flex gap-5 items-start w-full h-full">
       <FilterSideBarComponent
+        sortFor="/products"
         currentParams={itemParams}
         filterOptions={filterOptions}
       />
@@ -69,6 +70,7 @@ function ProductListingComponent({
               </p>
               {sortOptions && sortOptions.length > 0 && (
                 <SortByMenuComponent
+                  sortFor="/products"
                   currentParams={itemParams}
                   sortOptions={sortOptions[0].values}
                 />

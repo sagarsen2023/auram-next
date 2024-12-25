@@ -1,8 +1,12 @@
 import React, { Suspense } from "react";
-import { getItemParams, getItems, getSortFilterOptions } from "../utils";
+import {
+  getItemParams,
+  getItems,
+  getSortFilterOptions,
+} from "@/utils/sort-filter";
 import DefaultLoaderComponent from "@/components/ui/default-loader.component";
-import SortByMenuComponent from "@/components/product-listing-components/sort-by-menu.component";
-import FilterMenuComponent from "@/components/product-listing-components/filter-menu.component";
+import SortByMenuComponent from "@/components/sort-filter-components/sort-by-menu.component";
+import FilterMenuComponent from "@/components/sort-filter-components/filter-menu.component";
 import CollectionHeaderComponent from "@/components/product-listing-components/collection-header.component";
 import BreadCrumbComponent, {
   BreadCrumbComponentProps,
@@ -43,12 +47,14 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         <div className="flex justify-between lg:hidden items-center w-full my-3">
           {filterOptions && filterOptions.length > 0 && (
             <FilterMenuComponent
+              sortFor="/products"
               currentParams={itemParams}
               filterOptions={filterOptions}
             />
           )}
           {sortOptions && sortOptions.length > 0 && (
             <SortByMenuComponent
+              sortFor="/products"
               currentParams={itemParams}
               sortOptions={sortOptions[0].values}
             />
