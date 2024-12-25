@@ -1,22 +1,31 @@
 import { getAuthToken } from "@/utils/token-store";
 import { fetchAPI } from "./config";
 import { WISHLIST_URL } from "./queryUrls";
-import { AddToWishlistResponse } from "@/models/wishlist/wishlist-response.model";
+import {
+  AddToWishlistResponse,
+  WishlistItemResponse,
+} from "@/models/wishlist/wishlist-response.model";
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import queryParamsFormatter from "@/utils/queryParamsFormatter";
 
 export const wishlistAPI = {
-  getWishList: async ({ params }: { params: ItemParams }) => {
+  // ? Following API call is happening from server side
+  getWishList: async ({
+    params,
+    token,
+  }: {
+    params: ItemParams;
+    token?: string;
+  }) => {
     const queryString = queryParamsFormatter(params);
-    return await fetchAPI.get<AddToWishlistResponse>(
+    return await fetchAPI.get<WishlistItemResponse>(
       `${WISHLIST_URL}?${queryString}`,
       {
-        headers: {
-          authorization: `Bearer ${getAuthToken()}`,
-        },
+        headers: token ? { authorization: `Bearer ${token}` } : {},
       }
     );
   },
+  // ? Following API call is happening from client side
   addToWishList: async (productId: string) => {
     return await fetchAPI.post<AddToWishlistResponse>(
       WISHLIST_URL,
@@ -30,6 +39,7 @@ export const wishlistAPI = {
       }
     );
   },
+  // ? Following API call is happening from client side
   removeFromWishList: async (productId: string) => {
     return await fetchAPI.delete<AddToWishlistResponse>(
       `${WISHLIST_URL}/${productId}`,
