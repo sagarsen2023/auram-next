@@ -30,8 +30,8 @@ export const CONTACT_INFO = `/general-infos`;
 export const CONTACT_US_URL = `/contact-us`;
 
 //My addresses
-export const MY_ADDRESSES_URL = `/addresses`;
-
+export const ADDRESSES_URL = `/addresses`;
+export const SET_DEFAULT_ADDRESS_URL = `/addresses/set-default`;
 
 // Cart Urls
 export const ADD_TO_CART_URL = "/carts/add-to-cart";
