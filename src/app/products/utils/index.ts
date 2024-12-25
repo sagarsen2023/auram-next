@@ -1,5 +1,5 @@
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
-import ItemApiResponse from "@/models/product-category-collections/item.model";
+import ItemApiResponse from "@/models/product-category-collections/item-response.model";
 import { itemAPI } from "@/services/item.service";
 
 export async function getItems({

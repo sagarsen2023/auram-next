@@ -34,6 +34,7 @@ function Page() {
       if (!response.error) {
         setCartResponse(response);
         // setCartData(response.data);
+
       } else {
         throw new Error();
       }

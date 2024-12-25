@@ -9,7 +9,7 @@ import {
 } from "./queryUrls";
 import ItemApiResponse, {
   ItemDetailsResponse,
-} from "@/models/product-category-collections/item.model";
+} from "@/models/product-category-collections/item-response.model";
 import { SortFilterApiResponse } from "@/models/product-category-collections/sort-filter.model";
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { generateQueryStringWithSortFilter } from "@/utils/sort-filter";

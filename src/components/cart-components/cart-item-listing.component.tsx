@@ -29,7 +29,7 @@ function CartItemListingComponent({
     if (!items) return;
 
     const updatedItems = items.map((item) => {
-      if (item.itemId === itemId) {
+      if (item.itemId._id === itemId) {
         const newQuantity = Math.max(1, item.quantity + change);
         onQuantityChange(itemId, newQuantity);
         return { ...item, quantity: newQuantity };
@@ -49,24 +49,20 @@ function CartItemListingComponent({
         >
           <button
             className="absolute top-2 right-2 text-red-500"
-            onClick={() => onDelete(item.itemId)}
+            onClick={() => onDelete(item.itemId._id)}
           >
             <FaXmark />
           </button>
           <div className="flex items-start gap-4 pr-5">
-            <Link href={`/product-details/${item.itemCopy._id}`}>
-              <div className="relative w-24 h-24 shrink-0">
-                <div className="absolute inset-0 p-2 border rounded-xl">
-                  <div className="relative w-full h-full">
-                    <Image
-                      src={imageValidator(item.itemCopy?.thumbnail?.path)}
-                      alt={item.itemCopy.itemName}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 96px) 100vw, 96px"
-                    />
-                  </div>
-                </div>
+            <Link href={`/product-details/${item.itemId._id}`}>
+              <div className="relative w-24 h-24 shrink-0 rounded-lg overflow-hidden">
+                <Image
+                  src={imageValidator(item.itemId?.thumbnail?.path)}
+                  alt={item.itemId.itemName}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 96px) 100vw, 96px"
+                />
               </div>
             </Link>
             <div className="flex-1 min-w-0">
@@ -77,7 +73,7 @@ function CartItemListingComponent({
               <div className="flex items-center gap-2 mt-2">
                 <PrimaryButtonComponent
                   className="h-8 w-8"
-                  onClick={() => handleQuantityChange(item.itemId, -1)}
+                  onClick={() => handleQuantityChange(item.itemId._id, -1)}
                   disabled={item.quantity <= 1}
                 >
                   <FaMinus />
@@ -85,7 +81,7 @@ function CartItemListingComponent({
                 <span className="w-8 text-center">{item.quantity}</span>
                 <PrimaryButtonComponent
                   className="h-8 w-8"
-                  onClick={() => handleQuantityChange(item.itemId, 1)}
+                  onClick={() => handleQuantityChange(item.itemId._id, 1)}
                 >
                   <FaPlus />
                 </PrimaryButtonComponent>

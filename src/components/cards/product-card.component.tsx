@@ -1,6 +1,5 @@
 "use client";
 
-import { ItemModel } from "@/models/product-category-collections/item.model";
 import cartAPI from "@/services/cart.service";
 import imageValidator from "@/utils/image-validator";
 import priceFormatter from "@/utils/price-formatter";
@@ -13,6 +12,7 @@ import { getAuthToken } from "@/utils/token-store";
 import { useRouter } from "next/navigation";
 import { FaHeart } from "react-icons/fa6";
 import wishlistAPI from "@/services/wishlist.service";
+import { ItemModel } from "@/models/common/item.model";
 
 function ProductCardComponent({ item }: { item: ItemModel }) {
   const router = useRouter();

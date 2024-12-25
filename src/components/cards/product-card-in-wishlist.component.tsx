@@ -1,6 +1,5 @@
 "use client";
 
-import { ItemModel } from "@/models/product-category-collections/item.model";
 import wishlistAPI from "@/services/wishlist.service";
 import imageValidator from "@/utils/image-validator";
 import priceFormatter from "@/utils/price-formatter";
@@ -9,6 +8,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { FaTrash } from "react-icons/fa6";
+import { ItemModel } from "@/models/common/item.model";
 
 function ProductCartInWishListComponent({
   item,

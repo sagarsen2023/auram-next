@@ -7,12 +7,12 @@ import { SortFilterModel } from "@/models/product-category-collections/sort-filt
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import ProductCardComponent from "../cards/product-card.component";
 import SortByMenuComponent from "../sort-filter-components/sort-by-menu.component";
-import { ItemModel } from "@/models/product-category-collections/item.model";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
 import { MdOutlineReadMore } from "react-icons/md";
 import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
 import { getItems } from "@/app/products/utils";
+import { ItemModel } from "@/models/common/item.model";
 const getRandomTagline = dynamic(() => import("@/constants/jewelry-taglines"), {
   ssr: false,
 });

@@ -15,10 +15,6 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const { sortOptions, filterOptions } = await getSortFilterOptions();
   const itemParams = getItemParams({ slug });
   const response = await fetchWishlist({ params: itemParams });
-  console.log(
-    "🚀 ~ file: page.tsx ~ line 100 ~ Page ~ response",
-    response?.data[0]
-  )
   const token = await getAuthToken();
   const breadcrumbs: BreadCrumbComponentProps[] = [
     {
