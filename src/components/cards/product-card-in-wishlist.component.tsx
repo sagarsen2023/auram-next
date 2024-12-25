@@ -12,8 +12,10 @@ import { WishlistModel } from "@/models/wishlist/wishlist-response.model";
 
 function ProductCartInWishListComponent({
   wishlistItem,
+  onRemove,
 }: {
   wishlistItem: WishlistModel;
+  onRemove?: () => void;
 }) {
   const { item } = wishlistItem;
   const [loading, setLoading] = useState(false);
@@ -27,6 +29,7 @@ function ProductCartInWishListComponent({
         throw new Error();
       }
       toast.success("Item removed from wishlist");
+      onRemove?.();
     } catch {
       toast.error("Failed to remove from wishlist");
     } finally {
@@ -35,7 +38,10 @@ function ProductCartInWishListComponent({
   };
 
   return (
-    <div className="hover:shadow-lg transition-all duration-300 border rounded-md flex flex-col gap-4 justify-between group hover:bg-gray-100 overflow-hidden">
+    <Link
+      href={`/product-details/${item.slug}`}
+      className="hover:shadow-lg transition-all duration-300 border rounded-md flex flex-col gap-4 justify-between group hover:bg-gray-100 overflow-hidden"
+    >
       {/* Item image and title */}
       <div className="w-full">
         <div className="relative w-full h-[18rem] overflow-hidden">
@@ -48,7 +54,7 @@ function ProductCartInWishListComponent({
           <button
             onClick={handleRemoveFromWishList}
             disabled={loading}
-            className="absolute top-2 right-2 text-lg text-secondary bg-white border-secondary border p-1.5 rounded-full shadow-md hover:scale-110 transition-all duration-200 disabled:opacity-50"
+            className="absolute top-2 right-2 text-sm text-white bg-red-500 p-2 rounded-full shadow-md hover:scale-110 transition-all duration-200 disabled:opacity-50"
           >
             <FaTrash />
           </button>
@@ -73,14 +79,11 @@ function ProductCartInWishListComponent({
         <p className="text-lg font-bold tracking-widest mb-2">
           {priceFormatter(item.finalPrice ?? 0)}
         </p>
-        <Link
-          href={`/product-details/${item.slug}`}
-          className="text-secondary font-semibold hover:underline"
-        >
+        <span className="text-secondary font-semibold hover:underline">
           View Details
-        </Link>
+        </span>
       </div>
-    </div>
+    </Link>
   );
 }
 

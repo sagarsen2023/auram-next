@@ -32,6 +32,8 @@ function WishlistListingComponent({
   sortOptions: SortFilterModel[] | null;
   initialItemData: WishlistModel[] | null;
 }) {
+  const [totalWishListItemCount, setTotalWishListItemCount] =
+    useState(totalCount);
   const [loading, setLoading] = useState(false);
   const [itemData, setItemData] = useState(initialItemData);
   const RandomTaglineComponent = getRandomTagline;
@@ -50,6 +52,22 @@ function WishlistListingComponent({
       setItemData((prev) => [...(prev || []), ...(response?.data || [])]);
     } catch {
       toast.error("Error loading more products");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const refetchWishlist = async () => {
+    try {
+      setLoading(true);
+      const response = await wishlistAPI.getWishList({
+        params: itemParams,
+        token,
+      });
+      setItemData(response?.data || []);
+      setTotalWishListItemCount(response?.totalCount || 0);
+    } catch {
+      toast.error("Error refetching wishlist");
     } finally {
       setLoading(false);
     }
@@ -79,13 +97,17 @@ function WishlistListingComponent({
             </div>
 
             {itemData.map((wishListItem) => (
-              <ProductCartInWishListComponent key={wishListItem._id} wishlistItem={wishListItem} />
+              <ProductCartInWishListComponent
+                key={wishListItem._id}
+                wishlistItem={wishListItem}
+                onRemove={refetchWishlist}
+              />
             ))}
             <div className="col-span-full w-full justify-center items-center flex">
               <PrimaryButtonComponent
                 isLoading={loading}
                 className="w-fit"
-                disabled={itemData.length === totalCount}
+                disabled={itemData.length === totalWishListItemCount}
                 onClick={handleLoadMore}
               >
                 <MdOutlineReadMore className="mr-3" />
