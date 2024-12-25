@@ -1,7 +1,6 @@
-import BaseApiResponse from "../common/base-api-response.model";
-import MediaResponse from "../common/media-response.model";
-import { CategoryItem } from "./category.model";
-import { CollectionItem } from "./collection.model";
+import { CategoryItem } from "../product-category-collections/category.model";
+import { CollectionItem } from "../product-category-collections/collection.model";
+import MediaResponse from "./media-response.model";
 
 export interface StoneDetails {
   _id: string;
@@ -44,15 +43,5 @@ export interface ItemModel {
   grossWeight?: number;
   isFeatured: boolean;
   isAddedToCart?: boolean;
-}
-
-export default interface ItemApiResponse extends BaseApiResponse {
-  status: boolean;
-  totalCount: number;
-  data: ItemModel[];
-}
-
-export interface ItemDetailsResponse extends BaseApiResponse {
-  status: boolean;
-  data: ItemModel;
+  isAddedToWishlist?: boolean;
 }

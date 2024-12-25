@@ -1,7 +1,7 @@
-import { ItemModel } from "@/models/product-category-collections/item.model";
 import imageValidator from "@/utils/image-validator";
 import React from "react";
 import getRandomTagline from "@/constants/jewelry-taglines";
+import { ItemModel } from "@/models/common/item.model";
 
 function CollectionHeaderComponent({ itemData }: { itemData?: ItemModel }) {
   if (!itemData) return null;

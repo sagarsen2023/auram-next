@@ -1,4 +1,4 @@
-import { StoneDetails } from "@/models/product-category-collections/item.model";
+import { StoneDetails } from "@/models/common/item.model";
 import firstLetterCapitalize from "@/utils/first-letter-capitalize";
 import priceFormatter from "@/utils/price-formatter";
 import React from "react";

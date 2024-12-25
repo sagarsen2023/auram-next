@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { generateSlugFromParams } from "@/app/products/utils";
+import { generateSlugFromParams } from "@/utils/sort-filter";
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
 import { useRouter } from "next/navigation";
@@ -10,9 +10,11 @@ import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import { FaXmark } from "react-icons/fa6";
 
 function FilterSideBarComponent({
+  sortFor,
   currentParams,
   filterOptions,
 }: {
+  sortFor: "/products" | "/wishlist";
   currentParams: ItemParams;
   filterOptions: SortFilterModel[] | null;
 }) {
@@ -30,8 +32,9 @@ function FilterSideBarComponent({
   useEffect(() => {
     if (mergedParams) {
       const newParams = generateSlugFromParams(mergedParams);
-      router.push(`/products/${newParams}`);
+      router.push(`${sortFor}/${newParams}`);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mergedParams, router]);
 
   function handleFilterChange(filterType: string, value: string) {
@@ -53,7 +56,7 @@ function FilterSideBarComponent({
         <h1 className="text-2xl font-bold">Apply Filters</h1>
         <PrimaryButtonCOmponent
           className="p-2 w-fit h-8"
-          onClick={() => router.push("/products")}
+          onClick={() => router.push(sortFor)}
         >
           Clear
           <FaXmark />

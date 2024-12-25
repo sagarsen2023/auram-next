@@ -9,10 +9,10 @@ import {
 } from "./queryUrls";
 import ItemApiResponse, {
   ItemDetailsResponse,
-} from "@/models/product-category-collections/item.model";
+} from "@/models/product-category-collections/item-response.model";
 import { SortFilterApiResponse } from "@/models/product-category-collections/sort-filter.model";
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
-import queryParamsFormatter from "@/utils/queryParamsFormatter";
+import { generateQueryStringWithSortFilter } from "@/utils/sort-filter";
 
 export const collectionAPI = {
   getAllCollections: async () =>
@@ -43,17 +43,11 @@ export const itemAPI = {
   getAllItems: async ({
     params,
     token,
-  }:{params: ItemParams, token?: string}) => {
-    const queryString = queryParamsFormatter({
-      skip: params.skip,
-      limit: params.limit ?? 36,
-      sortBy: params.sortBy,
-      collections: params.collections,
-      itemCategory: params.itemCategory,
-      goldPurity: params.goldPurity,
-      gender: params.gender,
-      priceRange: [params.minPrice, params.maxPrice],
-    });
+  }: {
+    params: ItemParams;
+    token?: string;
+  }) => {
+    const queryString = generateQueryStringWithSortFilter(params);
     return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`, {
       headers: token ? { authorization: `Bearer ${token}` } : {},
     });

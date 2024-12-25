@@ -2,14 +2,16 @@
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { SortFilterOptions } from "@/models/product-category-collections/sort-filter.model";
 import React, { useEffect, useState } from "react";
-import { generateSlugFromParams } from "@/app/products/utils";
+import { generateSlugFromParams } from "@/utils/sort-filter";
 import Link from "next/link";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 
 const SortByMenuComponent = ({
+  sortFor,
   currentParams,
   sortOptions,
 }: {
+  sortFor: "/products" | "/wishlist";
   currentParams: ItemParams;
   sortOptions?: SortFilterOptions[];
 }) => {
@@ -32,11 +34,12 @@ const SortByMenuComponent = ({
     if (sortOptions) {
       const newSortOptions = sortOptions.map((option) => {
         const updatedParams = { ...currentParams, sortBy: option.value };
-        const link = `/products/${generateSlugFromParams(updatedParams)}`;
+        const link = `${sortFor}/${generateSlugFromParams(updatedParams)}`;
         return { ...option, link };
       });
       setUpdatedSortOptions(newSortOptions);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [sortOptions, currentParams]);
 
   const toggleDropdown = () => {

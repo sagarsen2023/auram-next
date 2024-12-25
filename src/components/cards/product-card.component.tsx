@@ -1,6 +1,5 @@
 "use client";
 
-import { ItemModel } from "@/models/product-category-collections/item.model";
 import cartAPI from "@/services/cart.service";
 import imageValidator from "@/utils/image-validator";
 import priceFormatter from "@/utils/price-formatter";
@@ -11,11 +10,17 @@ import { toast } from "sonner";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import { getAuthToken } from "@/utils/token-store";
 import { useRouter } from "next/navigation";
+import { FaHeart } from "react-icons/fa6";
+import wishlistAPI from "@/services/wishlist.service";
+import { ItemModel } from "@/models/common/item.model";
 
 function ProductCardComponent({ item }: { item: ItemModel }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(item.isAddedToCart);
+  const [isAddedToWishlist, setIsAddedToWishlist] = useState(
+    item.isAddedToWishlist
+  );
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -46,6 +51,28 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
     }
   };
 
+  const handleAddToWishList = async (e: React.MouseEvent) => {
+    e.preventDefault();
+    const token = getAuthToken();
+    if (!token) {
+      toast.error("Please login to add to wishlist");
+      return;
+    }
+    try {
+      setLoading(true);
+      const response = await wishlistAPI.addToWishList(item._id);
+      if (response.error) {
+        throw new Error();
+      }
+      setIsAddedToWishlist(true);
+      toast.success("Item added to wishlist");
+    } catch {
+      toast.error("Failed to add to wishlist");
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Link
       href={`/product-details/${item.slug}`}
@@ -59,7 +86,17 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
             alt={item.itemName}
             fill
             className="object-cover transition-transform duration-300 group-hover:scale-125 rounded-md"
-          />{" "}
+          />
+          <button
+            onClick={handleAddToWishList}
+            className={`absolute top-2 right-2 text-lg ${
+              isAddedToWishlist
+                ? "text-red-600 bg-white border-red-600 border"
+                : "text-white bg-black/10"
+            }  p-1.5 rounded-full shadow-md hover:scale-110 transition-all duration-200`}
+          >
+            <FaHeart />
+          </button>
         </div>
         <div className="px-4 md:px-6 pb-4 md:pb-6 md:mt-4">
           <p className="text-xl font-[700] mt-2">{item.itemName}</p>

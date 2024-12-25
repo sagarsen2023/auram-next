@@ -58,15 +58,16 @@ function NavBarComponent() {
             <div className="flex items-center gap-4 text-2xl">
               <div className="hidden md:flex gap-6 items-center font-[300] text-[14px] mr-8">
                 {userName ? (
+                  // TODO: Here a dropdown menu will be added
                   <span>{userName}</span>
                 ) : (
                   <button onClick={handleModalState}>
                     <CiUser className="text-2xl" />
                   </button>
                 )}
-                <button>
+                <Link href="/wishlist">
                   <CiHeart className="text-2xl" />
-                </button>
+                </Link>
                 <button>
                   <IoIosNotificationsOutline className="text-2xl" />
                 </button>

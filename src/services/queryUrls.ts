@@ -37,3 +37,6 @@ export const SET_DEFAULT_ADDRESS_URL = `/addresses/set-default`;
 export const ADD_TO_CART_URL = "/carts/add-to-cart";
 export const GET_CART_URL = "/carts/get-cart";
 export const DELETE_CART_ITEM_URL = "/carts/remove-cart-item";
+
+// Wishlist Urls
+export const WISHLIST_URL = "/wishlists";
