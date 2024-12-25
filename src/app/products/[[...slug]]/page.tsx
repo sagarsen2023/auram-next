@@ -17,11 +17,12 @@ import { getItems } from "../utils";
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
   const itemParams = getItemParams({ slug });
+  const token = await getAuthToken();
   const itemData = await getItems({
     params: itemParams,
+    token,
   });
   const { sortOptions, filterOptions } = await getSortFilterOptions();
-  const token = await getAuthToken();
 
   const breadCrumbs: BreadCrumbComponentProps[] = [
     { name: "Home", link: "/" },

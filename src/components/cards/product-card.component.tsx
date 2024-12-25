@@ -18,6 +18,9 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(item.isAddedToCart);
+  const [isAddedToWishlist, setIsAddedToWishlist] = useState(
+    item.isAddedToWishlist
+  );
 
   const handleAddToCart = async (e: React.MouseEvent) => {
     e.preventDefault();
@@ -61,6 +64,7 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
       if (response.error) {
         throw new Error();
       }
+      setIsAddedToWishlist(true);
       toast.success("Item added to wishlist");
     } catch {
       toast.error("Failed to add to wishlist");
@@ -85,7 +89,11 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
           />
           <button
             onClick={handleAddToWishList}
-            className="absolute top-2 right-2 text-lg text-secondary bg-white border-secondary border p-1.5 rounded-full shadow-md hover:scale-110 transition-all duration-200"
+            className={`absolute top-2 right-2 text-lg ${
+              isAddedToWishlist
+                ? "text-red-600 bg-white border-red-600 border"
+                : "text-white bg-black/10"
+            }  p-1.5 rounded-full shadow-md hover:scale-110 transition-all duration-200`}
           >
             <FaHeart />
           </button>

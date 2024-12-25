@@ -33,8 +33,6 @@ function Page() {
       const response = await cartAPI.getCartData();
       if (!response.error) {
         setCartResponse(response);
-        // setCartData(response.data);
-
       } else {
         throw new Error();
       }

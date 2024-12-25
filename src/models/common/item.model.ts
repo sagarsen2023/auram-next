@@ -43,4 +43,5 @@ export interface ItemModel {
   grossWeight?: number;
   isFeatured: boolean;
   isAddedToCart?: boolean;
+  isAddedToWishlist?: boolean;
 }

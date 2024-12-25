@@ -35,6 +35,7 @@ function WishlistListingComponent({
   const [loading, setLoading] = useState(false);
   const [itemData, setItemData] = useState(initialItemData);
   const RandomTaglineComponent = getRandomTagline;
+
   const handleLoadMore = async () => {
     try {
       setLoading(true);
@@ -78,7 +79,7 @@ function WishlistListingComponent({
             </div>
 
             {itemData.map((wishListItem) => (
-              <ProductCartInWishListComponent key={wishListItem._id} item={wishListItem.item} />
+              <ProductCartInWishListComponent key={wishListItem._id} wishlistItem={wishListItem} />
             ))}
             <div className="col-span-full w-full justify-center items-center flex">
               <PrimaryButtonComponent

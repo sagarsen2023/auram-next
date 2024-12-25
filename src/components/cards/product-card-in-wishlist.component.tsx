@@ -8,20 +8,21 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "sonner";
 import { FaTrash } from "react-icons/fa6";
-import { ItemModel } from "@/models/common/item.model";
+import { WishlistModel } from "@/models/wishlist/wishlist-response.model";
 
 function ProductCartInWishListComponent({
-  item,
+  wishlistItem,
 }: {
-  item: ItemModel;
+  wishlistItem: WishlistModel;
 }) {
+  const { item } = wishlistItem;
   const [loading, setLoading] = useState(false);
 
   const handleRemoveFromWishList = async (e: React.MouseEvent) => {
     e.preventDefault();
     try {
       setLoading(true);
-      const response = await wishlistAPI.removeFromWishList(item._id);
+      const response = await wishlistAPI.removeFromWishList(wishlistItem._id);
       if (response.error) {
         throw new Error();
       }
