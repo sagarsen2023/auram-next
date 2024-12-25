@@ -18,6 +18,7 @@ const getRandomTagline = dynamic(() => import("@/constants/jewelry-taglines"), {
 });
 
 function ProductListingComponent({
+  token,
   totalCount,
   itemParams,
   filterOptions,
@@ -25,6 +26,7 @@ function ProductListingComponent({
   initialItemData,
 }: {
   totalCount: number;
+  token: string | undefined;
   itemParams: ItemParams;
   filterOptions: SortFilterModel[] | null;
   sortOptions: SortFilterModel[] | null;
@@ -33,7 +35,6 @@ function ProductListingComponent({
   const [loading, setLoading] = useState(false);
   const [itemData, setItemData] = useState(initialItemData);
   const RandomTaglineComponent = getRandomTagline;
-
   const handleLoadMore = async () => {
     try {
       setLoading(true);
@@ -43,6 +44,7 @@ function ProductListingComponent({
           skip: itemData?.length.toString(),
           limit: "24",
         },
+        token
       });
       setItemData((prev) => [...(prev || []), ...(response?.data || [])]);
     } catch {

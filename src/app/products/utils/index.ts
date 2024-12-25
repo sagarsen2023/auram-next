@@ -127,11 +127,13 @@ export function getItemParams({ slug }: { slug?: string[] }): ItemParams {
 
 export async function getItems({
   params,
+  token,
 }: {
   params: ItemParams;
+  token?: string;
 }): Promise<ItemApiResponse | null> {
   try {
-    const response = await itemAPI.getAllItems(params);
+    const response = await itemAPI.getAllItems({ params, token });
     return response;
   } catch (error) {
     console.error(error);

@@ -20,17 +20,19 @@ export const collectionAPI = {
 };
 
 export const itemAPI = {
-  getFeaturedItems: async () =>
+  getFeaturedItems: async (token?: string) =>
     fetchAPI.get<ItemApiResponse>(FEATURED_ITEMS_URL, {
       next: {
         revalidate: 60,
       },
+      headers: token ? { authorization: `Bearer ${token}` } : {},
     }),
-  getLatestItems: async () =>
+  getLatestItems: async (token?: string) =>
     fetchAPI.get<ItemApiResponse>(LATEST_ITEMS_URL, {
       next: {
         revalidate: 60,
       },
+      headers: token ? { authorization: `Bearer ${token}` } : {},
     }),
   getSortFilers: async () =>
     fetchAPI.get<SortFilterApiResponse>(SORT_FILTERS_URL, {
@@ -38,7 +40,10 @@ export const itemAPI = {
         revalidate: 120,
       },
     }),
-  getAllItems: async (params: ItemParams) => {
+  getAllItems: async ({
+    params,
+    token,
+  }:{params: ItemParams, token?: string}) => {
     const queryString = queryParamsFormatter({
       skip: params.skip,
       limit: params.limit ?? 36,
@@ -49,8 +54,12 @@ export const itemAPI = {
       gender: params.gender,
       priceRange: [params.minPrice, params.maxPrice],
     });
-    return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`);
+    return fetchAPI.get<ItemApiResponse>(`${ITEM_URL}?${queryString}`, {
+      headers: token ? { authorization: `Bearer ${token}` } : {},
+    });
   },
-  getItemDetails: async (id: string) =>
-    fetchAPI.get<ItemDetailsResponse>(`${ITEM_URL}/${id}`),
+  getItemDetails: async (id: string, token?: string) =>
+    fetchAPI.get<ItemDetailsResponse>(`${ITEM_URL}/${id}`, {
+      headers: token ? { authorization: `Bearer ${token}` } : {},
+    }),
 };

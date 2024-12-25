@@ -1,7 +1,7 @@
 import BaseApiResponse from "../common/base-api-response.model";
 import { ItemModel } from "../product-category-collections/item.model";
 
-interface CartItem {
+export interface CartItem {
   quantity: number;
   _id: string;
   cartId: string;

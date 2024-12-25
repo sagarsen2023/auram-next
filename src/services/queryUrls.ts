@@ -36,3 +36,4 @@ export const MY_ADDRESSES_URL = `/addresses`;
 // Cart Urls
 export const ADD_TO_CART_URL = "/carts/add-to-cart";
 export const GET_CART_URL = "/carts/get-cart";
+export const DELETE_CART_ITEM_URL = "/carts/remove-cart-item";
