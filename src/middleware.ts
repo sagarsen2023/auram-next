@@ -24,10 +24,16 @@ const matchDynamicRoute = ({
   if (pathname.startsWith("/product-details/")) {
     return true;
   }
-  if (pathname.startsWith("/products/")) {
+  if (pathname.startsWith("/products")) {
     return true;
   }
-  if (pathname.startsWith("/my/")) {
+  if (pathname.startsWith("/my")) {
+    if (ifTokenNotExist) {
+      return false;
+    }
+    return true;
+  }
+  if (pathname.startsWith("/wishlist")) {
     if (ifTokenNotExist) {
       return false;
     }
