@@ -9,7 +9,7 @@ import { ItemParams } from "@/models/product-category-collections/item-params.mo
 import queryParamsFormatter from "@/utils/queryParamsFormatter";
 
 export const wishlistAPI = {
-  // ? Following API call is happening from server side
+  // ? Following API call is happening from both client and server side
   getWishList: async ({
     params,
     token,

@@ -4,15 +4,22 @@ import BreadCrumbComponent, {
   BreadCrumbComponentProps,
 } from "@/components/ui/breadcrumb.component";
 import DefaultLoaderComponent from "@/components/ui/default-loader.component";
-// import { getAuthToken } from "@/utils/cookie-store";
 import { getItemParams, getSortFilterOptions } from "@/utils/sort-filter";
 import React, { Suspense } from "react";
+import { fetchWishlist } from "../utils";
+import WishlistListingComponent from "@/components/wishlist-components";
+import { getAuthToken } from "@/utils/cookie-store";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
   const { sortOptions, filterOptions } = await getSortFilterOptions();
-  // const token = await getAuthToken();
   const itemParams = getItemParams({ slug });
+  const response = await fetchWishlist({ params: itemParams });
+  console.log(
+    "🚀 ~ file: page.tsx ~ line 100 ~ Page ~ response",
+    response?.data[0]
+  )
+  const token = await getAuthToken();
   const breadcrumbs: BreadCrumbComponentProps[] = [
     {
       name: "Home",
@@ -50,6 +57,15 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
             />
           )}
         </div>
+        {/* Product Listing */}
+        <WishlistListingComponent
+          token={token}
+          totalCount={response?.totalCount || 0}
+          itemParams={itemParams}
+          filterOptions={filterOptions}
+          sortOptions={sortOptions}
+          initialItemData={response?.data || null}
+        />
       </div>
     </Suspense>
   );

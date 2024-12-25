@@ -4,20 +4,20 @@ import React, { useState } from "react";
 import FilterSideBarComponent from "../sort-filter-components/filter-sidebar.component";
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
-import PrimaryButtonCOmponent from "../buttons/primary-button.component";
-import ProductCardComponent from "../cards/product-card.component";
+import PrimaryButtonComponent from "../buttons/primary-button.component";
 import SortByMenuComponent from "../sort-filter-components/sort-by-menu.component";
-import { ItemModel } from "@/models/product-category-collections/item.model";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
 import { MdOutlineReadMore } from "react-icons/md";
 import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
-import { getItems } from "@/app/products/utils";
+import ProductCartInWishListComponent from "../cards/product-card-in-wishlist.component";
+import { WishlistModel } from "@/models/wishlist/wishlist-response.model";
+import wishlistAPI from "@/services/wishlist.service";
 const getRandomTagline = dynamic(() => import("@/constants/jewelry-taglines"), {
   ssr: false,
 });
 
-function ProductListingComponent({
+function WishlistListingComponent({
   token,
   totalCount,
   itemParams,
@@ -30,7 +30,7 @@ function ProductListingComponent({
   itemParams: ItemParams;
   filterOptions: SortFilterModel[] | null;
   sortOptions: SortFilterModel[] | null;
-  initialItemData: ItemModel[] | null;
+  initialItemData: WishlistModel[] | null;
 }) {
   const [loading, setLoading] = useState(false);
   const [itemData, setItemData] = useState(initialItemData);
@@ -38,7 +38,7 @@ function ProductListingComponent({
   const handleLoadMore = async () => {
     try {
       setLoading(true);
-      const response = await getItems({
+      const response = await wishlistAPI.getWishList({
         params: {
           ...itemParams,
           skip: itemData?.length.toString(),
@@ -57,7 +57,7 @@ function ProductListingComponent({
   return (
     <div className="lg:flex gap-5 items-start w-full h-full">
       <FilterSideBarComponent
-        sortFor="/products"
+        sortFor="/wishlist"
         currentParams={itemParams}
         filterOptions={filterOptions}
       />
@@ -70,18 +70,18 @@ function ProductListingComponent({
               </p>
               {sortOptions && sortOptions.length > 0 && (
                 <SortByMenuComponent
-                  sortFor="/products"
+                  sortFor="/wishlist"
                   currentParams={itemParams}
                   sortOptions={sortOptions[0].values}
                 />
               )}
             </div>
 
-            {itemData.map((item) => (
-              <ProductCardComponent key={item._id} item={item} />
+            {itemData.map((wishListItem) => (
+              <ProductCartInWishListComponent key={wishListItem._id} item={wishListItem.item} />
             ))}
             <div className="col-span-full w-full justify-center items-center flex">
-              <PrimaryButtonCOmponent
+              <PrimaryButtonComponent
                 isLoading={loading}
                 className="w-fit"
                 disabled={itemData.length === totalCount}
@@ -89,7 +89,7 @@ function ProductListingComponent({
               >
                 <MdOutlineReadMore className="mr-3" />
                 Load More Products
-              </PrimaryButtonCOmponent>
+              </PrimaryButtonComponent>
             </div>
           </div>
         ) : (
@@ -100,4 +100,4 @@ function ProductListingComponent({
   );
 }
 
-export default ProductListingComponent;
+export default WishlistListingComponent;
