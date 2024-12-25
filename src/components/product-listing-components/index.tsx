@@ -10,9 +10,10 @@ import SortByMenuComponent from "../sort-filter-components/sort-by-menu.componen
 import { ItemModel } from "@/models/product-category-collections/item.model";
 import dynamic from "next/dynamic";
 import { toast } from "sonner";
-import { getItems } from "@/utils/sort-filter";
+
 import { MdOutlineReadMore } from "react-icons/md";
 import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
+import { getItems } from "@/app/products/utils";
 const getRandomTagline = dynamic(() => import("@/constants/jewelry-taglines"), {
   ssr: false,
 });

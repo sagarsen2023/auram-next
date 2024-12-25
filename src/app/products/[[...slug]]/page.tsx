@@ -1,7 +1,6 @@
 import React, { Suspense } from "react";
 import {
   getItemParams,
-  getItems,
   getSortFilterOptions,
 } from "@/utils/sort-filter";
 import DefaultLoaderComponent from "@/components/ui/default-loader.component";
@@ -13,6 +12,7 @@ import BreadCrumbComponent, {
 } from "@/components/ui/breadcrumb.component";
 import ProductListingComponent from "@/components/product-listing-components";
 import { getAuthToken } from "@/utils/cookie-store";
+import { getItems } from "../utils";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
