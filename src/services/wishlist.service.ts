@@ -1,7 +1,7 @@
 import { getAuthToken } from "@/utils/token-store";
 import { fetchAPI } from "./config";
 import { WISHLIST_URL } from "./queryUrls";
-import { AddToWishlistResponse } from "@/models/widhlist/wishlist-response.model";
+import { AddToWishlistResponse } from "@/models/wishlist/wishlist-response.model";
 
 export const wishlistAPI = {
   addToWishList: async (productId: string) => {
