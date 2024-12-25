@@ -1,6 +1,5 @@
 import { fetchAPI } from "./config";
 import { AllAddressApiResponse } from "@/models/addresses/address.model";
-
 import { getAuthToken } from "@/utils/token-store";
 import { ADDRESSES_URL } from "./queryUrls";
 

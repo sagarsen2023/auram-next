@@ -1,11 +1,13 @@
 "use client";
+
 import ModalComponent from "@/components/ui/modal.component";
 import React, { useEffect, useState } from "react";
-import AddUpdateAddress from "./add-update-address.comonent";
+import AddUpdateAddress from "./add-update-address.component";
 import { AddressesModel } from "@/models/addresses/address.model";
 import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.component";
 import addressesAPI from "@/services/address.service";
 import AddressListingComponent from "./address-card";
+
 function MyAddresses() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleAddressModalState = React.useCallback(
@@ -14,7 +16,7 @@ function MyAddresses() {
   );
 
   const [loading, setLoading] = useState(true);
-  const [addressesData, setaddressesData] = useState<AddressesModel[] | null>(
+  const [addressesData, setAddressesData] = useState<AddressesModel[] | null>(
     null
   );
 
@@ -23,7 +25,7 @@ function MyAddresses() {
     addressesAPI
       .fetchAllAddresses()
       .then((response) => {
-        setaddressesData(response.data);
+        setAddressesData(response.data);
       })
       .catch((error) => {
         console.log(error);
