@@ -1,13 +1,15 @@
 import React, { Suspense } from "react";
 import DefaultLoaderComponent from "../ui/default-loader.component";
-import { ItemModel } from "@/models/product-category-collections/item.model";
 import { itemAPI } from "@/services/item.service";
 import ProductCardComponent from "../cards/product-card.component";
+import { getAuthToken } from "@/utils/cookie-store";
+import { ItemModel } from "@/models/common/item.model";
 
 async function FeaturedItemComponent() {
+  const token = await getAuthToken();
   let items: ItemModel[] = [];
   try {
-    const response = await itemAPI.getFeaturedItems();
+    const response = await itemAPI.getFeaturedItems(token);
     items = response.data.slice(0, 4) ?? [];
   } catch (error) {
     console.log(error);

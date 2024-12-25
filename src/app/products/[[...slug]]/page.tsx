@@ -1,19 +1,26 @@
 import React, { Suspense } from "react";
-import { getItemParams, getItems, getSortFilterOptions } from "../utils";
+import {
+  getItemParams,
+  getSortFilterOptions,
+} from "@/utils/sort-filter";
 import DefaultLoaderComponent from "@/components/ui/default-loader.component";
-import SortByMenuComponent from "@/components/product-listing-components/sort-by-menu.component";
-import FilterMenuComponent from "@/components/product-listing-components/filter-menu.component";
+import SortByMenuComponent from "@/components/sort-filter-components/sort-by-menu.component";
+import FilterMenuComponent from "@/components/sort-filter-components/filter-menu.component";
 import CollectionHeaderComponent from "@/components/product-listing-components/collection-header.component";
 import BreadCrumbComponent, {
   BreadCrumbComponentProps,
 } from "@/components/ui/breadcrumb.component";
 import ProductListingComponent from "@/components/product-listing-components";
+import { getAuthToken } from "@/utils/cookie-store";
+import { getItems } from "../utils";
 
 async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
   const slug = (await params).slug;
   const itemParams = getItemParams({ slug });
+  const token = await getAuthToken();
   const itemData = await getItems({
     params: itemParams,
+    token,
   });
   const { sortOptions, filterOptions } = await getSortFilterOptions();
 
@@ -30,7 +37,7 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         </div>
       }
     >
-      <div className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-4">
+      <div className={`base-page space-y-2`}>
         {/* BreadCrumb */}
         <BreadCrumbComponent breadCrumbItems={breadCrumbs} />
 
@@ -41,12 +48,14 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
         <div className="flex justify-between lg:hidden items-center w-full my-3">
           {filterOptions && filterOptions.length > 0 && (
             <FilterMenuComponent
+              sortFor="/products"
               currentParams={itemParams}
               filterOptions={filterOptions}
             />
           )}
           {sortOptions && sortOptions.length > 0 && (
             <SortByMenuComponent
+              sortFor="/products"
               currentParams={itemParams}
               sortOptions={sortOptions[0].values}
             />
@@ -55,6 +64,7 @@ async function Page({ params }: { params: Promise<{ slug?: string[] }> }) {
 
         {/* All Products Part */}
         <ProductListingComponent
+          token={token}
           totalCount={itemData?.totalCount ?? 0}
           itemParams={itemParams}
           sortOptions={sortOptions}

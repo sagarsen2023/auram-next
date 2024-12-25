@@ -1,6 +1,6 @@
 "use client";
 
-import { generateSlugFromParams } from "@/app/products/utils";
+import { generateSlugFromParams } from "@/utils/sort-filter";
 import { ItemParams } from "@/models/product-category-collections/item-params.model";
 import { SortFilterModel } from "@/models/product-category-collections/sort-filter.model";
 import React, { useEffect, useState } from "react";
@@ -10,9 +10,11 @@ import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import { getInitialFilters, mergeFiltersToParams } from "./utils";
 
 function FilterMenuComponent({
+  sortFor,
   currentParams,
   filterOptions,
 }: {
+  sortFor: "/products" | "/wishlist";
   currentParams: ItemParams;
   filterOptions: SortFilterModel[] | null;
 }) {
@@ -42,7 +44,7 @@ function FilterMenuComponent({
   function handleApplyFilters() {
     const mergedParams = mergeFiltersToParams(selectedFilters);
     const newParams = generateSlugFromParams(mergedParams);
-    router.push(`/products/${newParams}`);
+    router.push(`${sortFor}/${newParams}`);
     setMenuOpen(false);
   }
 
@@ -70,7 +72,7 @@ function FilterMenuComponent({
           <div className="flex items-center gap-2">
             <PrimaryButtonCOmponent
               className="p-2  h-8"
-              onClick={() => router.push("/products")}
+              onClick={() => router.push(sortFor)}
             >
               Clear
             </PrimaryButtonCOmponent>

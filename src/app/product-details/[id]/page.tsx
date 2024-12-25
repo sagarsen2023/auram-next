@@ -1,4 +1,3 @@
-import { basePageClassNames } from "@/constants/universal-css";
 import React, { Suspense } from "react";
 import { fetchItemDetails } from "../utils";
 import ImageViewerComponent from "@/components/product-detail-components/image-viewer.component";
@@ -21,7 +20,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
     withGstPrice,
     withoutGstPrice,
     makingCharge,
-  } = itemData;
+  } = itemData ?? {};
   const breadcrumbs: BreadCrumbComponentProps[] = [
     {
       name: "Home",
@@ -32,17 +31,17 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
       link: "/products",
     },
     {
-      name: itemData.itemName,
+      name: itemData?.itemName,
     },
   ];
   const allItemImages: MediaResponse[] = [
-    itemData?.thumbnail ?? [],
+    ...(itemData?.thumbnail ? [itemData.thumbnail] : []),
     ...(itemData?.itemMedia ?? []),
-    itemData?.hoverImage,
+    ...(itemData?.hoverImage ? [itemData.hoverImage] : []),
   ];
   return (
     <Suspense fallback={<DefaultPageLoaderComponent />}>
-      <div className={`${basePageClassNames}`}>
+      <div className={"base-page"}>
         <BreadCrumbComponent breadCrumbItems={breadcrumbs} />
         <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-10">
           {/* Component to view images */}
@@ -53,8 +52,7 @@ async function Page({ params }: { params: Promise<{ id: string }> }) {
             {/* Item details and pricing */}
             <ItemDetailsAndPricing item={itemData} />
             {/* Item Add to cart */}
-            {/* TODO: Send item data to manage cart */}
-            <AddToCartSectionComponent />
+            <AddToCartSectionComponent itemId={itemData._id} />
           </div>
         </div>
         {/* Stone Pricing Details */}
