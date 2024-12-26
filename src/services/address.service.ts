@@ -1,7 +1,7 @@
 import { fetchAPI } from "./config";
 import { AllAddressApiResponse } from "@/models/addresses/address.model";
 import { getAuthToken } from "@/utils/token-store";
-import { ADDRESSES_URL } from "./queryUrls";
+import { ADDRESSES_URL, SET_DEFAULT_ADDRESS_URL } from "./queryUrls";
 
 const addressesAPI = {
   fetchAllAddresses: async () => {
@@ -11,9 +11,20 @@ const addressesAPI = {
       },
     });
   },
-  deleteCartItem: async (addressId: string) => {
+  deleteAddressItem: async (addressId: string) => {
     return await fetchAPI.delete<AllAddressApiResponse>(
       `${ADDRESSES_URL}/${addressId}`,
+      {
+        headers: {
+          authorization: `Bearer ${getAuthToken()}`,
+        },
+      }
+    );
+  },
+
+  setDefault: async (addressId: string) => {
+    return await fetchAPI.put<AllAddressApiResponse>(
+      `${SET_DEFAULT_ADDRESS_URL}/${addressId}`,
       {
         headers: {
           authorization: `Bearer ${getAuthToken()}`,

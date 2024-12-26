@@ -7,8 +7,12 @@ import { MdDeleteOutline, MdEditNote } from "react-icons/md";
 
 function AddressListingComponent({
   addresses,
+  onDelete,
+  onSetDefault,
 }: {
   addresses: AddressesModel[] | null;
+  onDelete: (_id: string) => void;
+  onSetDefault: (_id: string) => void;
 }) {
   return (
     <>
@@ -45,8 +49,7 @@ function AddressListingComponent({
               <Popover
                 position="top"
                 content={<div>Are you sure to make it default address?</div>}
-                onOk={() => console.log("OK clicked")}
-                onCancel={() => console.log("Cancel clicked")}
+                onOk={() => address?._id && onSetDefault(address._id)}
               >
                 <button className=" bg-yellow-600 text-white text-sm font-medium py-1 px-5 rounded-full mt-4">
                   Make it Default
@@ -64,8 +67,7 @@ function AddressListingComponent({
               <Popover
                 position="left"
                 content={<div>Are you sure to delete this address?</div>}
-                onOk={() => console.log("OK clicked")}
-                onCancel={() => console.log("Cancel clicked")}
+                onOk={() => address?._id && onDelete(address._id)}
               >
                 <button className="text-red-500 hover:text-red-600 text-md">
                   <MdDeleteOutline className="text-2xl" />
