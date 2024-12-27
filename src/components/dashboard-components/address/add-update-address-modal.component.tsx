@@ -3,6 +3,7 @@ import PrimaryButtonCOmponent from "@/components/buttons/primary-button.componen
 import TextAreaComponent from "@/components/ui/form-inputs/text-area.component";
 import TextInputComponent from "@/components/ui/form-inputs/text-input.component";
 import ModalComponent from "@/components/ui/modal.component";
+import { AddressesModel } from "@/models/addresses/address.model";
 import addressesAPI from "@/services/address.service";
 import {
   addressFormSchema,
@@ -16,14 +17,17 @@ import { toast } from "sonner";
 function AddUpdateAddressModalComponent({
   isOpen,
   onClose,
+  addressForUpdate,
 }: {
   isOpen: boolean;
   onClose: () => void;
+  addressForUpdate: AddressesModel | null;
 }) {
   const [loading, setLoading] = useState(false);
 
   const methods = useForm<AddressFormType>({
     resolver: zodResolver(addressFormSchema),
+    defaultValues: addressForUpdate || {},
   });
 
   const {
@@ -31,25 +35,37 @@ function AddUpdateAddressModalComponent({
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = methods;
 
   useEffect(() => {
-    setValue("countryCode", "91");
+    if (addressForUpdate) {
+      reset(addressForUpdate);
+    } else {
+      reset({});
+      setValue("countryCode", "91");
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    console.log("errors", errors);
+  }, [errors]);
 
   const onSubmit = async (data: AddressFormType) => {
     try {
       setLoading(true);
-      const response = await addressesAPI.addAddress({
-        ...data,
-        line2: data.line2 ?? "",
-        countryCode: "91",
-      });
+      let response;
+      if (addressForUpdate) {
+        response = await addressesAPI.updateAddress(data, addressForUpdate._id);
+      } else {
+        response = await addressesAPI.addAddress(data);
+      }
       if (response.error) {
         throw new Error("Something went wrong");
       }
       toast.success("Address added successfully.");
+      onClose();
     } catch {
       toast.error("Something went wrong");
     } finally {
@@ -149,7 +165,11 @@ function AddUpdateAddressModalComponent({
                 <div className="grid grid-cols-1 gap-4 mb-4">
                   <div>
                     <PrimaryButtonCOmponent isLoading={loading}>
-                      {loading ? "Saving Address..." : "Add Address"}
+                      {loading
+                        ? "Saving Address..."
+                        : addressForUpdate
+                        ? "Update Address"
+                        : "Add Address"}
                     </PrimaryButtonCOmponent>
                   </div>
                 </div>

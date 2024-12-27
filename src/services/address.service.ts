@@ -43,5 +43,15 @@ const addressesAPI = {
         authorization: `Bearer ${getAuthToken()}`,
       },
     }),
+  updateAddress: async (data: AddressFormType, addressId: string) =>
+    fetchAPI.put<AddAddressFormResponse>(
+      `${ADDRESSES_URL}/${addressId}`,
+      data,
+      {
+        headers: {
+          authorization: `Bearer ${getAuthToken()}`,
+        },
+      }
+    ),
 };
 export default addressesAPI;

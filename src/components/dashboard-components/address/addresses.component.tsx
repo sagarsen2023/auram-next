@@ -14,7 +14,13 @@ function MyAddresses() {
     null
   );
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleAddressModalState = () => setIsModalOpen((prev) => !prev);
+  const [selectedAddress, setSelectedAddress] = useState<AddressesModel | null>(
+    null
+  );
+  const handleAddressModalState = () => {
+    setIsModalOpen((prev) => !prev);
+    setSelectedAddress(null);
+  };
 
   const fetchAddressData = async () => {
     try {
@@ -86,6 +92,10 @@ function MyAddresses() {
       </div>
 
       <AddressListingComponent
+        onEdit={(address) => {
+          setSelectedAddress(address);
+          setIsModalOpen(true);
+        }}
         addresses={addressesData}
         onDelete={deleteAddress}
         onSetDefault={setDefaultAddress}
@@ -94,6 +104,7 @@ function MyAddresses() {
       <AddUpdateAddressModalComponent
         isOpen={isModalOpen}
         onClose={handleAddressModalState}
+        addressForUpdate={selectedAddress}
       />
     </>
   );

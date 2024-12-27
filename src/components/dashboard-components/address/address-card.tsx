@@ -7,10 +7,14 @@ import { MdDeleteOutline, MdEditNote } from "react-icons/md";
 
 function AddressListingComponent({
   addresses,
+  onEdit,
   onDelete,
   onSetDefault,
 }: {
   addresses: AddressesModel[] | null;
+  onEdit: (
+    address: AddressesModel | null
+  ) => void;
   onDelete: (_id: string) => void;
   onSetDefault: (_id: string) => void;
 }) {
@@ -60,7 +64,10 @@ function AddressListingComponent({
 
           <div className="space-x-4">
             <div className="flex justify-end gap-3 mt-4">
-              <button className="text-blue-500 hover:text-blue-600 ">
+              <button
+                className="text-blue-500 hover:text-blue-600 "
+                onClick={() => address?._id && onEdit(address)}
+              >
                 <MdEditNote className="text-3xl" />
               </button>
 
