@@ -1,25 +1,20 @@
 "use client";
 
-import ModalComponent from "@/components/ui/modal.component";
 import React, { useEffect, useState } from "react";
-import AddUpdateAddress from "./add-update-address.component";
 import { AddressesModel } from "@/models/addresses/address.model";
 import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.component";
 import addressesAPI from "@/services/address.service";
 import AddressListingComponent from "./address-card";
 import { toast } from "sonner";
+import AddUpdateAddressModalComponent from "./add-update-address-modal.component";
 
 function MyAddresses() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const handleAddressModalState = React.useCallback(
-    () => setIsModalOpen((prev) => !prev),
-    []
-  );
-
   const [loading, setLoading] = useState(true);
   const [addressesData, setAddressesData] = useState<AddressesModel[] | null>(
     null
   );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleAddressModalState = () => setIsModalOpen((prev) => !prev);
 
   const fetchAddressData = async () => {
     try {
@@ -72,7 +67,7 @@ function MyAddresses() {
   useEffect(() => {
     fetchAddressData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [isModalOpen]);
 
   if (loading) {
     return <DefaultPageLoaderComponent />;
@@ -96,13 +91,10 @@ function MyAddresses() {
         onSetDefault={setDefaultAddress}
       />
 
-      <ModalComponent
+      <AddUpdateAddressModalComponent
         isOpen={isModalOpen}
         onClose={handleAddressModalState}
-        size="2xl"
-      >
-        <AddUpdateAddress />
-      </ModalComponent>
+      />
     </>
   );
 }

@@ -37,7 +37,7 @@ const addressesAPI = {
       }
     );
   },
-  addUpdateAddress: async (data: AddressFormType) =>
+  addAddress: async (data: AddressFormType) =>
     fetchAPI.post<AddAddressFormResponse>(ADDRESSES_URL, data, {
       headers: {
         authorization: `Bearer ${getAuthToken()}`,
