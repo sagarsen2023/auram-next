@@ -1,5 +1,9 @@
 import { fetchAPI } from "./config";
-import { AllAddressApiResponse } from "@/models/addresses/address.model";
+import {
+  AddAddressFormResponse,
+  AddAddressParams,
+  AllAddressApiResponse,
+} from "@/models/addresses/address.model";
 import { getAuthToken } from "@/utils/token-store";
 import { ADDRESSES_URL, SET_DEFAULT_ADDRESS_URL } from "./queryUrls";
 
@@ -32,5 +36,11 @@ const addressesAPI = {
       }
     );
   },
+  addUpdateAddress: async (data: AddAddressParams) =>
+    fetchAPI.post<AddAddressFormResponse>(ADDRESSES_URL, data, {
+      headers: {
+        authorization: `Bearer ${getAuthToken()}`,
+      },
+    }),
 };
 export default addressesAPI;

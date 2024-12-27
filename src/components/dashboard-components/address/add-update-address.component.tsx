@@ -1,9 +1,49 @@
 "use client";
 import PrimaryButtonCOmponent from "@/components/buttons/primary-button.component";
+import SelectComponent from "@/components/ui/form-inputs/select.component";
+import TextAreaComponent from "@/components/ui/form-inputs/text-area.component";
 import TextInputComponent from "@/components/ui/form-inputs/text-input.component";
-import React from "react";
+import { countryCodeOptions } from "@/constants/generic-select-options";
+import addressesAPI from "@/services/address.service";
+import {
+  addressFormSchema,
+  AddressFormType,
+} from "@/validators/add-address-form.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import React, { useState } from "react";
+import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 function AddUpdateAddress() {
+  const [loading, setLoading] = useState(false);
+
+  const methods = useForm<AddressFormType>({
+    resolver: zodResolver(addressFormSchema),
+  });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = methods;
+
+  const onSubmit = async (data: AddressFormType) => {
+    try {
+      setLoading(true);
+      const response = await addressesAPI.addUpdateAddress({
+        ...data,
+        line2: data.line2 ?? "",
+        countryCode: "91",
+      });
+      if (response.error) {
+        throw new Error("Something went wrong");
+      }
+      toast.success("Address added successfully.");
+    } catch {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <>
       <div className="w-full ">
@@ -12,73 +52,96 @@ function AddUpdateAddress() {
             <h3 className="text-2xl  font-bold mb-4">
               Add New / Update Address
             </h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <TextInputComponent
-                  label="Name  (Required)"
-                  placeholder="Enter name"
-                />
-              </div>
-              <div>
-                <TextInputComponent
-                  label="Phone (Required)"
-                  placeholder="Enter your phone number"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <TextInputComponent
-                  label="Pincode  (Required)"
-                  placeholder="Enter pincode"
-                />
-              </div>
-              <div>
-                <TextInputComponent
-                  label="State (Required)"
-                  placeholder="Enter state"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-              <div>
-                <TextInputComponent
-                  label="City/Locality (Required)"
-                  placeholder="Enter Locality"
-                />
-              </div>
-              <div>
-                <TextInputComponent
-                  label="Country (Required)"
-                  placeholder="Enter locality"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 gap-4 mb-4">
-              <div>
-                <TextInputComponent
-                  label="Complete address including House No, Building, Street, Area (Required)"
-                  placeholder="Enter address"
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-1 gap-4 mb-4">
-              <div>
-                <TextInputComponent
-                  label="Land Mark (Optional)"
-                  placeholder="Enter.. "
-                />
-              </div>
-            </div>
+            <FormProvider {...methods}>
+              <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <TextInputComponent
+                      label="Name  (Required)"
+                      placeholder="Enter name"
+                      error={errors.name?.message}
+                      {...register("name")}
+                    />
+                  </div>
+                  <div>
+                    {" "}
+                    <TextInputComponent
+                      label="Phone (Required)"
+                      placeholder="Enter your phone number"
+                      error={errors.phone?.message}
+                      {...register("phone")}
+                    />
+                  </div>
+                </div>
 
-            <div className="grid grid-cols-1 gap-4 mb-4">
-              <div>
-                <PrimaryButtonCOmponent>
-                  {/* {loading ? "Sending..." : "Send Message"} */} Save /
-                  Update Address
-                </PrimaryButtonCOmponent>
-              </div>
-            </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <TextInputComponent
+                      label="Pincode  (Required)"
+                      placeholder="Enter pincode"
+                      error={errors.pincode?.message}
+                      {...register("pincode")}
+                    />
+                  </div>
+                  <div>
+                    <TextInputComponent
+                      label="State (Required)"
+                      placeholder="Enter state"
+                      error={errors.state?.message}
+                      {...register("state")}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                  <div>
+                    <TextInputComponent
+                      label="City/Locality (Required)"
+                      placeholder="Enter Locality"
+                      error={errors.city?.message}
+                      {...register("city")}
+                    />
+                  </div>
+                  <div>
+                    <TextInputComponent
+                      label="Country (Required)"
+                      placeholder="Enter country"
+                      error={errors.country?.message}
+                      {...register("country")}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 gap-4 mb-4">
+                  <div>
+                    <TextAreaComponent
+                      rows={2}
+                      label="Complete address including House No, Building, Street, Area (Required)"
+                      placeholder="Enter address"
+                      error={errors.line1?.message}
+                      {...register("line1")}
+                    />
+                  </div>
+                </div>
+                <div className="grid grid-cols-1 gap-4 mb-4">
+                  <div>
+                    <TextAreaComponent
+                      rows={2}
+                      label="Land Mark (Optional)"
+                      placeholder="Enter.. "
+                      error={errors.line2?.message}
+                      {...register("line2")}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 gap-4 mb-4">
+                  <div>
+                    <PrimaryButtonCOmponent isLoading={loading}>
+                      {loading ? "Saving Address..." : "Add Address"}
+                    </PrimaryButtonCOmponent>
+                  </div>
+                </div>
+              </form>
+            </FormProvider>
           </div>
         </div>
       </div>
