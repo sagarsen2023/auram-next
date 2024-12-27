@@ -1,11 +1,11 @@
 import { fetchAPI } from "./config";
 import {
   AddAddressFormResponse,
-  AddAddressParams,
   AllAddressApiResponse,
 } from "@/models/addresses/address.model";
 import { getAuthToken } from "@/utils/token-store";
 import { ADDRESSES_URL, SET_DEFAULT_ADDRESS_URL } from "./queryUrls";
+import { AddressFormType } from "@/validators/add-address-form.schema";
 
 const addressesAPI = {
   fetchAllAddresses: async () => {
@@ -29,6 +29,7 @@ const addressesAPI = {
   setDefault: async (addressId: string) => {
     return await fetchAPI.put<AllAddressApiResponse>(
       `${SET_DEFAULT_ADDRESS_URL}/${addressId}`,
+      {},
       {
         headers: {
           authorization: `Bearer ${getAuthToken()}`,
@@ -36,7 +37,7 @@ const addressesAPI = {
       }
     );
   },
-  addUpdateAddress: async (data: AddAddressParams) =>
+  addUpdateAddress: async (data: AddressFormType) =>
     fetchAPI.post<AddAddressFormResponse>(ADDRESSES_URL, data, {
       headers: {
         authorization: `Bearer ${getAuthToken()}`,

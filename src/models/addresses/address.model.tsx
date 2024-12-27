@@ -31,18 +31,6 @@ export interface SingleAddressApiResponse extends BaseApiResponse {
   data: AddressesModel;
 }
 
-export interface AddAddressParams {
-  line1: string;
-  line2?: string;
-  city: string;
-  state: string;
-  country: string;
-  pincode: string;
-  countryCode: string;
-  phone: string;
-  name: string;
-}
-
 export interface AddAddressFormResponse extends BaseApiResponse {
   status: boolean;
   data: {
