@@ -10,7 +10,14 @@ import {
   FaPhoneAlt,
   FaWhatsapp,
 } from "react-icons/fa";
-import { FaEnvelope, FaFacebook, FaInstagram, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa6";
+import {
+  FaEnvelope,
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+  FaYoutube,
+} from "react-icons/fa6";
 import { IoMailSharp } from "react-icons/io5";
 
 async function FooterComponent() {
@@ -136,9 +143,9 @@ async function FooterComponent() {
         <div className="w-full lg:max-w-8xl grid grid-cols-1 md:grid-cols-4 gap-10 lg:gap-4 lg:h-full">
           {/* Collection Info */}
           <div className={`${sectionClassName}`}>
-            <h1 className="pb-2 mb-2 border-b-2 border-secondary w-fit">
+            <h3 className="pb-2 mb-2 border-b-2 border-secondary w-fit">
               Collections
-            </h1>
+            </h3>
             {collectionData?.map((collection) => (
               <Link key={collection._id} href={"/"}>
                 <p className="py-1 lg:py-1.5 text-sm">{collection.title}</p>
@@ -147,9 +154,9 @@ async function FooterComponent() {
           </div>
           {/* Information */}
           <div className={`${sectionClassName}`}>
-            <h1 className="pb-2 mb-2 border-b-2 border-secondary w-fit">
+            <h3 className="pb-2 mb-2 border-b-2 border-secondary w-fit">
               Information
-            </h1>
+            </h3>
             {informationData.map((info) => (
               <Link key={info.title} href={info.href}>
                 <p className="py-1 lg:py-1.5 text-sm">{info.title}</p>
@@ -158,9 +165,9 @@ async function FooterComponent() {
           </div>
           {/* Extras */}
           <div className={`${sectionClassName}`}>
-            <h1 className="pb-2 mb-2 border-b-2 border-secondary w-fit">
+            <h3 className="pb-2 mb-2 border-b-2 border-secondary w-fit">
               Extras
-            </h1>
+            </h3>
             {extrasData.map((extra) => (
               <Link key={extra.title} href={extra.href}>
                 <p className="py-1 lg:py-1.5 text-sm">{extra.title}</p>
@@ -171,11 +178,11 @@ async function FooterComponent() {
           <div
             className={`${sectionClassName} bg-gray-200 -mt-5 lg:h-[24.5rem]`}
           >
-            <h1 className="mt-5 pb-2 mb-2 border-b-2 border-secondary w-fit">
+            <h3 className="mt-5 pb-2 mb-2 border-b-2 border-secondary w-fit">
               Contact Us
-            </h1>
+            </h3>
             {contactInfoData?.email && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-2">
                 <IoMailSharp className="" />
                 <Link href={`mailto:${contactInfoData.email}`}>
                   <p className="py-1 lg:py-1.5 text-sm">
@@ -185,7 +192,7 @@ async function FooterComponent() {
               </div>
             )}
             {contactInfoData?.phone && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-2">
                 <FaPhoneAlt className="" />
                 <p className="py-1 lg:py-1.5 text-sm">
                   {contactInfoData.phone}
@@ -193,7 +200,7 @@ async function FooterComponent() {
               </div>
             )}
             {contactInfoData?.whatsapp && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-2">
                 <FaWhatsapp className="" />
                 <Link href={`https://wa.me/${contactInfoData.whatsapp}`}>
                   <p className="py-1 lg:py-1.5 text-sm">
@@ -203,7 +210,7 @@ async function FooterComponent() {
               </div>
             )}
             {contactInfoData?.address && (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 mb-2">
                 <FaMapMarkerAlt className="" />
                 <p className="py-1 lg:py-1.5 text-sm">
                   {contactInfoData.address}

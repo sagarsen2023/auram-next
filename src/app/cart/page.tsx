@@ -93,8 +93,15 @@ function Page() {
     <div className={`base-page`}>
       <BreadCrumbComponent breadCrumbItems={breadcrumbs} />
       <div className="flex justify-center items-center flex-col gap-3 mt-2 mb-4">
-        <span className="text-2xl font-bold">Cart</span>
-        <DualLineComponent />
+        <h1
+          className="relative py-10 text-center text-[34px] font-normal 
+           before:absolute before:bottom-[22px] before:left-[calc(50%-50px)] 
+           before:block before:h-0.5 before:w-[80px] before:bg-black
+           after:absolute after:bottom-[15px] after:right-[calc(50%-50px)] 
+           after:block after:h-0.5 after:w-[80px] after:bg-black"
+        >
+          Cart
+        </h1>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <CartItemListingComponent

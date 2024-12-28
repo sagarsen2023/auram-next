@@ -14,6 +14,8 @@ import SearchBarComponent from "./search-bar.component";
 import SubNavComponent from "./sub-nav.component";
 import CustomerModel from "@/models/common/customer-model";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
+import { LiaHeart, LiaUserSolid } from "react-icons/lia";
+
 // import dynamic from "next/dynamic";
 // const ThemeSwitchButtonComponent = dynamic(
 //   () => import("../components/buttons/theme-switch-button.component"),
@@ -56,21 +58,18 @@ function NavBarComponent() {
 
             {/* Other redirection */}
             <div className="flex items-center gap-4 text-2xl">
-              <div className="hidden md:flex gap-6 items-center font-[300] text-[14px] mr-8">
+              <div className="hidden md:flex gap-6 items-center font-[300] text-[14px]">
                 {userName ? (
                   // TODO: Here a dropdown menu will be added
                   <span>{userName}</span>
                 ) : (
                   <button onClick={handleModalState}>
-                    <CiUser className="text-2xl" />
+                    <LiaUserSolid className="text-2xl" />
                   </button>
                 )}
                 <Link href="/wishlist">
-                  <CiHeart className="text-2xl" />
+                  <LiaHeart className="text-2xl" />
                 </Link>
-                <button>
-                  <IoIosNotificationsOutline className="text-2xl" />
-                </button>
 
                 <CartButtonComponent />
               </div>
