@@ -13,6 +13,7 @@ import { MdOutlineReadMore } from "react-icons/md";
 import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
 import { getItems } from "@/app/products/utils";
 import { ItemModel } from "@/models/common/item.model";
+import NoDataComponent from "../ui/no-data.component";
 const getRandomTagline = dynamic(() => import("@/constants/jewelry-taglines"), {
   ssr: false,
 });
@@ -93,7 +94,7 @@ function ProductListingComponent({
             </div>
           </div>
         ) : (
-          <div>No Products to display</div>
+          <NoDataComponent />
         )}
       </div>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { CiShoppingCart } from "react-icons/ci";
+import { IoCartOutline } from "react-icons/io5";
 
 // TODO: Add total cart count
 
@@ -13,10 +13,10 @@ function CartButtonComponent() {
       onClick={() => router.push("/cart")}
       aria-label="Cart"
     >
-      <div className=" absolute -top-2 -right-1 text-[10px] bg-white rounded-full border border-black w-4 h-4 flex items-center justify-center">
+      <div className=" absolute -top-3 -right-2 text-[12px] bg-white font-medium rounded-full border border-gray-300 w-5 h-5 flex items-center justify-center">
         0
       </div>
-      <CiShoppingCart className="text-2xl" />
+      <IoCartOutline className="text-2xl" />
     </button>
   );
 }

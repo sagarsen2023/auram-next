@@ -85,7 +85,13 @@ function ProductCardComponent({ item }: { item: ItemModel }) {
             src={imageValidator(item.thumbnail?.path)}
             alt={item.itemName}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-125 rounded-md"
+            className="object-cover transition-all duration-700 group-hover:translate-x-full"
+          />
+          <Image
+            src={imageValidator(item.hoverImage?.path)}
+            alt={item.itemName}
+            fill
+            className="object-cover absolute top-0 left-0 origin-left overflow-hidden -translate-x-full  max-w-full transition-all duration-700 group-hover:translate-x-0"
           />
           <button
             onClick={handleAddToWishList}

@@ -12,14 +12,14 @@ function CollectionCardComponent({
   return (
     <Link href={`/products/collections=${collection._id}`}>
       <div className="py-6">
-        <div className="relative w-full h-[28rem] lg:h-[23rem] aspect-square rounded-lg hover:shadow-lg hover:bg-white transition-all duration-300">
+        <div className="relative w-full h-[28rem] lg:h-[23rem] aspect-square rounded-lg hover:shadow-lg hover:bg-white transition-all duration-300 group">
           <Image
             src={imageValidator(collection.verticalImage?.path)}
             alt="collection image"
             fill
             className="p-4 object-cover peer"
           />
-          <button className="absolute bg-white py-4 bottom-0 shadow-lg left-1/2 -translate-x-1/2 w-56 text-center z-0 peer-hover:bottom-8 transition-all duration-500">
+          <button className="absolute bg-white py-4 bottom-0 shadow-lg left-1/2 -translate-x-1/2 w-56 text-center z-0 peer-hover:bottom-8 transition-all duration-500 tracking-[2px]">
             {collection.title}
           </button>
         </div>

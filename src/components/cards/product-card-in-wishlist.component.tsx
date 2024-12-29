@@ -49,7 +49,7 @@ function ProductCartInWishListComponent({
             src={imageValidator(item.thumbnail?.path)}
             alt={item.itemName}
             fill
-            className="object-cover transition-transform duration-300 group-hover:scale-125 rounded-md"
+            className="object-cover transition-transform duration-300 group-hover:scale-105 rounded-md"
           />
           <button
             onClick={handleRemoveFromWishList}

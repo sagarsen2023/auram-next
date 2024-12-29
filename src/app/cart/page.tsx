@@ -11,7 +11,11 @@ import cartAPI from "@/services/cart.service";
 import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.component";
 import CartItemListingComponent from "@/components/cart-components/cart-item-listing.component";
 import CartPricingDetailsComponent from "@/components/cart-components/cart-pricing-details.component";
-import DualLineComponent from "@/components/ui/dual-line.component";
+import NoDataComponent from "@/components/ui/no-data.component";
+import Link from "next/link";
+import PrimaryButtonCOmponent from "@/components/buttons/primary-button.component";
+
+// ! TODO:Page loading is working but previous data is still there for some time
 
 function Page() {
   const router = useRouter();
@@ -93,17 +97,33 @@ function Page() {
     <div className={`base-page`}>
       <BreadCrumbComponent breadCrumbItems={breadcrumbs} />
       <div className="flex justify-center items-center flex-col gap-3 mt-2 mb-4">
-        <span className="text-2xl font-bold">Cart</span>
-        <DualLineComponent />
+        <h1
+          className="relative py-10 text-center text-[34px] font-normal 
+           before:absolute before:bottom-[22px] before:left-[calc(50%-50px)] 
+           before:block before:h-0.5 before:w-[80px] before:bg-black
+           after:absolute after:bottom-[15px] after:right-[calc(50%-50px)] 
+           after:block after:h-0.5 after:w-[80px] after:bg-black"
+        >
+          Cart
+        </h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <CartItemListingComponent
-          cartResponse={cartResponse}
-          onQuantityChange={addOrRemoveItem}
-          onDelete={deleteItem}
-        />
-        <CartPricingDetailsComponent cartResponse={cartResponse} />
-      </div>
+      {cartResponse && cartResponse?.data?.items?.length > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <CartItemListingComponent
+            cartResponse={cartResponse}
+            onQuantityChange={addOrRemoveItem}
+            onDelete={deleteItem}
+          />
+          <CartPricingDetailsComponent cartResponse={cartResponse} />
+        </div>
+      ) : (
+        <div className="mx-auto w-full max-w-[800px]">
+          <NoDataComponent />
+          <Link href={"/products"}>
+            <PrimaryButtonCOmponent>Browse Products</PrimaryButtonCOmponent>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

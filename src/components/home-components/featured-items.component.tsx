@@ -24,8 +24,8 @@ async function FeaturedItemComponent() {
     >
       <div>
         <div className="pt-10 lg:pt-16 lg:pb-5 text-center">
-          <p className="text-sm lg:text-xl">ON TREND HOT JEWELRY</p>
-          <p className="text-xl lg:text-3xl font-[600] mt-2">
+          <p className="text-sm lg:text-xl tracking-[2px] md:tracking-[5px]">ON TREND HOT JEWELRY</p>
+          <p className="text-xl lg:text-3xl font-[600] mt-2 tracking-[2px]">
             FEATURED PRODUCTS
           </p>
         </div>

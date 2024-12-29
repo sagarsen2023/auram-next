@@ -42,8 +42,8 @@ function CollectionComponent() {
   return (
     <div className="flex flex-col items-center justify-center w-full">
       <div className="pt-10 lg:pt-16 lg:pb-5 text-center">
-        <p className="text-sm lg:text-xl">WE&apos;VE GOT EVERYTHING YOU NEED</p>
-        <p className="text-xl lg:text-3xl font-[600] mt-2">
+        <p className="text-sm lg:text-xl tracking-[2px] md:tracking-[5px]">WE&apos;VE GOT EVERYTHING YOU NEED</p>
+        <p className="text-xl lg:text-3xl font-[600] mt-2 tracking-[2px]">
           DISCOVER OUR COLLECTION
         </p>
       </div>

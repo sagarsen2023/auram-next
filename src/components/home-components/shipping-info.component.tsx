@@ -50,8 +50,10 @@ function ShippingInfoComponent() {
           className="text-white group w-full flex flex-col justify-center items-center text-center gap-2"
         >
           <div className="border-b w-fit">{info.icon}</div>
-          <p className="mt-2 md:text-xl">{info.title}</p>
-          <p className="text-sm md:w-96 md:text-lg">{info.description}</p>
+          <p className="mt-2 md:text-xl tracking-wider">{info.title}</p>
+          <p className="text-sm md:w-96 md:text-lg font-light tracking-wide">
+            {info.description}
+          </p>
         </div>
       ))}
     </div>
