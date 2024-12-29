@@ -51,7 +51,7 @@ function FilterSideBarComponent({
   }
 
   return (
-    <div className="hidden lg:block w-[26rem] dark:bg-black/50 h-full shadow-lg px-4 border-t border-secondary/30 rounded-md">
+    <div className="hidden lg:block w-[26rem] dark:bg-black/50 h-full  px-4 border border-gray-200 rounded-md mt-2">
       <div className="flex justify-between w-full items-center pt-3 mb-3">
         <h1 className="text-2xl font-bold">Apply Filters</h1>
         <PrimaryButtonCOmponent
@@ -73,7 +73,7 @@ function FilterSideBarComponent({
                 {filter.data?.map((item, itemIndex) => (
                   <li
                     key={itemIndex}
-                    className="text-sm pl-3 flex items-center cursor-pointer"
+                    className="text-sm pl-0 flex items-center cursor-pointer py-1"
                   >
                     <input
                       className="h-4 w-4 outline-none ring-0 checked:ring-0 active:ring-0 focus:ring-0 checked:bg-secondary transition-all duration-200 checked:hover:bg-secondary rounded-[4px]"
@@ -90,7 +90,7 @@ function FilterSideBarComponent({
                     />
                     <label
                       htmlFor={`${item.label}${item.value}`}
-                      className="ml-2 cursor-pointer"
+                      className="ml-2 cursor-pointer font-medium uppercase"
                     >
                       {item.label}
                     </label>

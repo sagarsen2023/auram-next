@@ -12,10 +12,14 @@ import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.comp
 import CartItemListingComponent from "@/components/cart-components/cart-item-listing.component";
 import CartPricingDetailsComponent from "@/components/cart-components/cart-pricing-details.component";
 import DualLineComponent from "@/components/ui/dual-line.component";
+import NoDataComponent from "@/components/ui/no-data.component";
+import Link from "next/link";
+import PrimaryButtonCOmponent from "@/components/buttons/primary-button.component";
 
 function Page() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);
+  const [cartItemNumber, setCartItemNumber] = useState<number>(0);
   const [cartResponse, setCartResponse] = useState<CartResponse | null>(null);
   const breadcrumbs: BreadCrumbComponentProps[] = [
     {
@@ -33,6 +37,7 @@ function Page() {
       const response = await cartAPI.getCartData();
       if (!response.error) {
         setCartResponse(response);
+        setCartItemNumber(response?.data.items.length);
       } else {
         throw new Error();
       }
@@ -103,14 +108,25 @@ function Page() {
           Cart
         </h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <CartItemListingComponent
-          cartResponse={cartResponse}
-          onQuantityChange={addOrRemoveItem}
-          onDelete={deleteItem}
-        />
-        <CartPricingDetailsComponent cartResponse={cartResponse} />
-      </div>
+      {cartItemNumber > 0 ? (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <CartItemListingComponent
+            cartResponse={cartResponse}
+            onQuantityChange={addOrRemoveItem}
+            onDelete={deleteItem}
+          />
+          <CartPricingDetailsComponent cartResponse={cartResponse} />
+        </div>
+      ) : (
+        <>
+          <div className="mx-auto w-full max-w-[800px]">
+            <NoDataComponent />
+            <Link href={"/products"}>
+              <PrimaryButtonCOmponent>Browse Products</PrimaryButtonCOmponent>
+            </Link>
+          </div>
+        </>
+      )}
     </div>
   );
 }

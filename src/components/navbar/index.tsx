@@ -6,7 +6,6 @@ import { CiHeart, CiMenuFries, CiUser } from "react-icons/ci";
 import auramLogoWithText from "../../../public/images/auram-logo-with-text.webp";
 import CartButtonComponent from "../buttons/cart-button.component";
 import Link from "next/link";
-import { FaXmark } from "react-icons/fa6";
 import ModalComponent from "../ui/modal.component";
 import AuthWrapper from "../auth/auth-wrapper.component";
 import { IoIosNotificationsOutline } from "react-icons/io";
@@ -15,6 +14,7 @@ import SubNavComponent from "./sub-nav.component";
 import CustomerModel from "@/models/common/customer-model";
 import PrimaryButtonCOmponent from "../buttons/primary-button.component";
 import { LiaHeart, LiaUserSolid } from "react-icons/lia";
+import { HiXMark } from "react-icons/hi2";
 
 // import dynamic from "next/dynamic";
 // const ThemeSwitchButtonComponent = dynamic(
@@ -80,15 +80,15 @@ function NavBarComponent() {
                 } `}
               >
                 {menuOpen ? (
-                  <FaXmark
-                    className="md:hidden"
+                  <HiXMark
+                    className="md:hidden cursor-pointer"
                     onClick={() => {
                       setMenuOpen(!menuOpen);
                     }}
                   />
                 ) : (
                   <CiMenuFries
-                    className="md:hidden"
+                    className="md:hidden cursor-pointer"
                     onClick={() => {
                       setMenuOpen(!menuOpen);
                     }}

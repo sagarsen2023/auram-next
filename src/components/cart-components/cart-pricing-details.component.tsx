@@ -24,7 +24,7 @@ function CartPricingDetailsComponent({
   } = cartResponse.data;
 
   return (
-    <div className="p-4 border-t md:border-l">
+    <div className="p-4 border-2 rounded-xl">
       <h2 className="text-xl font-semibold mb-4">Price Details</h2>
 
       <div className="flex justify-between mb-2">

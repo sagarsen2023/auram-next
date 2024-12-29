@@ -13,6 +13,7 @@ import { GiDiamonds, GiStrikingDiamonds } from "react-icons/gi";
 import ProductCartInWishListComponent from "../cards/product-card-in-wishlist.component";
 import { WishlistModel } from "@/models/wishlist/wishlist-response.model";
 import wishlistAPI from "@/services/wishlist.service";
+import NoDataComponent from "../ui/no-data.component";
 const getRandomTagline = dynamic(() => import("@/constants/jewelry-taglines"), {
   ssr: false,
 });
@@ -116,7 +117,7 @@ function WishlistListingComponent({
             </div>
           </div>
         ) : (
-          <div>No Products to display</div>
+          <NoDataComponent />
         )}
       </div>
     </div>
