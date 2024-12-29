@@ -11,7 +11,6 @@ import cartAPI from "@/services/cart.service";
 import DefaultPageLoaderComponent from "@/components/ui/default-page-loader.component";
 import CartItemListingComponent from "@/components/cart-components/cart-item-listing.component";
 import CartPricingDetailsComponent from "@/components/cart-components/cart-pricing-details.component";
-import DualLineComponent from "@/components/ui/dual-line.component";
 import NoDataComponent from "@/components/ui/no-data.component";
 import Link from "next/link";
 import PrimaryButtonCOmponent from "@/components/buttons/primary-button.component";

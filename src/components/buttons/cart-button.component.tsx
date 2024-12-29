@@ -1,7 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { CiShoppingCart } from "react-icons/ci";
 import { IoCartOutline } from "react-icons/io5";
 
 // TODO: Add total cart count
