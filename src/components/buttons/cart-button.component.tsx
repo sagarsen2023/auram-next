@@ -13,7 +13,7 @@ function CartButtonComponent() {
       onClick={() => router.push("/cart")}
       aria-label="Cart"
     >
-      <div className=" absolute -top-4 -right-1 text-[12px] bg-white font-medium rounded-full border border-gray-300 w-5 h-5 flex items-center justify-center">
+      <div className=" absolute -top-3 -right-2 text-[12px] bg-white font-medium rounded-full border border-gray-300 w-5 h-5 flex items-center justify-center">
         0
       </div>
       <IoCartOutline className="text-2xl" />
