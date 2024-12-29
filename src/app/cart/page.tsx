@@ -15,6 +15,8 @@ import NoDataComponent from "@/components/ui/no-data.component";
 import Link from "next/link";
 import PrimaryButtonCOmponent from "@/components/buttons/primary-button.component";
 
+// ! TODO:Page loading is working but previous data is still there for some time
+
 function Page() {
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(true);
@@ -106,13 +108,6 @@ function Page() {
         </h1>
       </div>
       {cartResponse && cartResponse?.data?.items?.length > 0 ? (
-        <div className="mx-auto w-full max-w-[800px]">
-          <NoDataComponent />
-          <Link href={"/products"}>
-            <PrimaryButtonCOmponent>Browse Products</PrimaryButtonCOmponent>
-          </Link>
-        </div>
-      ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <CartItemListingComponent
             cartResponse={cartResponse}
@@ -120,6 +115,13 @@ function Page() {
             onDelete={deleteItem}
           />
           <CartPricingDetailsComponent cartResponse={cartResponse} />
+        </div>
+      ) : (
+        <div className="mx-auto w-full max-w-[800px]">
+          <NoDataComponent />
+          <Link href={"/products"}>
+            <PrimaryButtonCOmponent>Browse Products</PrimaryButtonCOmponent>
+          </Link>
         </div>
       )}
     </div>
