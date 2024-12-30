@@ -117,7 +117,7 @@ function WishlistListingComponent({
             </div>
           </div>
         ) : (
-          <NoDataComponent />
+          <NoDataComponent title="No Wishlist Items Found" description="Please add some items to your wishlist." />
         )}
       </div>
     </div>

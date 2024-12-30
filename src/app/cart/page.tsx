@@ -118,10 +118,15 @@ function Page() {
         </div>
       ) : (
         <div className="mx-auto w-full max-w-[800px]">
-          <NoDataComponent />
+          <NoDataComponent
+            title="No Items in Cart"
+            description="Click on Browse Products, select your product, add to cart and process for checkout."
+          />
+          <div className="mx-auto w-full max-w-[500px]">
           <Link href={"/products"}>
             <PrimaryButtonCOmponent>Browse Products</PrimaryButtonCOmponent>
           </Link>
+          </div>
         </div>
       )}
     </div>
