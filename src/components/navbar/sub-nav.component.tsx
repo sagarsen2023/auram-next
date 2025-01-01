@@ -9,10 +9,21 @@ function SubNavComponent() {
   return (
     <div className="flex justify-between items-center p-2">
       <div className="flex items-center gap-6 text-sm">
-        <span>All</span>
-        <span>Gold</span>
-        <span>Silver</span>
-        <span>Diamond</span>
+        <Link href="/products">
+          <span>All</span>
+        </Link>
+        <Link href="/products/metalType=gold">
+          <span>Gold</span>
+        </Link>
+        <Link href="/products/metalType=silver">
+          <span>Silver</span>
+        </Link>
+        <Link href="/products/metalType=platinum">
+          <span>Platinum</span>
+        </Link>
+        {/* <Link href="/products/metalType=dimond">
+          <span>Dimond</span>
+        </Link> */}
       </div>
       <div className="flex items-center gap-6 text-sm">
         <Link href="/products" className={linkClassNme}>
